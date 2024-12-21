@@ -2,6 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
+import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { maxWidth } from "../constants";
@@ -11,6 +12,7 @@ import { IoCheckboxOutline } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { AvailableLanguagesType } from "@/types";
 import Radio from "./ui/Radio";
+import Toggle from "./ui/Toggle";
 
 const Navbar = () => {
   const sections = [
@@ -62,11 +64,17 @@ const Navbar = () => {
     setSelectedLanguage,
     disableAnimation,
     setDisableAnimation,
+    selectedTheme,
+    setSelectedTheme,
   } = useContext(UserPrefContext);
 
   return (
     <div className="whitespace-nowrap">
-      <div className="bg-black border-2 border-blue-500 fixed top-0 left-0 right-0">
+      <div
+        className={`${
+          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+        } border-2 border-blue-500 fixed top-0 left-0 right-0 transition-all duration-300`}
+      >
         <div
           className={`${maxWidth} px-4 py-2 border-2 border-red-500 flex justify-between items-center mx-auto relative`}
         >
@@ -87,7 +95,13 @@ const Navbar = () => {
             </div>
           )}
           {!isTablet ? (
-            <FaMoon size={35} className="text-purple hover:cursor-pointer" />
+            // <FaMoon size={35} className="text-purple hover:cursor-pointer" />
+            <Toggle
+              firstOption={{ label: <FaMoon />, value: "Dark" }}
+              secondOption={{ label: <FiSun />, value: "Light" }}
+              selectedOption={selectedTheme}
+              setSelectedOption={setSelectedTheme}
+            />
           ) : (
             <RxHamburgerMenu
               onClick={() => setShowNavbar(!showNavbar)}
@@ -100,7 +114,9 @@ const Navbar = () => {
 
       {/* SMALLER SCREENS */}
       <div
-        className={`fixed right-0 top-0 bottom-0 bg-black border-2 border-yellow-500 transition-all duration-500 flex flex-col justify-between overflow-auto gap-16 ${handleShowNavbar()}`}
+        className={`fixed right-0 top-0 bottom-0 border-2 border-yellow-500 transition-all duration-500 flex flex-col justify-between overflow-auto gap-16 ${
+          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+        } ${handleShowNavbar()}`}
       >
         <div>
           <div
@@ -111,7 +127,7 @@ const Navbar = () => {
           </div>
           <div
             className={`flex flex-col border-2 border-red-500 flex-wrap ${
-              isPhone || isLandscapePhone ? "gap-8" : "gap-16"
+              isPhone || isLandscapePhone ? "gap-8" : "gap-12"
             } ${isLandscapePhone ? "h-[100px] flex-wrap" : ""}`}
           >
             {renderLinks()}
@@ -119,7 +135,12 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-col gap-12">
-          <FaMoon size={35} className="text-purple hover:cursor-pointer" />
+          <Toggle
+            firstOption={{ label: <FaMoon />, value: "Dark" }}
+            secondOption={{ label: <FiSun />, value: "Light" }}
+            selectedOption={selectedTheme}
+            setSelectedOption={setSelectedTheme}
+          />
           <div className="flex flex-col gap-4">
             <div className="flex justify-between flex-wrap gap-4 gap-y-2">
               <Radio

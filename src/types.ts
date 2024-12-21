@@ -1,5 +1,5 @@
 export type AvailableLanguagesType = "English" | "Filipino" | "Bisaya";
-export type AvailableThemesType = "System" | "Dark" | "Light";
+export type AvailableThemesType = "Dark" | "Light";
 
 export interface UserPrefContextInterface {
   selectedLanguage: AvailableLanguagesType;

@@ -12,7 +12,7 @@ export const UserPrefContext = createContext<UserPrefContextInterface>({
   setSelectedLanguage: () => {},
   disableAnimation: false,
   setDisableAnimation: () => {},
-  selectedTheme: "System",
+  selectedTheme: "Dark",
   setSelectedTheme: () => {},
 });
 
