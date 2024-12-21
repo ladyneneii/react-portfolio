@@ -5,7 +5,7 @@ import { FaMoon } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { maxWidth } from "../constants";
+import { maxWidth, renderSmoothTransition } from "../shared";
 import { IoClose } from "react-icons/io5";
 import { LuSquare } from "react-icons/lu";
 import { IoCheckboxOutline } from "react-icons/io5";
@@ -39,7 +39,7 @@ const Navbar = () => {
     return sections.map((section) => (
       <div
         key={section}
-        className="hover:cursor-pointer hover:text-purple transition-all duration-300"
+        className={`hover:cursor-pointer hover:text-purple ${!disableAnimation ? renderSmoothTransition() : ""}`}
       >
         {section}
       </div>
@@ -73,7 +73,7 @@ const Navbar = () => {
       <div
         className={`${
           selectedTheme === "Dark" ? "bg-black" : "bg-white"
-        } border-2 border-blue-500 fixed top-0 left-0 right-0 transition-all duration-300`}
+        } border-2 border-blue-500 fixed top-0 left-0 right-0 ${!disableAnimation ? renderSmoothTransition() : ""}`}
       >
         <div
           className={`${maxWidth} px-4 py-2 border-2 border-red-500 flex justify-between items-center mx-auto relative`}
@@ -89,7 +89,7 @@ const Navbar = () => {
           </div>
           {!isTablet && (
             <div
-              className={`flex gap-16 border-2 border-yellow-500 transition-all duration-300 items-center`}
+              className={`flex gap-16 border-2 border-yellow-500 ${!disableAnimation ? renderSmoothTransition() : ""} items-center`}
             >
               {renderLinks()}
             </div>
@@ -106,7 +106,7 @@ const Navbar = () => {
             <RxHamburgerMenu
               onClick={() => setShowNavbar(!showNavbar)}
               size={35}
-              className="hover:cursor-pointer hover:text-purple transition-all duration-300"
+              className={`hover:cursor-pointer hover:text-purple ${!disableAnimation ? renderSmoothTransition() : ""}`}
             />
           )}
         </div>
@@ -114,14 +114,14 @@ const Navbar = () => {
 
       {/* SMALLER SCREENS */}
       <div
-        className={`fixed right-0 top-0 bottom-0 border-2 border-yellow-500 transition-all duration-500 flex flex-col justify-between overflow-auto gap-16 ${
+        className={`fixed right-0 top-0 bottom-0 border-2 border-yellow-500 ${!disableAnimation ? renderSmoothTransition(5) : ""} flex flex-col justify-between overflow-auto gap-16 ${
           selectedTheme === "Dark" ? "bg-black" : "bg-white"
         } ${handleShowNavbar()}`}
       >
         <div>
           <div
             onClick={() => setShowNavbar(false)}
-            className="flex justify-end hover:cursor-pointer mb-8 hover:text-purple transition-all duration-300"
+            className={`flex justify-end hover:cursor-pointer mb-8 hover:text-purple ${!disableAnimation ? renderSmoothTransition() : ""}`}
           >
             <IoClose size={35} />
           </div>
@@ -151,7 +151,7 @@ const Navbar = () => {
             </div>
             <div
               onClick={() => setDisableAnimation(!disableAnimation)}
-              className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple transition-all duration-300 ${
+              className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${!disableAnimation ? renderSmoothTransition() : ""} ${
                 disableAnimation ? "text-purple" : ""
               }`}
             >

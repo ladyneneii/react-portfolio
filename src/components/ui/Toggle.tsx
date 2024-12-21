@@ -1,5 +1,7 @@
+import { UserPrefContext } from "@/context/UserPrefContext";
+import { renderSmoothTransition } from "@/shared";
 import { AvailableThemesType } from "@/types";
-import React from "react";
+import React, { useContext } from "react";
 
 interface ToggleOptionInterface {
   label: React.ReactNode;
@@ -19,6 +21,8 @@ const Toggle = ({
   selectedOption,
   setSelectedOption,
 }: Props) => {
+  const { disableAnimation } = useContext(UserPrefContext);
+
   return (
     <div
       onClick={() =>
@@ -31,7 +35,7 @@ const Toggle = ({
       className="bg-purple py-1 px-[10px] relative rounded-[48px] w-16 h-9 cursor-pointer flex items-center justify-between"
     >
       <div
-        className={`rounded-full w-7 h-7 bg-white absolute top-1/2 -translate-y-1/2 transition-all duration-300 flex justify-center items-center ${
+        className={`rounded-full w-7 h-7 bg-white absolute top-1/2 -translate-y-1/2 flex justify-center items-center ${!disableAnimation ? renderSmoothTransition() : ""} ${
           selectedOption === firstOption.value ? "left-1" : "left-8"
         }`}
       ></div>

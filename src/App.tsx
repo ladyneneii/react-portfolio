@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import { UserPrefContext } from "./context/UserPrefContext";
 
 const App = () => {
-  const { selectedTheme, setSelectedTheme } = useContext(UserPrefContext);
+  const { selectedTheme } = useContext(UserPrefContext);
 
   return (
     <div
