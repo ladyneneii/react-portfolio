@@ -1,3 +1,5 @@
+import { AvailableLanguagesType } from "./types";
+
 export const maxWidth = "max-w-[1280px]";
 export const minWidth = "min-w-[300px]";
 
@@ -6,3 +8,5 @@ export const renderSmoothTransition = (seconds?: number) => {
 
   return `transition-all ${duration}`;
 };
+
+export const languages: AvailableLanguagesType[] = ["English", "Filipino", "Bisaya"];

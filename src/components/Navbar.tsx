@@ -5,12 +5,11 @@ import { FaMoon } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { maxWidth, renderSmoothTransition } from "../shared";
+import { languages, maxWidth, renderSmoothTransition } from "../shared";
 import { IoClose } from "react-icons/io5";
 import { LuSquare } from "react-icons/lu";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
-import { AvailableLanguagesType } from "@/types";
 import Radio from "./ui/Radio";
 import Toggle from "./ui/Toggle";
 
@@ -58,7 +57,6 @@ const Navbar = () => {
   };
 
   // LANGUAGE & DISABLE ANIMATIONS
-  const languages: AvailableLanguagesType[] = ["English", "Filipino", "Bisaya"];
   const {
     selectedLanguage,
     setSelectedLanguage,
@@ -73,7 +71,7 @@ const Navbar = () => {
       <div
         className={`${
           selectedTheme === "Dark" ? "bg-black" : "bg-white"
-        } fixed top-0 left-0 right-0 ${!disableAnimation ? renderSmoothTransition() : ""}`}
+        } fixed top-0 left-0 right-0 z-[100] ${!disableAnimation ? renderSmoothTransition() : ""}`}
       >
         <div
           className={`${maxWidth} px-4 py-2 flex justify-between items-center mx-auto relative`}
@@ -114,7 +112,7 @@ const Navbar = () => {
 
       {/* SMALLER SCREENS */}
       <div
-        className={`fixed right-0 top-0 bottom-0 ${!disableAnimation ? renderSmoothTransition(5) : ""} flex flex-col justify-between overflow-auto gap-16 ${
+        className={`fixed right-0 top-0 bottom-0 ${!disableAnimation ? renderSmoothTransition(5) : ""} flex flex-col justify-between overflow-auto gap-16 z-[100] ${
           selectedTheme === "Dark" ? "bg-black" : "bg-white"
         } ${handleShowNavbar()}`}
       >
