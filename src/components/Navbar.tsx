@@ -1,12 +1,16 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { maxWidth } from "../constants";
 import { IoClose } from "react-icons/io5";
-import { FaRegCircle } from "react-icons/fa6";
+import { LuSquare } from "react-icons/lu";
+import { IoCheckboxOutline } from "react-icons/io5";
+import { UserPrefContext } from "@/context/UserPrefContext";
+import { AvailableLanguagesType } from "@/types";
+import Radio from "./ui/Radio";
 
 const Navbar = () => {
   const sections = [
@@ -19,6 +23,10 @@ const Navbar = () => {
   ];
 
   const isTablet = useMediaQuery("(max-width: 1020px)");
+  const isPhone = useMediaQuery("(max-width: 620px)");
+  const isLandscapePhone = useMediaQuery(
+    "(max-device-width: 940px) and (orientation: landscape) and (min-aspect-ratio: 3/2)"
+  );
   const [showNavbar, setShowNavbar] = useState(false);
 
   useEffect(() => {
@@ -29,19 +37,35 @@ const Navbar = () => {
     return sections.map((section) => (
       <div
         key={section}
-        className="hover:cursor-pointer hover:text-purple whitespace-nowrap transition-all duration-300"
+        className="hover:cursor-pointer hover:text-purple transition-all duration-300"
       >
         {section}
       </div>
     ));
   };
 
-  // LANGUAGE
-  const languages = ["English", "Filipino", "Bisaya"];
-  const [selectedLanguage, setSelectedLanguage] = useState("English");
+  const handleShowNavbar = () => {
+    let retVal;
+    if (showNavbar) {
+      retVal = `p-8 ${isPhone || isLandscapePhone ? "w-full" : "w-1/2"}`;
+    } else {
+      retVal = "w-0";
+    }
+
+    return retVal;
+  };
+
+  // LANGUAGE & DISABLE ANIMATIONS
+  const languages: AvailableLanguagesType[] = ["English", "Filipino", "Bisaya"];
+  const {
+    selectedLanguage,
+    setSelectedLanguage,
+    disableAnimation,
+    setDisableAnimation,
+  } = useContext(UserPrefContext);
 
   return (
-    <>
+    <div className="whitespace-nowrap">
       <div className="bg-black border-2 border-blue-500 fixed top-0 left-0 right-0">
         <div
           className={`${maxWidth} px-4 py-2 border-2 border-red-500 flex justify-between items-center mx-auto relative`}
@@ -76,38 +100,51 @@ const Navbar = () => {
 
       {/* SMALLER SCREENS */}
       <div
-        className={`fixed right-0 top-0 bottom-0 bg-black border-2 border-yellow-500 transition-all duration-500 flex flex-col justify-between ${
-          showNavbar ? "w-1/2 p-8" : "w-0"
-        }`}
+        className={`fixed right-0 top-0 bottom-0 bg-black border-2 border-yellow-500 transition-all duration-500 flex flex-col justify-between overflow-auto gap-16 ${handleShowNavbar()}`}
       >
         <div>
           <div
             onClick={() => setShowNavbar(false)}
-            className="flex justify-end hover:cursor-pointer mb-4 hover:text-purple transition-all duration-300"
+            className="flex justify-end hover:cursor-pointer mb-8 hover:text-purple transition-all duration-300"
           >
             <IoClose size={35} />
           </div>
-          <div className="flex flex-col gap-16">{renderLinks()}</div>
+          <div
+            className={`flex flex-col border-2 border-red-500 flex-wrap ${
+              isPhone || isLandscapePhone ? "gap-8" : "gap-16"
+            } ${isLandscapePhone ? "h-[100px] flex-wrap" : ""}`}
+          >
+            {renderLinks()}
+          </div>
         </div>
-        <div className="border-2 border-red-500">
-          <FaMoon size={35} className="text-purple hover:cursor-pointer mb-4" />
-          <div className="flex justify-between items-center">
-            {languages.map((language) => (
-              <div
-                key={language}
-                onClick={() => setSelectedLanguage(language)}
-                className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple transition-all duration-300 ${
-                  selectedLanguage === language ? "text-purple" : ""
-                }`}
-              >
-                <FaRegCircle size={25} />
-                {language}
-              </div>
-            ))}
+
+        <div className="flex flex-col gap-12">
+          <FaMoon size={35} className="text-purple hover:cursor-pointer" />
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-between flex-wrap gap-4 gap-y-2">
+              <Radio
+                availableOptions={languages}
+                selectedOption={selectedLanguage}
+                setSelectedOption={setSelectedLanguage}
+              />
+            </div>
+            <div
+              onClick={() => setDisableAnimation(!disableAnimation)}
+              className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple transition-all duration-300 ${
+                disableAnimation ? "text-purple" : ""
+              }`}
+            >
+              {disableAnimation ? (
+                <IoCheckboxOutline size={25} />
+              ) : (
+                <LuSquare size={25} />
+              )}
+              Disable animations
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
