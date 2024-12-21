@@ -73,10 +73,10 @@ const Navbar = () => {
       <div
         className={`${
           selectedTheme === "Dark" ? "bg-black" : "bg-white"
-        } border-2 border-blue-500 fixed top-0 left-0 right-0 ${!disableAnimation ? renderSmoothTransition() : ""}`}
+        } fixed top-0 left-0 right-0 ${!disableAnimation ? renderSmoothTransition() : ""}`}
       >
         <div
-          className={`${maxWidth} px-4 py-2 border-2 border-red-500 flex justify-between items-center mx-auto relative`}
+          className={`${maxWidth} px-4 py-2 flex justify-between items-center mx-auto relative`}
         >
           <div>
             <img
@@ -89,7 +89,7 @@ const Navbar = () => {
           </div>
           {!isTablet && (
             <div
-              className={`flex gap-16 border-2 border-yellow-500 ${!disableAnimation ? renderSmoothTransition() : ""} items-center`}
+              className={`flex gap-16 ${!disableAnimation ? renderSmoothTransition() : ""} items-center`}
             >
               {renderLinks()}
             </div>
@@ -114,7 +114,7 @@ const Navbar = () => {
 
       {/* SMALLER SCREENS */}
       <div
-        className={`fixed right-0 top-0 bottom-0 border-2 border-yellow-500 ${!disableAnimation ? renderSmoothTransition(5) : ""} flex flex-col justify-between overflow-auto gap-16 ${
+        className={`fixed right-0 top-0 bottom-0 ${!disableAnimation ? renderSmoothTransition(5) : ""} flex flex-col justify-between overflow-auto gap-16 ${
           selectedTheme === "Dark" ? "bg-black" : "bg-white"
         } ${handleShowNavbar()}`}
       >
@@ -126,7 +126,7 @@ const Navbar = () => {
             <IoClose size={35} />
           </div>
           <div
-            className={`flex flex-col border-2 border-red-500 flex-wrap ${
+            className={`flex flex-col flex-wrap ${
               isPhone || isLandscapePhone ? "gap-8" : "gap-12"
             } ${isLandscapePhone ? "h-[100px] flex-wrap" : ""}`}
           >
