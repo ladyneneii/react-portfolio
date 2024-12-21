@@ -2,15 +2,17 @@
 
 import { useContext, useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
+import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { maxWidth } from "../constants";
+import { maxWidth, renderSmoothTransition } from "../shared";
 import { IoClose } from "react-icons/io5";
 import { LuSquare } from "react-icons/lu";
 import { IoCheckboxOutline } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { AvailableLanguagesType } from "@/types";
 import Radio from "./ui/Radio";
+import Toggle from "./ui/Toggle";
 
 const Navbar = () => {
   const sections = [
@@ -37,7 +39,7 @@ const Navbar = () => {
     return sections.map((section) => (
       <div
         key={section}
-        className="hover:cursor-pointer hover:text-purple transition-all duration-300"
+        className={`hover:cursor-pointer hover:text-purple ${!disableAnimation ? renderSmoothTransition() : ""}`}
       >
         {section}
       </div>
@@ -62,13 +64,19 @@ const Navbar = () => {
     setSelectedLanguage,
     disableAnimation,
     setDisableAnimation,
+    selectedTheme,
+    setSelectedTheme,
   } = useContext(UserPrefContext);
 
   return (
     <div className="whitespace-nowrap">
-      <div className="bg-black border-2 border-blue-500 fixed top-0 left-0 right-0">
+      <div
+        className={`${
+          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+        } fixed top-0 left-0 right-0 ${!disableAnimation ? renderSmoothTransition() : ""}`}
+      >
         <div
-          className={`${maxWidth} px-4 py-2 border-2 border-red-500 flex justify-between items-center mx-auto relative`}
+          className={`${maxWidth} px-4 py-2 flex justify-between items-center mx-auto relative`}
         >
           <div>
             <img
@@ -81,18 +89,24 @@ const Navbar = () => {
           </div>
           {!isTablet && (
             <div
-              className={`flex gap-16 border-2 border-yellow-500 transition-all duration-300 items-center`}
+              className={`flex gap-16 ${!disableAnimation ? renderSmoothTransition() : ""} items-center`}
             >
               {renderLinks()}
             </div>
           )}
           {!isTablet ? (
-            <FaMoon size={35} className="text-purple hover:cursor-pointer" />
+            // <FaMoon size={35} className="text-purple hover:cursor-pointer" />
+            <Toggle
+              firstOption={{ label: <FaMoon />, value: "Dark" }}
+              secondOption={{ label: <FiSun />, value: "Light" }}
+              selectedOption={selectedTheme}
+              setSelectedOption={setSelectedTheme}
+            />
           ) : (
             <RxHamburgerMenu
               onClick={() => setShowNavbar(!showNavbar)}
               size={35}
-              className="hover:cursor-pointer hover:text-purple transition-all duration-300"
+              className={`hover:cursor-pointer hover:text-purple ${!disableAnimation ? renderSmoothTransition() : ""}`}
             />
           )}
         </div>
@@ -100,18 +114,20 @@ const Navbar = () => {
 
       {/* SMALLER SCREENS */}
       <div
-        className={`fixed right-0 top-0 bottom-0 bg-black border-2 border-yellow-500 transition-all duration-500 flex flex-col justify-between overflow-auto gap-16 ${handleShowNavbar()}`}
+        className={`fixed right-0 top-0 bottom-0 ${!disableAnimation ? renderSmoothTransition(5) : ""} flex flex-col justify-between overflow-auto gap-16 ${
+          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+        } ${handleShowNavbar()}`}
       >
         <div>
           <div
             onClick={() => setShowNavbar(false)}
-            className="flex justify-end hover:cursor-pointer mb-8 hover:text-purple transition-all duration-300"
+            className={`flex justify-end hover:cursor-pointer mb-8 hover:text-purple ${!disableAnimation ? renderSmoothTransition() : ""}`}
           >
             <IoClose size={35} />
           </div>
           <div
-            className={`flex flex-col border-2 border-red-500 flex-wrap ${
-              isPhone || isLandscapePhone ? "gap-8" : "gap-16"
+            className={`flex flex-col flex-wrap ${
+              isPhone || isLandscapePhone ? "gap-8" : "gap-12"
             } ${isLandscapePhone ? "h-[100px] flex-wrap" : ""}`}
           >
             {renderLinks()}
@@ -119,7 +135,12 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-col gap-12">
-          <FaMoon size={35} className="text-purple hover:cursor-pointer" />
+          <Toggle
+            firstOption={{ label: <FaMoon />, value: "Dark" }}
+            secondOption={{ label: <FiSun />, value: "Light" }}
+            selectedOption={selectedTheme}
+            setSelectedOption={setSelectedTheme}
+          />
           <div className="flex flex-col gap-4">
             <div className="flex justify-between flex-wrap gap-4 gap-y-2">
               <Radio
@@ -130,7 +151,7 @@ const Navbar = () => {
             </div>
             <div
               onClick={() => setDisableAnimation(!disableAnimation)}
-              className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple transition-all duration-300 ${
+              className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${!disableAnimation ? renderSmoothTransition() : ""} ${
                 disableAnimation ? "text-purple" : ""
               }`}
             >

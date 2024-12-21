@@ -1,18 +1,51 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import { AvailableLanguagesType, UserPrefContextInterface } from "@/types";
-import { createContext, useState } from "react";
+import {
+  AvailableLanguagesType,
+  AvailableThemesType,
+  UserPrefContextInterface,
+} from "@/types";
+import { createContext, useEffect, useState } from "react";
 
 export const UserPrefContext = createContext<UserPrefContextInterface>({
   selectedLanguage: "English",
   setSelectedLanguage: () => {},
   disableAnimation: false,
   setDisableAnimation: () => {},
+  selectedTheme: "Dark",
+  setSelectedTheme: () => {},
 });
 
-export const UserPrefContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [selectedLanguage, setSelectedLanguage] = useState<AvailableLanguagesType>("English");
-  const [disableAnimation, setDisableAnimation] = useState(false);
+export const UserPrefContextProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  // Initialize state from localStorage or default values
+  const [selectedLanguage, setSelectedLanguage] =
+    useState<AvailableLanguagesType>(
+      (localStorage.getItem("selectedLanguage") as AvailableLanguagesType) ||
+        "English"
+    );
+  const [disableAnimation, setDisableAnimation] = useState<boolean>(
+    localStorage.getItem("disableAnimation") === "true" || false
+  );
+  const [selectedTheme, setSelectedTheme] = useState<AvailableThemesType>(
+    (localStorage.getItem("selectedTheme") as AvailableThemesType) || "System"
+  );
+
+  // CHANGE VALUE IN LOCALSTORAGE
+  useEffect(() => {
+    localStorage.setItem("selectedLanguage", selectedLanguage);
+  }, [selectedLanguage]);
+
+  useEffect(() => {
+    localStorage.setItem("disableAnimation", String(disableAnimation));
+  }, [disableAnimation]);
+
+  useEffect(() => {
+    localStorage.setItem("selectedTheme", selectedTheme);
+  }, [selectedTheme]);
 
   return (
     <UserPrefContext.Provider
@@ -21,6 +54,8 @@ export const UserPrefContextProvider = ({ children }: { children: React.ReactNod
         setSelectedLanguage,
         disableAnimation,
         setDisableAnimation,
+        selectedTheme,
+        setSelectedTheme,
       }}
     >
       {children}
