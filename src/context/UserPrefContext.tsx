@@ -3,6 +3,7 @@
 import {
   AvailableLanguagesType,
   AvailableThemesType,
+  SectionsType,
   UserPrefContextInterface,
 } from "@/types";
 import { createContext, useEffect, useState } from "react";
@@ -14,6 +15,8 @@ export const UserPrefContext = createContext<UserPrefContextInterface>({
   setDisableAnimation: () => {},
   selectedTheme: "Dark",
   setSelectedTheme: () => {},
+  selectedSection: "Home",
+  setSelectedSection: () => {},
 });
 
 export const UserPrefContextProvider = ({
@@ -33,6 +36,7 @@ export const UserPrefContextProvider = ({
   const [selectedTheme, setSelectedTheme] = useState<AvailableThemesType>(
     (localStorage.getItem("selectedTheme") as AvailableThemesType) || "System"
   );
+  const [selectedSection, setSelectedSection] = useState<SectionsType>("Home");
 
   // CHANGE VALUE IN LOCALSTORAGE
   useEffect(() => {
@@ -56,6 +60,8 @@ export const UserPrefContextProvider = ({
         setDisableAnimation,
         selectedTheme,
         setSelectedTheme,
+        selectedSection,
+        setSelectedSection,
       }}
     >
       {children}

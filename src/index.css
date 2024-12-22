@@ -35,3 +35,29 @@ body {
     box-shadow: var(--shadow);
   }
 }
+
+h1 {
+  font-size: 60px;
+}
+
+h4 {
+  font-size: 28px;
+}
+
+@media (max-width: 660px) {
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-device-width: 940px) and (orientation: landscape) and (min-aspect-ratio: 3/2) {
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 20px;
+  }
+}
