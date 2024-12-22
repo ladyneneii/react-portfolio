@@ -67,7 +67,7 @@ const Hero = () => {
   return (
     <div className={`relative ${marginTop}`}>
       <img
-        src="/assets/background-transparent.png"
+        src="/assets/background-transparent-20.png"
         className={`w-[2040px] object-cover mx-auto ${minWidth}`}
         style={{ height: heroImageHeight }}
       />
@@ -104,7 +104,7 @@ const Hero = () => {
             !isTablet || isTablet2
               ? "flex-col justify-between items-center"
               : ""
-          } gap-16 flex-shrink-0`}
+          } gap-12 flex-shrink-0`}
         >
           <div className="flex flex-col gap-4 flex-shrink-0">
             <img
@@ -145,7 +145,7 @@ const Hero = () => {
           <div
             className={`flex flex-col ${
               !isTablet ? "items-center" : "justify-between"
-            } gap-16`}
+            } gap-24`}
           >
             {isTablet && renderIntroduction()}
             <div
