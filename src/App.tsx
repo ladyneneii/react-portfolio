@@ -2,6 +2,7 @@ import { useContext } from "react";
 import Navbar from "./components/Navbar";
 import { UserPrefContext } from "./context/UserPrefContext";
 import Hero from "./components/Hero";
+import { maxWidth, minWidth } from "./shared";
 
 const App = () => {
   const { selectedTheme } = useContext(UserPrefContext);
@@ -13,7 +14,9 @@ const App = () => {
       }`}
     >
       <Navbar />
-      <Hero />
+        <Hero />
+      <div className={`${maxWidth} ${minWidth} mx-auto`}>
+      </div>
     </div>
   );
 };
