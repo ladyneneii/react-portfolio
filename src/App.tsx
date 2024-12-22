@@ -18,7 +18,7 @@ const App = () => {
     >
       <Navbar />
       <Hero />
-      <div className={`${maxWidth} mx-auto border-2 border-red-500`}>
+      <div className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}>
         <Skills />
       </div>
     </div>

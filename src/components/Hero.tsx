@@ -7,12 +7,13 @@ import {
   maxWidth,
   minWidth,
 } from "@/shared";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { LuSquare } from "react-icons/lu";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import Select from "./ui/Select";
 import { AvailableLanguagesType } from "@/types";
+import useHeightResize from "@/hooks/useHeightResize";
 
 const Hero = () => {
   const {
@@ -32,26 +33,7 @@ const Hero = () => {
 
   const heroInfoContainerRef = useRef<HTMLDivElement | null>(null);
   const [heroImageHeight, setHeroImageHeight] = useState(700);
-
-  useEffect(() => {
-    const VERTICAL_PADDING = 100;
-    const resizeObserver = new ResizeObserver(() => {
-      if (heroInfoContainerRef.current) {
-        setHeroImageHeight(
-          heroInfoContainerRef.current.getBoundingClientRect().height +
-            VERTICAL_PADDING
-        );
-      }
-    });
-
-    if (heroInfoContainerRef.current) {
-      resizeObserver.observe(heroInfoContainerRef.current);
-    }
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, []);
+  useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
 
   const renderIntroduction = () => {
     return (
@@ -75,8 +57,8 @@ const Hero = () => {
             ? "/assets/background-transparent-black.png"
             : "/assets/background-transparent-white.png"
         })`,
-        backgroundSize: "cover", 
-        // backgroundSize: "auto", 
+        backgroundSize: "cover",
+        // backgroundSize: "auto",
         // backgroundRepeat: "repeat",
         backgroundPosition: "center",
         height: heroImageHeight,
