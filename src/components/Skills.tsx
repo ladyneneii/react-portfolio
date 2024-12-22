@@ -150,7 +150,7 @@ const Skills = () => {
 
   return (
     <div className={`pt-6 pb-12`}>
-      <div className="flex flex-col gap-2 items-center mb-6">
+      <div className="flex flex-col gap-2 items-center mb-12">
         <h1>Skills</h1>
         <div className="flex items-center gap-6">
           <Radio
@@ -164,6 +164,7 @@ const Skills = () => {
         {selectedSubsection === "Main tech stack" ? (
           <>
             <Box
+              key="mainTechStack"
               title="Main Tech Stack"
               isFoldable={true}
               childrenHeight={mtsContainerHeight - EXTRA_SPACE}
@@ -172,12 +173,11 @@ const Skills = () => {
                 {renderItems(mts)}
               </div>
             </Box>
-
-            
           </>
         ) : (
           <>
             <Box
+              key="programmingLanguages"
               title="Programming Languages"
               isFoldable={true}
               childrenHeight={plContainerHeight - EXTRA_SPACE}
@@ -188,6 +188,7 @@ const Skills = () => {
             </Box>
 
             <Box
+              key="webDevelopment"
               title="Web Development"
               isFoldable={true}
               childrenHeight={wdContainerHeight - EXTRA_SPACE}
@@ -210,6 +211,7 @@ const Skills = () => {
             </Box>
 
             <Box
+              key="frameworksLibrariesAndTools"
               title="Frameworks, Libraries, and Tools"
               isFoldable={true}
               childrenHeight={fltContainerHeight - EXTRA_SPACE}
@@ -220,6 +222,7 @@ const Skills = () => {
             </Box>
 
             <Box
+              key="coursework"
               title="Coursework"
               isFoldable={true}
               childrenHeight={cwContainerHeight - EXTRA_SPACE}
