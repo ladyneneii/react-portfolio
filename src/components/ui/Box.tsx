@@ -28,20 +28,20 @@ const Box = ({
   const foldCondition = !isFoldable || (isFoldable && unfold);
 
   return (
-    <div className={`rounded-lg shadow-custom p-4`}>
+    <div className={`rounded-lg shadow-custom-sm p-4`}>
       <div
+        onClick={() => {
+          if (isFoldable) setUnfold(!unfold);
+        }}
         className={`flex justify-between gap-4 mb-8 ${
           isPhone ? "flex-col" : "items-center"
-        }`}
+        } ${
+          isFoldable ? "hover:text-purple" : ""
+        } cursor-pointer ${getConditionalSmoothTransition(disableAnimation)}`}
       >
         <div className="flex items-center gap-4">
           {isFoldable && (
-            <div
-              onClick={() => setUnfold(!unfold)}
-              className={`cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                disableAnimation
-              )}`}
-            >
+            <div>
               {unfold ? <FaAngleUp size={25} /> : <FaAngleDown size={25} />}
             </div>
           )}
@@ -56,11 +56,15 @@ const Box = ({
       </div>
       <div
         className={`${
-          foldCondition ? "opacity-100" : "opacity-0"
+          foldCondition ? "opacity-100" : "opacity-0 invisible"
         } ${getConditionalSmoothTransition(disableAnimation)}`}
-        style={{
-          height: foldCondition ? childrenHeight : 0,
-        }}
+        style={
+          isFoldable && childrenHeight
+            ? {
+                height: foldCondition ? childrenHeight : 0,
+              }
+            : {}
+        }
       >
         {children}
       </div>

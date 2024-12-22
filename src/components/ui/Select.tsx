@@ -51,9 +51,9 @@ const Select = ({
     <div ref={selectRef} className="relative w-max">
       <div
         onClick={() => setShowDropdown(!showDropdown)}
-        className={`px-2 py-1 w-[11rem] rounded-lg cursor-pointer flex items-center justify-between border-2 hover:border-purple ${renderBorderColor()} ${
-          getConditionalSmoothTransition(disableAnimation)
-        }`}
+        className={`px-2 py-1 w-[11rem] rounded-lg cursor-pointer flex items-center justify-between border-2 hover:border-purple ${renderBorderColor()} ${getConditionalSmoothTransition(
+          disableAnimation
+        )}`}
       >
         {options.find((option) => option.value === selectedOption)?.label ||
           "Select an option"}
@@ -62,29 +62,29 @@ const Select = ({
 
       <div
         className={`absolute left-0 right-0 top-10 rounded-lg border-purple ${
+          showDropdown ? "opacity-100" : "opacity-0 invisible"
+        } ${
           showDropdown ? `h-[84px] py-2 border-2` : "h-0 py-0"
         } ${getConditionalSmoothTransition(disableAnimation)}`}
       >
-        {showDropdown && (
-          <div className="overflow-auto flex flex-col">
-            {options.map(
-              ({ value, label }) =>
-                value !== selectedOption && (
-                  <div
-                    key={value}
-                    onClick={() => {
-                      onChange(value);
-                      setSelectedOption(value);
-                      setShowDropdown(false);
-                    }}
-                    className={`hover:cursor-pointer px-2 py-1 hover:bg-purple`}
-                  >
-                    {label}
-                  </div>
-                )
-            )}
-          </div>
-        )}
+        <div className="overflow-auto flex flex-col">
+          {options.map(
+            ({ value, label }) =>
+              value !== selectedOption && (
+                <div
+                  key={value}
+                  onClick={() => {
+                    onChange(value);
+                    setSelectedOption(value);
+                    setShowDropdown(false);
+                  }}
+                  className={`hover:cursor-pointer px-2 py-1 hover:bg-purple`}
+                >
+                  {label}
+                </div>
+              )
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +16,8 @@ html {
   --foreground: #000000;
 
   --purple: #d99cff;
-  --shadow: 0 0 200px 50px rgba(217, 156, 255, 0.25)
+  --shadow: 0 0 200px 50px rgba(217, 156, 255, 0.25);
+  --shadow-sm: rgba(217, 156, 255, 0.452) 0px 10px 36px 0px, rgba(217, 156, 255, 0.06) 0px 0px 0px 1px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,6 +35,10 @@ body {
   .shadow-custom {
     box-shadow: var(--shadow);
   }
+
+  .shadow-custom-sm {
+    box-shadow: var(--shadow-sm);
+  }
 }
 
 h1 {
@@ -42,6 +47,10 @@ h1 {
 
 h4 {
   font-size: 28px;
+}
+
+h6 {
+  font-size: 20px;
 }
 
 @media (max-width: 660px) {
