@@ -38,9 +38,9 @@ const Hero = () => {
   const renderIntroduction = () => {
     return (
       <div className="flex flex-col gap-4">
-        <h4>
-          I am <span className="font-normal">Ernest Curativo</span>—a software
-          engineer in{" "}
+        <h4 className="font-extralight">
+          I am <span className="font-normal">Ernest Curativo</span>—a{" "}
+          <span className="text-purple">software engineer</span> in{" "}
           <span className="whitespace-nowrap">Cebu, Philippines.</span>
         </h4>
         <Button onClick={() => console.log("lkdasf")} content="View CV" />

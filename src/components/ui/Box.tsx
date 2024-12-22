@@ -21,19 +21,18 @@ const Box = ({
   companyName,
   startAndEndDates,
 }: Props) => {
-  const { disableAnimation } = useContext(UserPrefContext);
+  const { selectedTheme, disableAnimation } = useContext(UserPrefContext);
   const isPhone = useMediaQuery("(max-width: 660px)");
   const [unfold, setUnfold] = useState(true);
 
   const foldCondition = !isFoldable || (isFoldable && unfold);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState(false);
-  const NAVBAR_HEIGHT = 66
+  const NAVBAR_HEIGHT = 65;
 
   const handleScroll = () => {
     if (headerRef.current) {
       const rect = headerRef.current.getBoundingClientRect();
-      console.log(rect.top);
       setIsSticky(rect.top <= NAVBAR_HEIGHT);
     }
   };
@@ -60,8 +59,9 @@ const Box = ({
         } ${
           isFoldable ? "hover:text-purple" : ""
         } cursor-pointer ${getConditionalSmoothTransition(disableAnimation)} ${
-          isSticky && unfold ? "sticky top-[65px] z-10 bg-black py-4" : ""
+          isSticky && unfold ? `sticky z-10 ${selectedTheme === "Dark" ? "bg-black" : "bg-white"} py-4` : ""
         }`}
+        style={{top: NAVBAR_HEIGHT}}
       >
         <div className="flex items-center gap-4">
           {isFoldable && (

@@ -51,7 +51,9 @@ const Select = ({
     <div ref={selectRef} className="relative w-max">
       <div
         onClick={() => setShowDropdown(!showDropdown)}
-        className={`px-2 py-1 w-[11rem] rounded-lg cursor-pointer flex items-center justify-between border-2 hover:border-purple ${renderBorderColor()} ${getConditionalSmoothTransition(
+        className={`px-2 py-1 w-[11rem] rounded-lg cursor-pointer flex items-center justify-between border-2 hover:border-purple hover:text-purple ${
+          showDropdown ? "text-purple" : ""
+        } ${renderBorderColor()} ${getConditionalSmoothTransition(
           disableAnimation
         )}`}
       >
