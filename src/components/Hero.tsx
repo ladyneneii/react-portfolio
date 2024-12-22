@@ -87,9 +87,9 @@ const Hero = () => {
         <div
           className={`flex ${
             !isTablet || isTablet2
-              ? "flex-col justify-between items-center"
-              : ""
-          } gap-12 flex-shrink-0`}
+              ? "flex-col justify-between items-center gap-12"
+              : "gap-24"
+          } flex-shrink-0`}
         >
           <div className="flex flex-col gap-4 flex-shrink-0">
             <img

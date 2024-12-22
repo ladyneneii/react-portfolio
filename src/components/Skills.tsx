@@ -9,8 +9,6 @@ import { AiOutlineCluster } from "react-icons/ai";
 import { MdOutlineSentimentSatisfied } from "react-icons/md";
 import Radio, { RadioDataTypes } from "./ui/Radio";
 
-type Props = {};
-
 interface SkillsListInterface {
   name: string;
   src: string | React.ReactNode;
@@ -18,7 +16,7 @@ interface SkillsListInterface {
 
 export type SkillsSubsectionsType = "Main tech stack" | "All skills";
 
-const Skills = (props: Props) => {
+const Skills = () => {
   const { selectedTheme } = useContext(UserPrefContext);
   const subsections: SkillsSubsectionsType[] = [
     "Main tech stack",
@@ -151,7 +149,7 @@ const Skills = (props: Props) => {
   };
 
   return (
-    <div className={`border-t-2 pt-6 pb-12`}>
+    <div className={`pt-6 pb-12`}>
       <div className="flex flex-col gap-2 items-center mb-6">
         <h1>Skills</h1>
         <div className="flex items-center gap-6">
@@ -164,15 +162,19 @@ const Skills = (props: Props) => {
       </div>
       <div className="flex flex-col gap-4">
         {selectedSubsection === "Main tech stack" ? (
-          <Box
-            title="Main Tech Stack"
-            isFoldable={true}
-            childrenHeight={mtsContainerHeight - EXTRA_SPACE}
-          >
-            <div ref={mtsContainerRef} className={itemsContainerClass}>
-              {renderItems(mts)}
-            </div>
-          </Box>
+          <>
+            <Box
+              title="Main Tech Stack"
+              isFoldable={true}
+              childrenHeight={mtsContainerHeight - EXTRA_SPACE}
+            >
+              <div ref={mtsContainerRef} className={itemsContainerClass}>
+                {renderItems(mts)}
+              </div>
+            </Box>
+
+            
+          </>
         ) : (
           <>
             <Box
