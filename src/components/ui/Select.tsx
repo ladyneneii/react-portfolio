@@ -1,6 +1,6 @@
 import { UserPrefContext } from "@/context/UserPrefContext";
 import useOutsideClick from "@/hooks/useOutsideClick";
-import { renderSmoothTransition } from "@/shared";
+import { getConditionalSmoothTransition } from "@/shared";
 import { useContext, useEffect, useRef, useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 
@@ -51,8 +51,8 @@ const Select = ({
     <div ref={selectRef} className="relative w-max">
       <div
         onClick={() => setShowDropdown(!showDropdown)}
-        className={`px-2 py-1 w-[8rem] rounded-lg cursor-pointer flex items-center justify-between border-2 hover:border-purple ${renderBorderColor()} ${
-          !disableAnimation ? renderSmoothTransition() : ""
+        className={`px-2 py-1 w-[11rem] rounded-lg cursor-pointer flex items-center justify-between border-2 hover:border-purple ${renderBorderColor()} ${
+          getConditionalSmoothTransition(disableAnimation)
         }`}
       >
         {options.find((option) => option.value === selectedOption)?.label ||
@@ -63,7 +63,7 @@ const Select = ({
       <div
         className={`absolute left-0 right-0 top-10 rounded-lg border-purple ${
           showDropdown ? `h-[84px] py-2 border-2` : "h-0 py-0"
-        } ${!disableAnimation ? renderSmoothTransition(5) : ""}`}
+        } ${getConditionalSmoothTransition(disableAnimation)}`}
       >
         {showDropdown && (
           <div className="overflow-auto flex flex-col">

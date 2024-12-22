@@ -1,5 +1,5 @@
 import { UserPrefContext } from "@/context/UserPrefContext";
-import { renderSmoothTransition } from "@/shared";
+import { getConditionalSmoothTransition } from "@/shared";
 import React, { useContext } from "react";
 
 type Props = {
@@ -12,7 +12,7 @@ const Button = ({ content, onClick }: Props) => {
   return (
     <div
       onClick={onClick}
-      className={`border ${!disableAnimation ? renderSmoothTransition() : ""} ${
+      className={`border ${getConditionalSmoothTransition(disableAnimation)} ${
         selectedTheme === "Dark" ? "border-white" : "border-black"
       } px-8 py-4 rounded-lg cursor-pointer hover:border-purple hover:text-purple whitespace-nowrap w-max`}
     >

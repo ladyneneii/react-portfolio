@@ -16,6 +16,7 @@ html {
   --foreground: #000000;
 
   --purple: #d99cff;
+  --shadow: 0 0 200px 50px rgba(217, 156, 255, 0.25)
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,4 +28,10 @@ html {
 
 body {
   font-family: "Poppins", serif;
+}
+
+@layer utilities {
+  .shadow-custom {
+    box-shadow: var(--shadow);
+  }
 }

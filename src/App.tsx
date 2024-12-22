@@ -14,8 +14,8 @@ const App = () => {
       }`}
     >
       <Navbar />
-      <div className={`${maxWidth} ${minWidth} mx-auto`}>
         <Hero />
+      <div className={`${maxWidth} ${minWidth} mx-auto`}>
       </div>
     </div>
   );

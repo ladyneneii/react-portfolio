@@ -9,4 +9,12 @@ export const renderSmoothTransition = (seconds?: number) => {
   return `transition-all ${duration}`;
 };
 
-export const languages: AvailableLanguagesType[] = ["English", "Filipino", "Bisaya"];
+export const getConditionalSmoothTransition = (disableAnimation: boolean) => {
+  return !disableAnimation ? renderSmoothTransition() : "";
+};
+
+export const languages: AvailableLanguagesType[] = [
+  "English",
+  "Filipino",
+  "Bisaya",
+];
