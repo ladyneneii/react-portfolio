@@ -55,7 +55,10 @@ const Navbar = () => {
         href={`#${section.charAt(0).toLowerCase() + section.slice(1)}`}
       >
         <div
-          onClick={() => setSelectedSection(section)}
+          onClick={() => {
+            setSelectedSection(section);
+            setShowNavbar(false);
+          }}
           className={`hover:cursor-pointer hover:text-purple ${
             selectedSection === section ? "text-purple" : ""
           } ${getConditionalSmoothTransition(disableTransitions)}`}
