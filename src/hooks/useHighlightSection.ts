@@ -9,11 +9,13 @@ type Props = {
 };
 
 const useHighlightSection = ({ ref, setSection, section }: Props) => {
+  const VALUE_FOR_EARLY_HIGHLIGHT = 200
+  
   useEffect(() => {
     const handleScroll = () => {
       if (ref.current) {
         const rect = ref.current.getBoundingClientRect();
-        if (rect.top <= NAVBAR_HEIGHT) setSection(section);
+        if (rect.top <= NAVBAR_HEIGHT + VALUE_FOR_EARLY_HIGHLIGHT) setSection(section);
       }
     };
 

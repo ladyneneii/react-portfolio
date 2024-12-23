@@ -11,14 +11,7 @@ import { renderProjects } from "./functions/renderProjects";
 import { useNavigate } from "react-router-dom";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import { UserPrefContext } from "@/context/UserPrefContext";
-
-export interface ProjectsInterface {
-  img: string;
-  desc: string;
-  techUsed: string;
-  websiteLink?: string;
-  learnMoreLink?: string;
-}
+import { ProjectsInterface } from "./Projects";
 
 const Experience = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
@@ -26,7 +19,7 @@ const Experience = () => {
   const [fpContainerHeight, setFpContainerHeight] = useState(0);
   useHeightResize({ ref: fpContainerRef, setHeight: setFpContainerHeight });
 
-  const projectsInfo: ProjectsInterface[] = [
+  const experienceInfo: ProjectsInterface[] = [
     {
       img: "/assets/thumbnail-filpass.png",
       desc: "Worked full-time with a project manager, product owner, and a team of frontend developers and QA testers on Filpass v2.0.",
@@ -79,7 +72,27 @@ const Experience = () => {
           startAndEndDates="Sept 2024 - Dec 2024"
         >
           <div ref={fpContainerRef} className="mt-16 flex flex-col gap-12">
-            {renderProjects(projectsInfo, navigate)}
+            {experienceInfo.map(
+              (
+                {
+                  img,
+                  desc,
+                  techUsed,
+                  websiteLink,
+                  learnMoreLink,
+                }: ProjectsInterface,
+                index
+              ) =>
+                renderProjects(
+                  img,
+                  desc,
+                  techUsed,
+                  index,
+                  navigate,
+                  websiteLink,
+                  learnMoreLink
+                )
+            )}
           </div>
         </Box>
       </div>

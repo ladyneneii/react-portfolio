@@ -20,7 +20,7 @@ export const languages: AvailableLanguagesType[] = [
 ];
 
 export const NAVBAR_HEIGHT = 65;
-export const sectionPaddingClassnames = "py-16 flex flex-col gap-8 min-h-[100vh]";
+export const sectionPaddingClassnames = "py-16 flex flex-col gap-8";
 export const sectionTitleContainerClassnames =
   "flex flex-col gap-2 items-center";
 export const boxContainerClassnames = "flex flex-col gap-4";
