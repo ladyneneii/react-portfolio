@@ -1,13 +1,19 @@
 import Button from "./ui/Button";
 import { IoCheckboxOutline, IoMail } from "react-icons/io5";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { getConditionalSmoothTransition, languages, maxWidth, minWidth } from "@/shared";
-import { useContext, useEffect, useRef, useState } from "react";
+import {
+  getConditionalSmoothTransition,
+  languages,
+  maxWidth,
+  minWidth,
+} from "@/shared";
+import { useContext, useRef, useState } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { LuSquare } from "react-icons/lu";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import Select from "./ui/Select";
 import { AvailableLanguagesType } from "@/types";
+import useHeightResize from "@/hooks/useHeightResize";
 
 const Hero = () => {
   const {
@@ -15,6 +21,7 @@ const Hero = () => {
     setSelectedLanguage,
     disableAnimation,
     setDisableAnimation,
+    selectedTheme,
   } = useContext(UserPrefContext);
   const marginTop = "mt-[66px]";
   const isTablet = useMediaQuery("(max-width: 1020px)");
@@ -26,67 +33,45 @@ const Hero = () => {
 
   const heroInfoContainerRef = useRef<HTMLDivElement | null>(null);
   const [heroImageHeight, setHeroImageHeight] = useState(700);
-
-  useEffect(() => {
-    const VERTICAL_PADDING = 100;
-    const resizeObserver = new ResizeObserver(() => {
-      if (heroInfoContainerRef.current) {
-        setHeroImageHeight(
-          heroInfoContainerRef.current.getBoundingClientRect().height +
-            VERTICAL_PADDING
-        );
-      }
-    });
-
-    if (heroInfoContainerRef.current) {
-      resizeObserver.observe(heroInfoContainerRef.current);
-    }
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, []);
+  useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
 
   const renderIntroduction = () => {
     return (
       <div className="flex flex-col gap-4">
-        <h2
-          className={`font-extralight ${
-            !isPhone && !isLandscapePhone ? "text-[28px]" : "text-[20px]"
-          }`}
-        >
-          I am <span className="font-normal">Ernest Curativo</span>—a software
-          engineer in{" "}
+        <h4 className="font-extralight">
+          I am <span className="font-normal">Ernest Curativo</span>—a{" "}
+          <span className="text-purple">software engineer</span> in{" "}
           <span className="whitespace-nowrap">Cebu, Philippines.</span>
-        </h2>
+        </h4>
         <Button onClick={() => console.log("lkdasf")} content="View CV" />
       </div>
     );
   };
 
   return (
-    <div className={`relative ${marginTop}`}>
-      <img
-        src="/assets/background-transparent-20.png"
-        className={`w-[2040px] object-cover mx-auto ${minWidth}`}
-        style={{ height: heroImageHeight }}
-      />
+    <div
+      className={`relative ${marginTop} ${minWidth}`}
+      style={{
+        backgroundImage: `url(${
+          selectedTheme === "Dark"
+            ? "/assets/background-transparent-black.png"
+            : "/assets/background-transparent-white.png"
+        })`,
+        backgroundSize: "cover",
+        // backgroundSize: "auto",
+        // backgroundRepeat: "repeat",
+        backgroundPosition: "center",
+        height: heroImageHeight,
+      }}
+    >
       <div
         ref={heroInfoContainerRef}
         className={`absolute z-30 left-0 right-0 flex gap-16 px-4 justify-between top-1/2 -translate-y-1/2 ${
           !isTablet ? "" : "flex-col"
         } ${maxWidth} ${minWidth} mx-auto`}
       >
-        <div
-          className={
-            "flex gap-16 flex-col max-w-[700px]"
-          }
-        >
-          <h1
-            className={`${
-              !isPhone && !isLandscapePhone ? "text-[60px]" : "text-[40px]"
-            }`}
-          >
+        <div className={"flex gap-16 flex-col max-w-[700px]"}>
+          <h1>
             Transforming your ideas into{" "}
             <span className="text-purple font-extralight italic">elegant</span>{" "}
             code and{" "}
@@ -102,9 +87,9 @@ const Hero = () => {
         <div
           className={`flex ${
             !isTablet || isTablet2
-              ? "flex-col justify-between items-center"
-              : ""
-          } gap-12 flex-shrink-0`}
+              ? "flex-col justify-between items-center gap-12"
+              : "gap-24"
+          } flex-shrink-0`}
         >
           <div className="flex flex-col gap-4 flex-shrink-0">
             <img
@@ -117,27 +102,27 @@ const Hero = () => {
             <div className="flex gap-3 justify-center">
               <IoMail
                 size={25}
-                className={`hover:cursor-pointer hover:text-purple ${
-                  getConditionalSmoothTransition(disableAnimation)
-                }`}
+                className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                  disableAnimation
+                )}`}
               />
               <FaGithub
                 size={25}
-                className={`hover:cursor-pointer hover:text-purple ${
-                  getConditionalSmoothTransition(disableAnimation)
-                }`}
+                className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                  disableAnimation
+                )}`}
               />
               <FaLinkedin
                 size={25}
-                className={`hover:cursor-pointer hover:text-purple ${
-                  getConditionalSmoothTransition(disableAnimation)
-                }`}
+                className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                  disableAnimation
+                )}`}
               />
               <FaInstagram
                 size={25}
-                className={`hover:cursor-pointer hover:text-purple ${
-                  getConditionalSmoothTransition(disableAnimation)
-                }`}
+                className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                  disableAnimation
+                )}`}
               />
             </div>
           </div>
@@ -155,9 +140,9 @@ const Hero = () => {
             >
               <div
                 onClick={() => setDisableAnimation(!disableAnimation)}
-                className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${
-                  getConditionalSmoothTransition(disableAnimation)
-                } ${disableAnimation ? "text-purple" : ""}`}
+                className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${getConditionalSmoothTransition(
+                  disableAnimation
+                )} ${disableAnimation ? "text-purple" : ""}`}
               >
                 {disableAnimation ? (
                   <IoCheckboxOutline size={25} />
