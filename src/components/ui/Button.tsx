@@ -8,11 +8,11 @@ type Props = {
 };
 
 const Button = ({ content, onClick }: Props) => {
-  const { selectedTheme, disableAnimation } = useContext(UserPrefContext);
+  const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
   return (
     <div
       onClick={onClick}
-      className={`border ${getConditionalSmoothTransition(disableAnimation)} ${
+      className={`border ${getConditionalSmoothTransition(disableTransitions)} ${
         selectedTheme === "Dark" ? "border-white" : "border-black"
       } px-8 py-4 rounded-lg cursor-pointer hover:border-purple hover:text-purple whitespace-nowrap w-max`}
     >

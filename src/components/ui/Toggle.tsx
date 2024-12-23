@@ -21,7 +21,7 @@ const Toggle = ({
   selectedOption,
   setSelectedOption,
 }: Props) => {
-  const { disableAnimation } = useContext(UserPrefContext);
+  const { disableTransitions } = useContext(UserPrefContext);
 
   return (
     <div
@@ -36,7 +36,7 @@ const Toggle = ({
     >
       <div
         className={`rounded-full w-7 h-7 bg-white absolute top-1/2 -translate-y-1/2 flex justify-center items-center ${getConditionalSmoothTransition(
-          disableAnimation
+          disableTransitions
         )} ${selectedOption === firstOption.value ? "left-1" : "left-8"}`}
       ></div>
       <div className="text-purple z-[100]">{firstOption.label}</div>

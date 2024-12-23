@@ -15,7 +15,7 @@ const Select = ({
   options,
   onChange,
 }: Props) => {
-  const { selectedTheme, disableAnimation } = useContext(UserPrefContext);
+  const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
 
   const selectRef = useRef<HTMLDivElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -54,7 +54,7 @@ const Select = ({
         className={`px-2 py-1 w-[11rem] rounded-lg cursor-pointer flex items-center justify-between border-2 hover:border-purple hover:text-purple ${
           showDropdown ? "text-purple" : ""
         } ${renderBorderColor()} ${getConditionalSmoothTransition(
-          disableAnimation
+          disableTransitions
         )}`}
       >
         {options.find((option) => option.value === selectedOption)?.label ||
@@ -67,7 +67,7 @@ const Select = ({
           showDropdown ? "opacity-100" : "opacity-0 invisible"
         } ${
           showDropdown ? `h-[84px] py-2 border-2` : "h-0 py-0"
-        } ${getConditionalSmoothTransition(disableAnimation)}`}
+        } ${getConditionalSmoothTransition(disableTransitions)}`}
       >
         <div className="overflow-auto flex flex-col">
           {options.map(

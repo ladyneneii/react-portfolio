@@ -6,7 +6,6 @@ import Hero from "./components/Hero";
 import { maxWidth, minWidth } from "./shared";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
-import Resume from "./components/Resume";
 
 const App = () => {
   const { selectedTheme } = useContext(UserPrefContext);
@@ -35,13 +34,6 @@ const App = () => {
                   <Experience />
                 </div>
               </div>
-            }
-          />
-
-          <Route
-            path="/cv"
-            element={
-              <Resume />
             }
           />
 

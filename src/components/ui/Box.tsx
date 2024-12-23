@@ -21,7 +21,7 @@ const Box = ({
   companyName,
   startAndEndDates,
 }: Props) => {
-  const { selectedTheme, disableAnimation } = useContext(UserPrefContext);
+  const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
   const isPhone = useMediaQuery("(max-width: 660px)");
   const [unfold, setUnfold] = useState(true);
 
@@ -58,7 +58,7 @@ const Box = ({
           isPhone ? "flex-col" : "items-center"
         } ${
           isFoldable ? "hover:text-purple" : ""
-        } cursor-pointer ${getConditionalSmoothTransition(disableAnimation)} ${
+        } cursor-pointer ${getConditionalSmoothTransition(disableTransitions)} ${
           isSticky && unfold ? `sticky z-10 ${selectedTheme === "Dark" ? "bg-black" : "bg-white"} py-4` : ""
         }`}
         style={{top: NAVBAR_HEIGHT}}
@@ -81,7 +81,7 @@ const Box = ({
       <div
         className={`${
           foldCondition ? "opacity-100" : "opacity-0 invisible"
-        } ${getConditionalSmoothTransition(disableAnimation)}`}
+        } ${getConditionalSmoothTransition(disableTransitions)}`}
         style={
           isFoldable && childrenHeight
             ? {

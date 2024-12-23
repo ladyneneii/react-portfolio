@@ -14,14 +14,13 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import Select from "./ui/Select";
 import { AvailableLanguagesType } from "@/types";
 import useHeightResize from "@/hooks/useHeightResize";
-import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const {
     selectedLanguage,
     setSelectedLanguage,
-    disableAnimation,
-    setDisableAnimation,
+    disableTransitions,
+    setDisableTransitions,
     selectedTheme,
   } = useContext(UserPrefContext);
   const marginTop = "mt-[66px]";
@@ -36,8 +35,6 @@ const Hero = () => {
   const [heroImageHeight, setHeroImageHeight] = useState(700);
   useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
 
-  const navigate = useNavigate();
-
   const renderIntroduction = () => {
     return (
       <div className="flex flex-col gap-4">
@@ -46,7 +43,23 @@ const Hero = () => {
           <span className="text-purple">software engineer</span> in{" "}
           <span className="whitespace-nowrap">Cebu, Philippines.</span>
         </h4>
-        <Button onClick={() => navigate("/cv")} content="View CV" />
+        <div className={`flex gap-2 ${isPhone ? "flex-col" : ""}`}>
+          <Button
+            onClick={() =>
+              window.open(
+                "https://drive.google.com/file/d/1TnSpt95P1PRLskue2kxloazTlsc_bIZC/view?usp=sharing",
+                "_blank"
+              )
+            }
+            content="View CV"
+          />
+          <a
+            href="/src/data/Curativo-CV.pdf" // Path to the PDF file
+            download="Curativo-CV.pdf" // File name for the download
+          >
+            <Button onClick={() => null} content="Download CV" />
+          </a>
+        </div>
       </div>
     );
   };
@@ -106,25 +119,25 @@ const Hero = () => {
               <IoMail
                 size={25}
                 className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
+                  disableTransitions
                 )}`}
               />
               <FaGithub
                 size={25}
                 className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
+                  disableTransitions
                 )}`}
               />
               <FaLinkedin
                 size={25}
                 className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
+                  disableTransitions
                 )}`}
               />
               <FaInstagram
                 size={25}
                 className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
+                  disableTransitions
                 )}`}
               />
             </div>
@@ -142,17 +155,17 @@ const Hero = () => {
               }`}
             >
               <div
-                onClick={() => setDisableAnimation(!disableAnimation)}
+                onClick={() => setDisableTransitions(!disableTransitions)}
                 className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
-                )} ${disableAnimation ? "text-purple" : ""}`}
+                  disableTransitions
+                )} ${disableTransitions ? "text-purple" : ""}`}
               >
-                {disableAnimation ? (
+                {disableTransitions ? (
                   <IoCheckboxOutline size={25} />
                 ) : (
                   <LuSquare size={25} />
                 )}
-                Disable animations
+                Disable transitions
               </div>
               <Select
                 selectedOption={selectedLanguage}

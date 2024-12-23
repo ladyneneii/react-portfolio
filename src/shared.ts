@@ -9,8 +9,8 @@ export const renderSmoothTransition = (seconds?: number) => {
   return `transition-all ${duration}`;
 };
 
-export const getConditionalSmoothTransition = (disableAnimation: boolean) => {
-  return !disableAnimation ? renderSmoothTransition() : "";
+export const getConditionalSmoothTransition = (disableTransitions: boolean) => {
+  return !disableTransitions ? renderSmoothTransition() : "";
 };
 
 export const languages: AvailableLanguagesType[] = [

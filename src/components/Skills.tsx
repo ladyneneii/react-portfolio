@@ -13,13 +13,13 @@ import {
   sectionTitleContainerClassnames,
 } from "@/shared";
 import Button from "./ui/Button";
+import { useNavigate } from "react-router-dom";
 
 interface SkillsListInterface {
   name: string;
   src: string | React.ReactNode;
 }
 
-export type SkillsSubsectionsType = "Main tech stack" | "All skills";
 export const EXTRA_SPACE = 80;
 
 const Skills = () => {
@@ -40,6 +40,8 @@ const Skills = () => {
   useHeightResize({ ref: mtsContainerRef, setHeight: setMtsContainerHeight });
 
   const itemsContainerClass = "flex justify-center flex-wrap mb-8";
+
+  const navigate = useNavigate();
 
   const renderItems = (list: SkillsListInterface[]) => {
     return list.map((item) => (
@@ -86,7 +88,10 @@ const Skills = () => {
         </Box>
       </div>
       <div className="flex justify-center">
-        <Button onClick={() => console.log("lkdasf")} content="View full list of skills" />
+        <Button
+          onClick={() => navigate("/skills-list")}
+          content="View full list of skills"
+        />
       </div>
     </div>
   );

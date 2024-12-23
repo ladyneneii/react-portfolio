@@ -11,8 +11,8 @@ import { createContext, useEffect, useState } from "react";
 export const UserPrefContext = createContext<UserPrefContextInterface>({
   selectedLanguage: "English",
   setSelectedLanguage: () => {},
-  disableAnimation: false,
-  setDisableAnimation: () => {},
+  disableTransitions: false,
+  setDisableTransitions: () => {},
   selectedTheme: "Dark",
   setSelectedTheme: () => {},
   selectedSection: "Home",
@@ -30,8 +30,8 @@ export const UserPrefContextProvider = ({
       (localStorage.getItem("selectedLanguage") as AvailableLanguagesType) ||
         "English"
     );
-  const [disableAnimation, setDisableAnimation] = useState<boolean>(
-    localStorage.getItem("disableAnimation") === "true" || false
+  const [disableTransitions, setDisableTransitions] = useState<boolean>(
+    localStorage.getItem("disableTransitions") === "true" || false
   );
   const [selectedTheme, setSelectedTheme] = useState<AvailableThemesType>(
     (localStorage.getItem("selectedTheme") as AvailableThemesType) || "System"
@@ -44,8 +44,8 @@ export const UserPrefContextProvider = ({
   }, [selectedLanguage]);
 
   useEffect(() => {
-    localStorage.setItem("disableAnimation", String(disableAnimation));
-  }, [disableAnimation]);
+    localStorage.setItem("disableTransitions", String(disableTransitions));
+  }, [disableTransitions]);
 
   useEffect(() => {
     localStorage.setItem("selectedTheme", selectedTheme);
@@ -56,8 +56,8 @@ export const UserPrefContextProvider = ({
       value={{
         selectedLanguage,
         setSelectedLanguage,
-        disableAnimation,
-        setDisableAnimation,
+        disableTransitions,
+        setDisableTransitions,
         selectedTheme,
         setSelectedTheme,
         selectedSection,
