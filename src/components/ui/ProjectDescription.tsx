@@ -1,15 +1,18 @@
-import { NavigateFunction } from "react-router-dom";
-import Button from "../ui/Button";
+import { useNavigate } from "react-router-dom";
+import { ProjectsInterface } from "../Projects";
+import Button from "./Button";
 
-export const renderProjects = (
-  img: string,
-  desc: string,
-  techUsed: string,
-  index: number,
-  navigate: NavigateFunction,
-  websiteLink?: string,
-  learnMoreLink?: string
-) => {
+type ProjectDescription = ProjectsInterface & { index: number };
+
+const ProjectDescription = ({
+  img,
+  desc,
+  techUsed,
+  index,
+  websiteLink,
+  learnMoreLink,
+}: ProjectDescription) => {
+  const navigate = useNavigate();
   return (
     <div key={img} className="flex flex-col gap-4">
       <div className="flex gap-8">
@@ -52,3 +55,5 @@ export const renderProjects = (
     </div>
   );
 };
+
+export default ProjectDescription;

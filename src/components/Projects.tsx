@@ -7,10 +7,9 @@ import { MutableRefObject, useContext, useRef, useState } from "react";
 import Box from "./ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
 import { EXTRA_SPACE } from "./Skills";
-import { useNavigate } from "react-router-dom";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import { UserPrefContext } from "@/context/UserPrefContext";
-import { renderProjects } from "./functions/renderProjects";
+import ProjectDescription from "./ui/ProjectDescription";
 
 export interface ProjectsInterface {
   img: string;
@@ -71,7 +70,7 @@ const Projects = () => {
     {
       title: "Padayon;",
       img: "/assets/thumbnail-padayon.png",
-      desc: "Created a full-stack app with the following features: user authentication, profile viewing & sorting according to location, a forum with multi-tiered/infinitely nested comments and replies, private and group messaging, a global map, and different permissions and privileges depending on user type",
+      desc: "Created a full-stack app with the following features: user authentication, profile viewing & sorting according to location, a forum with multi-tiered/infinitely nested comments and replies, private and group messaging, a global map, and different permissions and privileges depending on user type.",
       techUsed: "React TypeScript, Node.js, Express.js, Firebase, Bootstrap",
       learnMoreLink: "/padayon",
       ref: pContainerRef,
@@ -108,21 +107,18 @@ const Projects = () => {
         childrenHeight={height - EXTRA_SPACE}
       >
         <div ref={ref} className="flex flex-col gap-12">
-          {renderProjects(
-            img,
-            desc,
-            techUsed,
-            index,
-            navigate,
-            websiteLink,
-            learnMoreLink
-          )}
+          <ProjectDescription
+            img={img}
+            desc={desc}
+            techUsed={techUsed}
+            index={index}
+            websiteLink={websiteLink}
+            learnMoreLink={learnMoreLink}
+          />
         </div>
       </Box>
     );
   };
-
-  const navigate = useNavigate();
 
   const projectsRef = useRef<HTMLDivElement | null>(null);
   useHighlightSection({

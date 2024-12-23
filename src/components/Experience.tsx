@@ -7,8 +7,7 @@ import { useContext, useRef, useState } from "react";
 import Box from "./ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
 import { EXTRA_SPACE } from "./Skills";
-import { renderProjects } from "./functions/renderProjects";
-import { useNavigate } from "react-router-dom";
+import ProjectDescription from "./ui/ProjectDescription";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { ProjectsInterface } from "./Projects";
@@ -43,8 +42,6 @@ const Experience = () => {
       // learnMoreLink: "/verifier-template",
     },
   ];
-
-  const navigate = useNavigate();
 
   const experienceRef = useRef<HTMLDivElement | null>(null);
   useHighlightSection({
@@ -82,16 +79,17 @@ const Experience = () => {
                   learnMoreLink,
                 }: ProjectsInterface,
                 index
-              ) =>
-                renderProjects(
-                  img,
-                  desc,
-                  techUsed,
-                  index,
-                  navigate,
-                  websiteLink,
-                  learnMoreLink
-                )
+              ) => (
+                <ProjectDescription
+                  key={img}
+                  img={img}
+                  desc={desc}
+                  techUsed={techUsed}
+                  index={index}
+                  websiteLink={websiteLink}
+                  learnMoreLink={learnMoreLink}
+                />
+              )
             )}
           </div>
         </Box>
