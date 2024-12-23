@@ -5,7 +5,7 @@ import { FaMoon } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { getConditionalSmoothTransition, languages, maxWidth } from "../shared";
+import { getConditionalSmoothTransition, languages, maxWidth, minWidth } from "../shared";
 import { IoClose } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import Radio from "./ui/Radio";
@@ -139,13 +139,20 @@ const Navbar = () => {
         } ${handleShowNavbar()}`}
       >
         <div>
-          <div
-            onClick={() => setShowNavbar(false)}
-            className={`flex justify-end hover:cursor-pointer mb-8 hover:text-purple ${getConditionalSmoothTransition(
-              disableTransitions
-            )}`}
-          >
-            <IoClose size={35} />
+          <div className={`flex justify-between items-center mb-8`}>
+            <Toggle
+              firstOption={{ label: <FaMoon />, value: "Dark" }}
+              secondOption={{ label: <FiSun />, value: "Light" }}
+              selectedOption={selectedTheme}
+              setSelectedOption={setSelectedTheme}
+            />
+            <IoClose
+              onClick={() => setShowNavbar(false)}
+              size={35}
+              className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                disableTransitions
+              )}`}
+            />
           </div>
           <div
             className={`flex flex-col flex-wrap ${
@@ -157,12 +164,6 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-col gap-12">
-          <Toggle
-            firstOption={{ label: <FaMoon />, value: "Dark" }}
-            secondOption={{ label: <FiSun />, value: "Light" }}
-            selectedOption={selectedTheme}
-            setSelectedOption={setSelectedTheme}
-          />
           <div className="flex flex-col gap-4">
             <div className="flex justify-between flex-wrap gap-4 gap-y-2">
               <Radio
@@ -171,16 +172,18 @@ const Navbar = () => {
                 setSelectedOption={setSelectedLanguage}
               />
             </div>
-            <SingleCheckbox
-              state={disableTransitions}
-              setState={setDisableTransitions}
-              label="Disable transitions"
-            />
-            <SingleCheckbox
-              state={disableAnimations}
-              setState={setDisableAnimations}
-              label="Disable animations"
-            />
+            <div className="flex flex-col gap-2">
+              <SingleCheckbox
+                state={disableTransitions}
+                setState={setDisableTransitions}
+                label="Disable transitions"
+              />
+              <SingleCheckbox
+                state={disableAnimations}
+                setState={setDisableAnimations}
+                label="Disable animations"
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -51,7 +51,7 @@ const Projects = () => {
       title: "Taylor Swift's Discography",
       img: "/assets/thumbnail-taylor-swift.png",
       desc: "Created and deployed a website about Taylor Swift's discography.",
-      techUsed: "React TypeScript, Cloudflare",
+      techUsed: "React TypeScript, Cloudflare, SCSS",
       websiteLink: "https://taymother.pages.dev/",
       learnMoreLink: "/taylor-swift",
       ref: tsContainerRef,
