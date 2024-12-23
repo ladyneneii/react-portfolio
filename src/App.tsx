@@ -6,6 +6,8 @@ import Hero from "./components/Hero";
 import { maxWidth, minWidth } from "./shared";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
+import SkillsList from "./components/SkillsList";
+import Footer from "./components/Footer";
 
 const App = () => {
   const { selectedTheme } = useContext(UserPrefContext);
@@ -15,8 +17,8 @@ const App = () => {
       <div
         className={`${minWidth} ${
           selectedTheme === "Dark"
-            ? "bg-black text-white border-white"
-            : "bg-white text-black border-black"
+            ? "bg-black text-white"
+            : "bg-white text-black"
         }`}
       >
         <Navbar />
@@ -43,11 +45,13 @@ const App = () => {
               <div
                 className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
               >
-                <Skills />
+                <SkillsList />
               </div>
             }
           />
         </Routes>
+
+        <Footer />
       </div>
     </Router>
   );

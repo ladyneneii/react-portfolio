@@ -30,14 +30,14 @@ const Box = ({
   const [isSticky, setIsSticky] = useState(false);
   const NAVBAR_HEIGHT = 65;
 
-  const handleScroll = () => {
-    if (headerRef.current) {
-      const rect = headerRef.current.getBoundingClientRect();
-      setIsSticky(rect.top <= NAVBAR_HEIGHT);
-    }
-  };
-
   useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current && isFoldable) {
+        const rect = headerRef.current.getBoundingClientRect();
+        setIsSticky(rect.top <= NAVBAR_HEIGHT);
+      }
+    };
+    
     // Listen for scroll events
     window.addEventListener("scroll", handleScroll);
 
@@ -45,7 +45,7 @@ const Box = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isFoldable]);
 
   return (
     <div className={`rounded-lg shadow-custom-sm p-4`}>
@@ -58,10 +58,16 @@ const Box = ({
           isPhone ? "flex-col" : "items-center"
         } ${
           isFoldable ? "hover:text-purple" : ""
-        } cursor-pointer ${getConditionalSmoothTransition(disableTransitions)} ${
-          isSticky && unfold ? `sticky z-10 ${selectedTheme === "Dark" ? "bg-black" : "bg-white"} py-4` : ""
+        } cursor-pointer ${getConditionalSmoothTransition(
+          disableTransitions
+        )} ${
+          isSticky && unfold
+            ? `sticky z-10 ${
+                selectedTheme === "Dark" ? "bg-black" : "bg-white"
+              } py-4`
+            : ""
         }`}
-        style={{top: NAVBAR_HEIGHT}}
+        style={{ top: NAVBAR_HEIGHT }}
       >
         <div className="flex items-center gap-4">
           {isFoldable && (

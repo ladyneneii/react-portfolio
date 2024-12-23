@@ -19,7 +19,9 @@ export const languages: AvailableLanguagesType[] = [
   "Bisaya",
 ];
 
-export const sectionPaddingClassnames = "pt-6 pb-12 flex flex-col gap-8";
+export const sectionPaddingClassnames = "py-16 flex flex-col gap-8";
 export const sectionTitleContainerClassnames =
   "flex flex-col gap-2 items-center";
 export const boxContainerClassnames = "flex flex-col gap-4";
+
+
