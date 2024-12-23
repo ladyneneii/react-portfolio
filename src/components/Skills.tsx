@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Box from "./ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
 // import { TbBinaryTree } from "react-icons/tb";
@@ -15,6 +15,8 @@ import {
 import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
 import { renderSkills } from "./functions/renderSkills";
+import { UserPrefContext } from "@/context/UserPrefContext";
+import useHighlightSection from "@/hooks/useHighlightSection";
 
 export interface SkillsInterface {
   name: string;
@@ -24,6 +26,7 @@ export interface SkillsInterface {
 export const EXTRA_SPACE = 80;
 
 const Skills = () => {
+  const { setSelectedSection } = useContext(UserPrefContext);
   const mts = [
     { name: "TypeScript", src: "/assets/pl-typescript.png" },
     { name: "JavaScript", src: "/assets/pl-javascript.png" },
@@ -44,8 +47,15 @@ const Skills = () => {
 
   const navigate = useNavigate();
 
+  const skillsRef = useRef<HTMLDivElement | null>(null);
+  useHighlightSection({
+    ref: skillsRef,
+    setSection: setSelectedSection,
+    section: "Skills",
+  });
+
   return (
-    <div className={sectionPaddingClassnames}>
+    <div ref={skillsRef} id="skills" className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
         <h1>Skills</h1>
       </div>

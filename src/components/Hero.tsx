@@ -14,6 +14,7 @@ import Select from "./ui/Select";
 import { AvailableLanguagesType } from "@/types";
 import useHeightResize from "@/hooks/useHeightResize";
 import SingleCheckbox from "./ui/SingleCheckbox";
+import useHighlightSection from "@/hooks/useHighlightSection";
 
 const Hero = () => {
   const {
@@ -24,6 +25,7 @@ const Hero = () => {
     disableAnimations,
     setDisableAnimations,
     selectedTheme,
+    setSelectedSection,
   } = useContext(UserPrefContext);
   const marginTop = "mt-[66px]";
   const isTablet = useMediaQuery("(max-width: 1020px)");
@@ -66,114 +68,124 @@ const Hero = () => {
     );
   };
 
+  const homeRef = useRef<HTMLDivElement | null>(null);
+  useHighlightSection({
+    ref: homeRef,
+    setSection: setSelectedSection,
+    section: "Home",
+  });
+
   return (
-    <div
-      className={`relative ${marginTop} ${minWidth}`}
-      style={{
-        backgroundImage: `url(${
-          selectedTheme === "Dark"
-            ? "/assets/background-transparent-black.png"
-            : "/assets/background-transparent-white.png"
-        })`,
-        backgroundSize: "cover",
-        // backgroundSize: "auto",
-        // backgroundRepeat: "repeat",
-        backgroundPosition: "center",
-        height: heroImageHeight,
-      }}
-    >
+    <div id="home" className="border-[0.5px] border-black">
       <div
-        ref={heroInfoContainerRef}
-        className={`absolute z-30 left-0 right-0 flex gap-16 px-4 justify-between top-1/2 -translate-y-1/2 ${
-          !isTablet ? "" : "flex-col"
-        } ${maxWidth} ${minWidth} mx-auto`}
+        ref={homeRef}
+        className={`relative ${marginTop} ${minWidth}`}
+        style={{
+          backgroundImage: `url(${
+            selectedTheme === "Dark"
+              ? "/assets/background-transparent-black.png"
+              : "/assets/background-transparent-white.png"
+          })`,
+          backgroundSize: "cover",
+          // backgroundSize: "auto",
+          // backgroundRepeat: "repeat",
+          backgroundPosition: "center",
+          height: heroImageHeight,
+        }}
       >
-        <div className={"flex gap-16 flex-col max-w-[700px]"}>
-          <h1>
-            Transforming your ideas into{" "}
-            <span className="text-purple font-extralight italic">elegant</span>{" "}
-            code and{" "}
-            <span className="text-purple font-extralight italic">
-              meaningful
-            </span>{" "}
-            creations
-          </h1>
-
-          {!isTablet && renderIntroduction()}
-        </div>
-
         <div
-          className={`flex ${
-            !isTablet || isTablet2
-              ? "flex-col justify-between items-center gap-12"
-              : "gap-24"
-          } flex-shrink-0`}
+          ref={heroInfoContainerRef}
+          className={`absolute z-30 left-0 right-0 flex gap-16 px-4 justify-between top-1/2 -translate-y-1/2 ${
+            !isTablet ? "" : "flex-col"
+          } ${maxWidth} ${minWidth} mx-auto`}
         >
-          <div className="flex flex-col gap-4 flex-shrink-0">
-            <img
-              src="/assets/hero-me.jpg"
-              alt=""
-              width={!isPhone && !isLandscapePhone ? 300 : 250}
-              height={!isPhone && !isLandscapePhone ? 300 : 250}
-              className="rounded-full shadow-custom"
-            />
-            <div className="flex gap-3 justify-center">
-              <IoMail
-                size={25}
-                className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableTransitions
-                )}`}
-              />
-              <FaGithub
-                size={25}
-                className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableTransitions
-                )}`}
-              />
-              <FaLinkedin
-                size={25}
-                className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableTransitions
-                )}`}
-              />
-              <FaInstagram
-                size={25}
-                className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableTransitions
-                )}`}
-              />
-            </div>
+          <div className={"flex gap-16 flex-col max-w-[700px]"}>
+            <h1>
+              Transforming your ideas into{" "}
+              <span className="text-purple font-extralight italic">
+                elegant
+              </span>{" "}
+              code and{" "}
+              <span className="text-purple font-extralight italic">
+                meaningful
+              </span>{" "}
+              creations
+            </h1>
+
+            {!isTablet && renderIntroduction()}
           </div>
 
           <div
-            className={`flex flex-col ${
-              !isTablet ? "items-center" : "justify-between"
-            } gap-24`}
+            className={`flex ${
+              !isTablet || isTablet2
+                ? "flex-col justify-between items-center gap-12"
+                : "gap-24"
+            } flex-shrink-0`}
           >
-            {isTablet && renderIntroduction()}
+            <div className="flex flex-col gap-4 flex-shrink-0">
+              <img
+                src="/assets/hero-me.jpg"
+                alt=""
+                width={!isPhone && !isLandscapePhone ? 300 : 250}
+                height={!isPhone && !isLandscapePhone ? 300 : 250}
+                className="rounded-full shadow-custom"
+              />
+              <div className="flex gap-3 justify-center">
+                <IoMail
+                  size={25}
+                  className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                    disableTransitions
+                  )}`}
+                />
+                <FaGithub
+                  size={25}
+                  className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                    disableTransitions
+                  )}`}
+                />
+                <FaLinkedin
+                  size={25}
+                  className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                    disableTransitions
+                  )}`}
+                />
+                <FaInstagram
+                  size={25}
+                  className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                    disableTransitions
+                  )}`}
+                />
+              </div>
+            </div>
+
             <div
-              className={`flex gap-2 flex-col`}
+              className={`flex flex-col ${
+                !isTablet ? "items-center" : "justify-between"
+              } gap-24`}
             >
-              <SingleCheckbox
-                state={disableTransitions}
-                setState={setDisableTransitions}
-                label="Disable transitions"
-              />
-              <SingleCheckbox
-                state={disableAnimations}
-                setState={setDisableAnimations}
-                label="Disable animations"
-              />
-              <Select
-                selectedOption={selectedLanguage}
-                options={languages.map((language) => ({
-                  label: language,
-                  value: language,
-                }))}
-                onChange={(value) =>
-                  setSelectedLanguage(value as AvailableLanguagesType)
-                }
-              />
+              {isTablet && renderIntroduction()}
+              <div className={`flex gap-2 flex-col`}>
+                <SingleCheckbox
+                  state={disableTransitions}
+                  setState={setDisableTransitions}
+                  label="Disable transitions"
+                />
+                <SingleCheckbox
+                  state={disableAnimations}
+                  setState={setDisableAnimations}
+                  label="Disable animations"
+                />
+                <Select
+                  selectedOption={selectedLanguage}
+                  options={languages.map((language) => ({
+                    label: language,
+                    value: language,
+                  }))}
+                  onChange={(value) =>
+                    setSelectedLanguage(value as AvailableLanguagesType)
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>

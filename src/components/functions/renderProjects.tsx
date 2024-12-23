@@ -8,7 +8,7 @@ export const renderProjects = (
 ) => {
   return projectsList.map(
     ({ img, desc, techUsed, websiteLink, learnMoreLink }, index) => (
-      <div className="flex flex-col gap-4">
+      <div key={img} className="flex flex-col gap-4">
         <div className="flex gap-8">
           <div className={`w-1/2 ${index % 2 === 0 ? "order-1" : "order-2"}`}>
             <img src={img} alt="" className="rounded-lg" />

@@ -33,7 +33,7 @@ const Navbar = () => {
     "Skills",
     "Experience",
     "Projects",
-    "Education & Thesis",
+    "Thesis",
     "Testimonials",
   ];
 
@@ -50,15 +50,19 @@ const Navbar = () => {
 
   const renderLinks = () => {
     return sections.map((section) => (
-      <div
+      <a
         key={section}
-        onClick={() => setSelectedSection(section)}
-        className={`hover:cursor-pointer hover:text-purple ${
-          selectedSection === section ? "text-purple" : ""
-        } ${getConditionalSmoothTransition(disableTransitions)}`}
+        href={`#${section.charAt(0).toLowerCase() + section.slice(1)}`}
       >
-        {section}
-      </div>
+        <div
+          onClick={() => setSelectedSection(section)}
+          className={`hover:cursor-pointer hover:text-purple ${
+            selectedSection === section ? "text-purple" : ""
+          } ${getConditionalSmoothTransition(disableTransitions)}`}
+        >
+          {section}
+        </div>
+      </a>
     ));
   };
 

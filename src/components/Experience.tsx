@@ -3,12 +3,14 @@ import {
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Box from "./ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
 import { EXTRA_SPACE } from "./Skills";
 import { renderProjects } from "./functions/renderProjects";
 import { useNavigate } from "react-router-dom";
+import useHighlightSection from "@/hooks/useHighlightSection";
+import { UserPrefContext } from "@/context/UserPrefContext";
 
 export interface ProjectsInterface {
   img: string;
@@ -19,6 +21,7 @@ export interface ProjectsInterface {
 }
 
 const Experience = () => {
+  const { setSelectedSection } = useContext(UserPrefContext);
   const fpContainerRef = useRef<HTMLDivElement | null>(null);
   const [fpContainerHeight, setFpContainerHeight] = useState(0);
   useHeightResize({ ref: fpContainerRef, setHeight: setFpContainerHeight });
@@ -50,8 +53,19 @@ const Experience = () => {
 
   const navigate = useNavigate();
 
+  const experienceRef = useRef<HTMLDivElement | null>(null);
+  useHighlightSection({
+    ref: experienceRef,
+    setSection: setSelectedSection,
+    section: "Experience",
+  });
+
   return (
-    <div className={sectionPaddingClassnames}>
+    <div
+      ref={experienceRef}
+      id="experience"
+      className={sectionPaddingClassnames}
+    >
       <div className={sectionTitleContainerClassnames}>
         <h1>Experience</h1>
       </div>
