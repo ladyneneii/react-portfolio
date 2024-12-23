@@ -1,6 +1,6 @@
-import { SkillsListInterface } from "@/components/Skills";
+import { SkillsInterface } from "@/components/Skills";
 
-export const renderItems = (list: SkillsListInterface[]) => {
+export const renderSkills = (list: SkillsInterface[]) => {
   return list.map((item) => (
     <div
       key={item.name}

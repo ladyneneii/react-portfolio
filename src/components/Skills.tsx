@@ -14,15 +14,14 @@ import {
 } from "@/shared";
 import Button from "./ui/Button";
 import { useNavigate } from "react-router-dom";
-import { renderItems } from "./functions/renderItems";
+import { renderSkills } from "./functions/renderSkills";
 
-export interface SkillsListInterface {
+export interface SkillsInterface {
   name: string;
   src: string | React.ReactNode;
 }
 
 export const EXTRA_SPACE = 80;
-
 
 const Skills = () => {
   const mts = [
@@ -41,7 +40,7 @@ const Skills = () => {
   const [mtsContainerHeight, setMtsContainerHeight] = useState(0);
   useHeightResize({ ref: mtsContainerRef, setHeight: setMtsContainerHeight });
 
-  const itemsContainerClass = "flex justify-center flex-wrap mb-8";
+  const itemsContainerClass = "flex justify-center flex-wrap";
 
   const navigate = useNavigate();
 
@@ -58,7 +57,7 @@ const Skills = () => {
           childrenHeight={mtsContainerHeight - EXTRA_SPACE}
         >
           <div ref={mtsContainerRef} className={itemsContainerClass}>
-            {renderItems(mts)}
+            {renderSkills(mts)}
           </div>
         </Box>
       </div>
@@ -68,7 +67,7 @@ const Skills = () => {
             navigate("/skills-list");
             window.scrollTo(0, 0);
           }}
-          content="View full list of skills"
+          content="View all skills"
         />
       </div>
     </div>
@@ -76,5 +75,3 @@ const Skills = () => {
 };
 
 export default Skills;
-
-

@@ -12,7 +12,7 @@ import {
   sectionTitleContainerClassnames,
 } from "@/shared";
 import Button from "./ui/Button";
-import { renderItems } from "./functions/renderItems";
+import { renderSkills } from "./functions/renderSkills";
 import { UserPrefContext } from "@/context/UserPrefContext";
 
 export const EXTRA_SPACE = 80;
@@ -111,7 +111,7 @@ const SkillsList = () => {
   return (
     <div className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h1>Skills List</h1>
+        <h1>All Skills</h1>
       </div>
       <div className={boxContainerClassnames}>
         <Box
@@ -121,7 +121,7 @@ const SkillsList = () => {
           childrenHeight={plContainerHeight - EXTRA_SPACE}
         >
           <div ref={plContainerRef} className={itemsContainerClass}>
-            {renderItems(pl)}
+            {renderSkills(pl)}
           </div>
         </Box>
         <Box
@@ -131,14 +131,14 @@ const SkillsList = () => {
           childrenHeight={wdContainerHeight - EXTRA_SPACE}
         >
           <div ref={wdContainerRef} className="flex flex-col gap-8">
-            <div>
+            <div className="flex flex-col gap-4">
               <h6 className="text-center">Frontend</h6>
-              <div className={itemsContainerClass}>{renderItems(wdFront)}</div>
+              <div className={itemsContainerClass}>{renderSkills(wdFront)}</div>
             </div>
 
-            <div>
+            <div className="flex flex-col gap-4">
               <h6 className="text-center">Backend</h6>
-              <div className={itemsContainerClass}>{renderItems(wdBack)}</div>
+              <div className={itemsContainerClass}>{renderSkills(wdBack)}</div>
             </div>
           </div>
         </Box>
@@ -149,7 +149,7 @@ const SkillsList = () => {
           childrenHeight={fltContainerHeight - EXTRA_SPACE}
         >
           <div ref={fltContainerRef} className={itemsContainerClass}>
-            {renderItems(flt)}
+            {renderSkills(flt)}
           </div>
         </Box>
         <Box
@@ -159,7 +159,7 @@ const SkillsList = () => {
           childrenHeight={cwContainerHeight - EXTRA_SPACE}
         >
           <div ref={cwContainerRef} className={itemsContainerClass}>
-            {renderItems(cw)}
+            {renderSkills(cw)}
           </div>
         </Box>
       </div>
