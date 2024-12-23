@@ -1,5 +1,5 @@
 import Button from "./ui/Button";
-import { IoCheckboxOutline, IoMail } from "react-icons/io5";
+import { IoMail } from "react-icons/io5";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import {
   getConditionalSmoothTransition,
@@ -9,18 +9,20 @@ import {
 } from "@/shared";
 import { useContext, useRef, useState } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
-import { LuSquare } from "react-icons/lu";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import Select from "./ui/Select";
 import { AvailableLanguagesType } from "@/types";
 import useHeightResize from "@/hooks/useHeightResize";
+import SingleCheckbox from "./ui/SingleCheckbox";
 
 const Hero = () => {
   const {
     selectedLanguage,
     setSelectedLanguage,
-    disableAnimation,
-    setDisableAnimation,
+    disableTransitions,
+    setDisableTransitions,
+    disableAnimations,
+    setDisableAnimations,
     selectedTheme,
   } = useContext(UserPrefContext);
   const marginTop = "mt-[66px]";
@@ -43,7 +45,23 @@ const Hero = () => {
           <span className="text-purple">software engineer</span> in{" "}
           <span className="whitespace-nowrap">Cebu, Philippines.</span>
         </h4>
-        <Button onClick={() => console.log("lkdasf")} content="View CV" />
+        <div className={`flex gap-2 ${isPhone ? "flex-col" : ""}`}>
+          <Button
+            onClick={() =>
+              window.open(
+                "https://drive.google.com/file/d/1TnSpt95P1PRLskue2kxloazTlsc_bIZC/view?usp=sharing",
+                "_blank"
+              )
+            }
+            content="View CV"
+          />
+          <a
+            href="/src/data/Curativo-CV.pdf" // Path to the PDF file
+            download="Curativo-CV.pdf" // File name for the download
+          >
+            <Button onClick={() => null} content="Download CV" />
+          </a>
+        </div>
       </div>
     );
   };
@@ -103,25 +121,25 @@ const Hero = () => {
               <IoMail
                 size={25}
                 className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
+                  disableTransitions
                 )}`}
               />
               <FaGithub
                 size={25}
                 className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
+                  disableTransitions
                 )}`}
               />
               <FaLinkedin
                 size={25}
                 className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
+                  disableTransitions
                 )}`}
               />
               <FaInstagram
                 size={25}
                 className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
+                  disableTransitions
                 )}`}
               />
             </div>
@@ -134,23 +152,18 @@ const Hero = () => {
           >
             {isTablet && renderIntroduction()}
             <div
-              className={`flex gap-2 flex-col  ${
-                !isTablet ? "items-center" : "justify-between"
-              }`}
+              className={`flex gap-2 flex-col`}
             >
-              <div
-                onClick={() => setDisableAnimation(!disableAnimation)}
-                className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${getConditionalSmoothTransition(
-                  disableAnimation
-                )} ${disableAnimation ? "text-purple" : ""}`}
-              >
-                {disableAnimation ? (
-                  <IoCheckboxOutline size={25} />
-                ) : (
-                  <LuSquare size={25} />
-                )}
-                Disable animations
-              </div>
+              <SingleCheckbox
+                state={disableTransitions}
+                setState={setDisableTransitions}
+                label="Disable transitions"
+              />
+              <SingleCheckbox
+                state={disableAnimations}
+                setState={setDisableAnimations}
+                label="Disable animations"
+              />
               <Select
                 selectedOption={selectedLanguage}
                 options={languages.map((language) => ({

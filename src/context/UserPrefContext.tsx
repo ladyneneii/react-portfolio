@@ -11,8 +11,10 @@ import { createContext, useEffect, useState } from "react";
 export const UserPrefContext = createContext<UserPrefContextInterface>({
   selectedLanguage: "English",
   setSelectedLanguage: () => {},
-  disableAnimation: false,
-  setDisableAnimation: () => {},
+  disableTransitions: false,
+  setDisableTransitions: () => {},
+  disableAnimations: true,
+  setDisableAnimations: () => {},
   selectedTheme: "Dark",
   setSelectedTheme: () => {},
   selectedSection: "Home",
@@ -30,11 +32,14 @@ export const UserPrefContextProvider = ({
       (localStorage.getItem("selectedLanguage") as AvailableLanguagesType) ||
         "English"
     );
-  const [disableAnimation, setDisableAnimation] = useState<boolean>(
-    localStorage.getItem("disableAnimation") === "true" || false
+  const [disableTransitions, setDisableTransitions] = useState<boolean>(
+    localStorage.getItem("disableTransitions") === "true" || false
+  );
+  const [disableAnimations, setDisableAnimations] = useState<boolean>(
+    localStorage.getItem("disableAnimations") === "true" || false
   );
   const [selectedTheme, setSelectedTheme] = useState<AvailableThemesType>(
-    (localStorage.getItem("selectedTheme") as AvailableThemesType) || "System"
+    (localStorage.getItem("selectedTheme") as AvailableThemesType) || "Dark"
   );
   const [selectedSection, setSelectedSection] = useState<SectionsType>("Home");
 
@@ -44,8 +49,12 @@ export const UserPrefContextProvider = ({
   }, [selectedLanguage]);
 
   useEffect(() => {
-    localStorage.setItem("disableAnimation", String(disableAnimation));
-  }, [disableAnimation]);
+    localStorage.setItem("disableTransitions", String(disableTransitions));
+  }, [disableTransitions]);
+
+  useEffect(() => {
+    localStorage.setItem("disableAnimations", String(disableAnimations));
+  }, [disableAnimations]);
 
   useEffect(() => {
     localStorage.setItem("selectedTheme", selectedTheme);
@@ -56,8 +65,10 @@ export const UserPrefContextProvider = ({
       value={{
         selectedLanguage,
         setSelectedLanguage,
-        disableAnimation,
-        setDisableAnimation,
+        disableTransitions,
+        setDisableTransitions,
+        disableAnimations,
+        setDisableAnimations,
         selectedTheme,
         setSelectedTheme,
         selectedSection,

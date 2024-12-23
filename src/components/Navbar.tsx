@@ -7,20 +7,21 @@ import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { getConditionalSmoothTransition, languages, maxWidth } from "../shared";
 import { IoClose } from "react-icons/io5";
-import { LuSquare } from "react-icons/lu";
-import { IoCheckboxOutline } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import Radio from "./ui/Radio";
 import Toggle from "./ui/Toggle";
 import { SectionsType } from "@/types";
+import SingleCheckbox from "./ui/SingleCheckbox";
 
 const Navbar = () => {
-  // LANGUAGE & DISABLE ANIMATIONS
+  // LANGUAGE & DISABLE TRANSITIONS
   const {
     selectedLanguage,
     setSelectedLanguage,
-    disableAnimation,
-    setDisableAnimation,
+    disableTransitions,
+    setDisableTransitions,
+    disableAnimations,
+    setDisableAnimations,
     selectedTheme,
     setSelectedTheme,
     selectedSection,
@@ -54,7 +55,7 @@ const Navbar = () => {
         onClick={() => setSelectedSection(section)}
         className={`hover:cursor-pointer hover:text-purple ${
           selectedSection === section ? "text-purple" : ""
-        } ${getConditionalSmoothTransition(disableAnimation)}`}
+        } ${getConditionalSmoothTransition(disableTransitions)}`}
       >
         {section}
       </div>
@@ -78,7 +79,7 @@ const Navbar = () => {
         className={`${
           selectedTheme === "Dark" ? "bg-black" : "bg-white"
         } fixed top-0 left-0 right-0 z-[100] ${getConditionalSmoothTransition(
-          disableAnimation
+          disableTransitions
         )}`}
       >
         <div
@@ -96,7 +97,7 @@ const Navbar = () => {
           {!isTablet && (
             <div
               className={`flex gap-16 ${getConditionalSmoothTransition(
-                disableAnimation
+                disableTransitions
               )} items-center`}
             >
               {renderLinks()}
@@ -115,7 +116,7 @@ const Navbar = () => {
               onClick={() => setShowNavbar(!showNavbar)}
               size={35}
               className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                disableAnimation
+                disableTransitions
               )}`}
             />
           )}
@@ -125,7 +126,7 @@ const Navbar = () => {
       {/* SMALLER SCREENS */}
       <div
         className={`fixed right-0 top-0 bottom-0 ${
-          !disableAnimation ? "transition-all duration-500" : ""
+          !disableTransitions ? "transition-all duration-500" : ""
         } flex flex-col justify-between overflow-auto gap-16 z-[100] ${
           selectedTheme === "Dark" ? "bg-black" : "bg-white"
         } ${handleShowNavbar()}`}
@@ -134,7 +135,7 @@ const Navbar = () => {
           <div
             onClick={() => setShowNavbar(false)}
             className={`flex justify-end hover:cursor-pointer mb-8 hover:text-purple ${getConditionalSmoothTransition(
-              disableAnimation
+              disableTransitions
             )}`}
           >
             <IoClose size={35} />
@@ -163,19 +164,16 @@ const Navbar = () => {
                 setSelectedOption={setSelectedLanguage}
               />
             </div>
-            <div
-              onClick={() => setDisableAnimation(!disableAnimation)}
-              className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${getConditionalSmoothTransition(
-                disableAnimation
-              )} ${disableAnimation ? "text-purple" : ""}`}
-            >
-              {disableAnimation ? (
-                <IoCheckboxOutline size={25} />
-              ) : (
-                <LuSquare size={25} />
-              )}
-              Disable animations
-            </div>
+            <SingleCheckbox
+              state={disableTransitions}
+              setState={setDisableTransitions}
+              label="Disable transitions"
+            />
+            <SingleCheckbox
+              state={disableAnimations}
+              setState={setDisableAnimations}
+              label="Disable animations"
+            />
           </div>
         </div>
       </div>

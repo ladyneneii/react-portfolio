@@ -7,8 +7,10 @@ export type SectionsType = "Home" | "Skills" | "Experience" | "Projects" | "Educ
 export interface UserPrefContextInterface {
   selectedLanguage: AvailableLanguagesType;
   setSelectedLanguage: (value: RadioDataTypes) => void;
-  disableAnimation: boolean;
-  setDisableAnimation: (value: boolean) => void;
+  disableTransitions: boolean;
+  setDisableTransitions: (value: boolean) => void;
+  disableAnimations: boolean;
+  setDisableAnimations: (value: boolean) => void;
   selectedTheme: AvailableThemesType;
   setSelectedTheme: (value: AvailableThemesType) => void;
   selectedSection: SectionsType;
