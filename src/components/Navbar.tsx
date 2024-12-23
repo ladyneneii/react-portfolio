@@ -7,12 +7,11 @@ import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { getConditionalSmoothTransition, languages, maxWidth } from "../shared";
 import { IoClose } from "react-icons/io5";
-import { LuSquare } from "react-icons/lu";
-import { IoCheckboxOutline } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import Radio from "./ui/Radio";
 import Toggle from "./ui/Toggle";
 import { SectionsType } from "@/types";
+import SingleCheckbox from "./ui/SingleCheckbox";
 
 const Navbar = () => {
   // LANGUAGE & DISABLE TRANSITIONS
@@ -21,6 +20,8 @@ const Navbar = () => {
     setSelectedLanguage,
     disableTransitions,
     setDisableTransitions,
+    disableAnimations,
+    setDisableAnimations,
     selectedTheme,
     setSelectedTheme,
     selectedSection,
@@ -163,19 +164,16 @@ const Navbar = () => {
                 setSelectedOption={setSelectedLanguage}
               />
             </div>
-            <div
-              onClick={() => setDisableTransitions(!disableTransitions)}
-              className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${getConditionalSmoothTransition(
-                disableTransitions
-              )} ${disableTransitions ? "text-purple" : ""}`}
-            >
-              {disableTransitions ? (
-                <IoCheckboxOutline size={25} />
-              ) : (
-                <LuSquare size={25} />
-              )}
-              Disable transitions
-            </div>
+            <SingleCheckbox
+              state={disableTransitions}
+              setState={setDisableTransitions}
+              label="Disable transitions"
+            />
+            <SingleCheckbox
+              state={disableAnimations}
+              setState={setDisableAnimations}
+              label="Disable animations"
+            />
           </div>
         </div>
       </div>

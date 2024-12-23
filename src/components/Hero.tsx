@@ -1,5 +1,5 @@
 import Button from "./ui/Button";
-import { IoCheckboxOutline, IoMail } from "react-icons/io5";
+import { IoMail } from "react-icons/io5";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import {
   getConditionalSmoothTransition,
@@ -9,11 +9,11 @@ import {
 } from "@/shared";
 import { useContext, useRef, useState } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
-import { LuSquare } from "react-icons/lu";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import Select from "./ui/Select";
 import { AvailableLanguagesType } from "@/types";
 import useHeightResize from "@/hooks/useHeightResize";
+import SingleCheckbox from "./ui/SingleCheckbox";
 
 const Hero = () => {
   const {
@@ -21,6 +21,8 @@ const Hero = () => {
     setSelectedLanguage,
     disableTransitions,
     setDisableTransitions,
+    disableAnimations,
+    setDisableAnimations,
     selectedTheme,
   } = useContext(UserPrefContext);
   const marginTop = "mt-[66px]";
@@ -150,23 +152,18 @@ const Hero = () => {
           >
             {isTablet && renderIntroduction()}
             <div
-              className={`flex gap-2 flex-col  ${
-                !isTablet ? "items-center" : "justify-between"
-              }`}
+              className={`flex gap-2 flex-col`}
             >
-              <div
-                onClick={() => setDisableTransitions(!disableTransitions)}
-                className={`flex gap-2 items-center hover:cursor-pointer hover:underline hover:text-purple ${getConditionalSmoothTransition(
-                  disableTransitions
-                )} ${disableTransitions ? "text-purple" : ""}`}
-              >
-                {disableTransitions ? (
-                  <IoCheckboxOutline size={25} />
-                ) : (
-                  <LuSquare size={25} />
-                )}
-                Disable transitions
-              </div>
+              <SingleCheckbox
+                state={disableTransitions}
+                setState={setDisableTransitions}
+                label="Disable transitions"
+              />
+              <SingleCheckbox
+                state={disableAnimations}
+                setState={setDisableAnimations}
+                label="Disable animations"
+              />
               <Select
                 selectedOption={selectedLanguage}
                 options={languages.map((language) => ({

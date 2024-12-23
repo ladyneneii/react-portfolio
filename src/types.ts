@@ -9,6 +9,8 @@ export interface UserPrefContextInterface {
   setSelectedLanguage: (value: RadioDataTypes) => void;
   disableTransitions: boolean;
   setDisableTransitions: (value: boolean) => void;
+  disableAnimations: boolean;
+  setDisableAnimations: (value: boolean) => void;
   selectedTheme: AvailableThemesType;
   setSelectedTheme: (value: AvailableThemesType) => void;
   selectedSection: SectionsType;
