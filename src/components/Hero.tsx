@@ -14,6 +14,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import Select from "./ui/Select";
 import { AvailableLanguagesType } from "@/types";
 import useHeightResize from "@/hooks/useHeightResize";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
   const {
@@ -35,6 +36,8 @@ const Hero = () => {
   const [heroImageHeight, setHeroImageHeight] = useState(700);
   useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
 
+  const navigate = useNavigate();
+
   const renderIntroduction = () => {
     return (
       <div className="flex flex-col gap-4">
@@ -43,7 +46,7 @@ const Hero = () => {
           <span className="text-purple">software engineer</span> in{" "}
           <span className="whitespace-nowrap">Cebu, Philippines.</span>
         </h4>
-        <Button onClick={() => console.log("lkdasf")} content="View CV" />
+        <Button onClick={() => navigate("/cv")} content="View CV" />
       </div>
     );
   };
