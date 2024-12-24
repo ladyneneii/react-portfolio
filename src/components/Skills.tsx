@@ -9,6 +9,7 @@ import useHeightResize from "@/hooks/useHeightResize";
 // import Radio, { RadioDataTypes } from "./ui/Radio";
 import {
   boxContainerClassnames,
+  EXTRA_HEIGHT,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
@@ -22,8 +23,6 @@ export interface SkillsInterface {
   name: string;
   src: string | React.ReactNode;
 }
-
-export const EXTRA_SPACE = 80;
 
 const Skills = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
@@ -64,7 +63,7 @@ const Skills = () => {
           key="mainTechStack"
           title="Main Tech Stack"
           isFoldable={true}
-          childrenHeight={mtsContainerHeight - EXTRA_SPACE}
+          childrenHeight={mtsContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={mtsContainerRef} className={itemsContainerClass}>
             {renderSkills(mts)}

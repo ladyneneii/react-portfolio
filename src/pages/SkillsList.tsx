@@ -1,5 +1,5 @@
-import { useContext, useRef, useState } from "react";
-import Box from "./ui/Box";
+import { useContext, useEffect, useRef, useState } from "react";
+import Box from "../components/ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
 import { TbBinaryTree } from "react-icons/tb";
 import { FaCode } from "react-icons/fa6";
@@ -8,17 +8,21 @@ import { AiOutlineCluster } from "react-icons/ai";
 import { MdOutlineSentimentSatisfied } from "react-icons/md";
 import {
   boxContainerClassnames,
+  EXTRA_HEIGHT,
+  itemsContainerClass,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
-import Button from "./ui/Button";
-import { renderSkills } from "./functions/renderSkills";
+import Button from "../components/ui/Button";
+import { renderSkills } from "../components/functions/renderSkills";
 import { UserPrefContext } from "@/context/UserPrefContext";
 
-export const EXTRA_SPACE = 80;
-
 const SkillsList = () => {
-  const { selectedTheme } = useContext(UserPrefContext);
+  const { selectedTheme, setSelectedSection } = useContext(UserPrefContext);
+
+  useEffect(() => {
+    setSelectedSection("");
+  }, [setSelectedSection]);
 
   const pl = [
     { name: "TypeScript", src: "/assets/pl-typescript.png" },
@@ -106,8 +110,6 @@ const SkillsList = () => {
   const [cwContainerHeight, setCwContainerHeight] = useState(0);
   useHeightResize({ ref: cwContainerRef, setHeight: setCwContainerHeight });
 
-  const itemsContainerClass = "flex justify-center flex-wrap mb-8";
-
   return (
     <div className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
@@ -118,7 +120,7 @@ const SkillsList = () => {
           key="programmingLanguages"
           title="Programming Languages"
           isFoldable={true}
-          childrenHeight={plContainerHeight - EXTRA_SPACE}
+          childrenHeight={plContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={plContainerRef} className={itemsContainerClass}>
             {renderSkills(pl)}
@@ -128,7 +130,7 @@ const SkillsList = () => {
           key="webDevelopment"
           title="Web Development"
           isFoldable={true}
-          childrenHeight={wdContainerHeight - EXTRA_SPACE}
+          childrenHeight={wdContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={wdContainerRef} className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
@@ -146,7 +148,7 @@ const SkillsList = () => {
           key="frameworksLibrariesAndTools"
           title="Frameworks, Libraries, and Tools"
           isFoldable={true}
-          childrenHeight={fltContainerHeight - EXTRA_SPACE}
+          childrenHeight={fltContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={fltContainerRef} className={itemsContainerClass}>
             {renderSkills(flt)}
@@ -156,7 +158,7 @@ const SkillsList = () => {
           key="coursework"
           title="Coursework"
           isFoldable={true}
-          childrenHeight={cwContainerHeight - EXTRA_SPACE}
+          childrenHeight={cwContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={cwContainerRef} className={itemsContainerClass}>
             {renderSkills(cw)}
