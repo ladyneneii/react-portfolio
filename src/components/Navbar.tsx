@@ -12,6 +12,7 @@ import Radio from "./ui/Radio";
 import Toggle from "./ui/Toggle";
 import { SectionsType } from "@/types";
 import SingleCheckbox from "./ui/SingleCheckbox";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   // LANGUAGE & DISABLE TRANSITIONS
@@ -48,24 +49,35 @@ const Navbar = () => {
     if (!isTablet) setShowNavbar(false);
   }, [isTablet]);
 
+  const navigate = useNavigate()
+
   const renderLinks = () => {
     return sections.map((section) => (
-      <a
+      <div
         key={section}
-        href={`#${section.charAt(0).toLowerCase() + section.slice(1)}`}
+        onClick={() => {
+          const sectionHash = `#${
+            section.charAt(0).toLowerCase() + section.slice(1)
+          }`;
+
+          navigate(`/${sectionHash}`); // Navigate to root with hash
+          setSelectedSection(section);
+          setShowNavbar(false);
+
+          // Delay scroll to allow page navigation
+          setTimeout(() => {
+            const targetSection = document.getElementById(sectionHash.slice(1));
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 100); // Adjust timing if necessary
+        }}
+        className={`hover:cursor-pointer hover:text-purple ${
+          selectedSection === section ? "text-purple" : ""
+        } ${getConditionalSmoothTransition(disableTransitions)}`}
       >
-        <div
-          onClick={() => {
-            setSelectedSection(section);
-            setShowNavbar(false);
-          }}
-          className={`hover:cursor-pointer hover:text-purple ${
-            selectedSection === section ? "text-purple" : ""
-          } ${getConditionalSmoothTransition(disableTransitions)}`}
-        >
-          {section}
-        </div>
-      </a>
+        {section}
+      </div>
     ));
   };
 

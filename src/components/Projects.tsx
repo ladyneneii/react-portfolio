@@ -1,12 +1,12 @@
 import {
   boxContainerClassnames,
+  EXTRA_HEIGHT,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
 import { MutableRefObject, useContext, useRef, useState } from "react";
 import Box from "./ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
-import { EXTRA_SPACE } from "./Skills";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import ProjectDescription from "./ui/ProjectDescription";
@@ -82,7 +82,6 @@ const Projects = () => {
       desc: "Designed an FM-AM Synthesizer with mobile (portrait & landscape) responsiveness.",
       techUsed: "React TypeScript, Node.js, Express.js, Firebase, Bootstrap",
       websiteLink: "https://noodlesushi.github.io/FM-AM-Synth/",
-      learnMoreLink: "/fm-am-synthesizer",
       ref: fasContainerRef,
       height: fasContainerHeight,
     },
@@ -104,7 +103,7 @@ const Projects = () => {
         key={title}
         title={title}
         isFoldable={true}
-        childrenHeight={height - EXTRA_SPACE}
+        childrenHeight={height - EXTRA_HEIGHT}
       >
         <div ref={ref} className="flex flex-col gap-12">
           <ProjectDescription

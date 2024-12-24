@@ -1,22 +1,24 @@
 import {
   boxContainerClassnames,
+  EXTRA_HEIGHT,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
 import { useContext, useRef, useState } from "react";
 import Box from "./ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
-import { EXTRA_SPACE } from "./Skills";
 import ProjectDescription from "./ui/ProjectDescription";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { ProjectsInterface } from "./Projects";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 const Experience = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
   const fpContainerRef = useRef<HTMLDivElement | null>(null);
   const [fpContainerHeight, setFpContainerHeight] = useState(0);
   useHeightResize({ ref: fpContainerRef, setHeight: setFpContainerHeight });
+  const isTablet = useMediaQuery("(max-width: 1020px)");
 
   const experienceInfo: ProjectsInterface[] = [
     {
@@ -31,7 +33,7 @@ const Experience = () => {
       desc: "Created a dynamic & customizable table component with global & column filtering, date range filtering, simple & custom sorting, drag & drop, row selection, export, pagination, group by, dependent & independent actions, custom filters preset, and advanced filtering features with CRUD operations.",
       techUsed: "Next.js, TypeScript, Tailwind CSS, Bitbucket, Jira",
       // websiteLink: "https://filpassv2.netlify.app/ia/drm/applications",
-      // learnMoreLink: "/filpass-v2-table",
+      learnMoreLink: "/filpass-v2-table",
     },
     {
       img: "/assets/thumbnail-verifierTemplate-transparent.png",
@@ -64,11 +66,11 @@ const Experience = () => {
           key="frontendDeveloperIntern"
           title="Frontend Developer Intern"
           isFoldable={true}
-          childrenHeight={fpContainerHeight - EXTRA_SPACE}
+          childrenHeight={fpContainerHeight - EXTRA_HEIGHT}
           companyName="BEfied (fka Edufied)"
           startAndEndDates="Sept 2024 - Dec 2024"
         >
-          <div ref={fpContainerRef} className="mt-16 flex flex-col gap-12">
+          <div ref={fpContainerRef} className={`mt-16 flex flex-col ${isTablet ? "gap-16" : "gap-12"}`}>
             {experienceInfo.map(
               (
                 {
