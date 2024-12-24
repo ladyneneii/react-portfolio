@@ -3,27 +3,22 @@ import {
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Box from "./ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
 import { EXTRA_SPACE } from "./Skills";
-import { renderProjects } from "./functions/renderProjects";
-import { useNavigate } from "react-router-dom";
-
-export interface ProjectsInterface {
-  img: string;
-  desc: string;
-  techUsed: string;
-  websiteLink?: string;
-  learnMoreLink?: string;
-}
+import ProjectDescription from "./ui/ProjectDescription";
+import useHighlightSection from "@/hooks/useHighlightSection";
+import { UserPrefContext } from "@/context/UserPrefContext";
+import { ProjectsInterface } from "./Projects";
 
 const Experience = () => {
+  const { setSelectedSection } = useContext(UserPrefContext);
   const fpContainerRef = useRef<HTMLDivElement | null>(null);
   const [fpContainerHeight, setFpContainerHeight] = useState(0);
   useHeightResize({ ref: fpContainerRef, setHeight: setFpContainerHeight });
 
-  const projectsInfo: ProjectsInterface[] = [
+  const experienceInfo: ProjectsInterface[] = [
     {
       img: "/assets/thumbnail-filpass.png",
       desc: "Worked full-time with a project manager, product owner, and a team of frontend developers and QA testers on Filpass v2.0.",
@@ -48,10 +43,19 @@ const Experience = () => {
     },
   ];
 
-  const navigate = useNavigate();
+  const experienceRef = useRef<HTMLDivElement | null>(null);
+  useHighlightSection({
+    ref: experienceRef,
+    setSection: setSelectedSection,
+    section: "Experience",
+  });
 
   return (
-    <div className={sectionPaddingClassnames}>
+    <div
+      ref={experienceRef}
+      id="experience"
+      className={sectionPaddingClassnames}
+    >
       <div className={sectionTitleContainerClassnames}>
         <h1>Experience</h1>
       </div>
@@ -65,7 +69,28 @@ const Experience = () => {
           startAndEndDates="Sept 2024 - Dec 2024"
         >
           <div ref={fpContainerRef} className="mt-16 flex flex-col gap-12">
-            {renderProjects(projectsInfo, navigate)}
+            {experienceInfo.map(
+              (
+                {
+                  img,
+                  desc,
+                  techUsed,
+                  websiteLink,
+                  learnMoreLink,
+                }: ProjectsInterface,
+                index
+              ) => (
+                <ProjectDescription
+                  key={img}
+                  img={img}
+                  desc={desc}
+                  techUsed={techUsed}
+                  index={index}
+                  websiteLink={websiteLink}
+                  learnMoreLink={learnMoreLink}
+                />
+              )
+            )}
           </div>
         </Box>
       </div>

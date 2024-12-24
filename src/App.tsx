@@ -8,6 +8,7 @@ import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import SkillsList from "./components/SkillsList";
 import Footer from "./components/Footer";
+import Projects from "./components/Projects";
 
 const App = () => {
   const { selectedTheme } = useContext(UserPrefContext);
@@ -34,6 +35,7 @@ const App = () => {
                 >
                   <Skills />
                   <Experience />
+                  <Projects />
                 </div>
               </div>
             }

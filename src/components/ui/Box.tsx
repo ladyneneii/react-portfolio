@@ -1,6 +1,6 @@
 import { UserPrefContext } from "@/context/UserPrefContext";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { getConditionalSmoothTransition } from "@/shared";
+import { getConditionalSmoothTransition, NAVBAR_HEIGHT } from "@/shared";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 
@@ -28,7 +28,6 @@ const Box = ({
   const foldCondition = !isFoldable || (isFoldable && unfold);
   const headerRef = useRef<HTMLDivElement | null>(null);
   const [isSticky, setIsSticky] = useState(false);
-  const NAVBAR_HEIGHT = 65;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,7 +53,7 @@ const Box = ({
         onClick={() => {
           if (isFoldable) setUnfold(!unfold);
         }}
-        className={`flex justify-between gap-4 mb-8 ${
+        className={`flex justify-between gap-4 mb-8 py-4 ${
           isPhone ? "flex-col" : "items-center"
         } ${
           isFoldable ? "hover:text-purple" : ""
@@ -64,7 +63,7 @@ const Box = ({
           isSticky && unfold
             ? `sticky z-10 ${
                 selectedTheme === "Dark" ? "bg-black" : "bg-white"
-              } py-4`
+              }`
             : ""
         }`}
         style={{ top: NAVBAR_HEIGHT }}

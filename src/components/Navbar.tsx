@@ -33,7 +33,7 @@ const Navbar = () => {
     "Skills",
     "Experience",
     "Projects",
-    "Education & Thesis",
+    "Thesis",
     "Testimonials",
   ];
 
@@ -50,15 +50,22 @@ const Navbar = () => {
 
   const renderLinks = () => {
     return sections.map((section) => (
-      <div
+      <a
         key={section}
-        onClick={() => setSelectedSection(section)}
-        className={`hover:cursor-pointer hover:text-purple ${
-          selectedSection === section ? "text-purple" : ""
-        } ${getConditionalSmoothTransition(disableTransitions)}`}
+        href={`#${section.charAt(0).toLowerCase() + section.slice(1)}`}
       >
-        {section}
-      </div>
+        <div
+          onClick={() => {
+            setSelectedSection(section);
+            setShowNavbar(false);
+          }}
+          className={`hover:cursor-pointer hover:text-purple ${
+            selectedSection === section ? "text-purple" : ""
+          } ${getConditionalSmoothTransition(disableTransitions)}`}
+        >
+          {section}
+        </div>
+      </a>
     ));
   };
 
@@ -132,13 +139,20 @@ const Navbar = () => {
         } ${handleShowNavbar()}`}
       >
         <div>
-          <div
-            onClick={() => setShowNavbar(false)}
-            className={`flex justify-end hover:cursor-pointer mb-8 hover:text-purple ${getConditionalSmoothTransition(
-              disableTransitions
-            )}`}
-          >
-            <IoClose size={35} />
+          <div className={`flex justify-between items-center mb-8`}>
+            <Toggle
+              firstOption={{ label: <FaMoon />, value: "Dark" }}
+              secondOption={{ label: <FiSun />, value: "Light" }}
+              selectedOption={selectedTheme}
+              setSelectedOption={setSelectedTheme}
+            />
+            <IoClose
+              onClick={() => setShowNavbar(false)}
+              size={35}
+              className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+                disableTransitions
+              )}`}
+            />
           </div>
           <div
             className={`flex flex-col flex-wrap ${
@@ -150,12 +164,6 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-col gap-12">
-          <Toggle
-            firstOption={{ label: <FaMoon />, value: "Dark" }}
-            secondOption={{ label: <FiSun />, value: "Light" }}
-            selectedOption={selectedTheme}
-            setSelectedOption={setSelectedTheme}
-          />
           <div className="flex flex-col gap-4">
             <div className="flex justify-between flex-wrap gap-4 gap-y-2">
               <Radio
@@ -164,16 +172,18 @@ const Navbar = () => {
                 setSelectedOption={setSelectedLanguage}
               />
             </div>
-            <SingleCheckbox
-              state={disableTransitions}
-              setState={setDisableTransitions}
-              label="Disable transitions"
-            />
-            <SingleCheckbox
-              state={disableAnimations}
-              setState={setDisableAnimations}
-              label="Disable animations"
-            />
+            <div className="flex flex-col gap-2">
+              <SingleCheckbox
+                state={disableTransitions}
+                setState={setDisableTransitions}
+                label="Disable transitions"
+              />
+              <SingleCheckbox
+                state={disableAnimations}
+                setState={setDisableAnimations}
+                label="Disable animations"
+              />
+            </div>
           </div>
         </div>
       </div>
