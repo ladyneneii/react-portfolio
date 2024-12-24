@@ -5,7 +5,7 @@ import { FaMoon } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { getConditionalSmoothTransition, languages, maxWidth, minWidth } from "../shared";
+import { getConditionalSmoothTransition, languages, maxWidth } from "../shared";
 import { IoClose } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import Radio from "./ui/Radio";
