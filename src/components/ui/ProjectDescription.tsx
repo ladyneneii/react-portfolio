@@ -93,7 +93,8 @@ const ProjectDescription = ({
       </div>
 
       <Carousel
-        currentImgIdx={imgIdx}
+        imgIdx={imgIdx}
+        setImgIdx={setImgIdx}
         carousel={carousel}
         showCarousel={showCarousel}
         setShowCarousel={setShowCarousel}

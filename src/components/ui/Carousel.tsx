@@ -1,25 +1,26 @@
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { getConditionalSmoothTransition } from "@/shared";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
 type Props = {
-  currentImgIdx: number;
+  imgIdx: number;
+  setImgIdx: (value: number) => void;
   carousel: string[];
   showCarousel: boolean;
   setShowCarousel: (value: boolean) => void;
 };
 
 const Carousel = ({
-  currentImgIdx,
+  imgIdx,
+  setImgIdx,
   carousel,
   showCarousel,
   setShowCarousel,
 }: Props) => {
   const { disableTransitions } = useContext(UserPrefContext);
-  const [imgIdx, setImgIdx] = useState(currentImgIdx);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const refLeft = useRef<HTMLDivElement | null>(null);
   const refRight = useRef<HTMLDivElement | null>(null);
