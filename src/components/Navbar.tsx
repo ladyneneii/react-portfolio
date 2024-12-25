@@ -49,29 +49,31 @@ const Navbar = () => {
     if (!isTablet) setShowNavbar(false);
   }, [isTablet]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const navigateToSection = (section: SectionsType) => {
+    const sectionHash = `#${
+      section.charAt(0).toLowerCase() + section.slice(1)
+    }`;
+
+    navigate(`/${sectionHash}`); // Navigate to root with hash
+    setSelectedSection(section);
+    setShowNavbar(false);
+
+    // Delay scroll to allow page navigation
+    setTimeout(() => {
+      const targetSection = document.getElementById(sectionHash.slice(1));
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); // Adjust timing if necessary
+  };
 
   const renderLinks = () => {
     return sections.map((section) => (
       <div
         key={section}
-        onClick={() => {
-          const sectionHash = `#${
-            section.charAt(0).toLowerCase() + section.slice(1)
-          }`;
-
-          navigate(`/${sectionHash}`); // Navigate to root with hash
-          setSelectedSection(section);
-          setShowNavbar(false);
-
-          // Delay scroll to allow page navigation
-          setTimeout(() => {
-            const targetSection = document.getElementById(sectionHash.slice(1));
-            if (targetSection) {
-              targetSection.scrollIntoView({ behavior: "smooth" });
-            }
-          }, 100); // Adjust timing if necessary
-        }}
+        onClick={() => navigateToSection(section)}
         className={`hover:cursor-pointer hover:text-purple ${
           selectedSection === section ? "text-purple" : ""
         } ${getConditionalSmoothTransition(disableTransitions)}`}
@@ -106,6 +108,7 @@ const Navbar = () => {
         >
           <div>
             <img
+              onClick={() => navigateToSection("Home")}
               src={"/assets/logo-transparent.png"}
               alt=""
               width={50}

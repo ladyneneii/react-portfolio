@@ -5,10 +5,11 @@ import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 
 export interface VideoDescriptionInterface {
   src: string;
-  desc?: string;
+  desc?: string | React.ReactNode;
   altLink: string;
   isPortrait?: boolean;
   hasDiffScreenSizes?: boolean;
+  thumbnail?: string;
 }
 
 const VideoDescription = ({
@@ -17,6 +18,7 @@ const VideoDescription = ({
   altLink,
   isPortrait,
   hasDiffScreenSizes,
+  thumbnail,
 }: VideoDescriptionInterface) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -69,7 +71,8 @@ const VideoDescription = ({
           controls
           onPlay={handlePlay}
           onPause={handlePause}
-          // poster="/assets/thumbnail-synthesizer.png"
+          // poster={thumbnail}
+          poster={thumbnail}
         >
           <source src={src} type="video/mp4" />
           <div className="flex flex-col gap-4 items-center">
