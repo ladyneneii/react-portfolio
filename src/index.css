@@ -17,7 +17,8 @@ html {
 
   --purple: #c870ff;
   --shadow: 0 0 200px 50px rgba(217, 156, 255, 0.25);
-  --shadow-sm: rgba(217, 156, 255, 0.452) 0px 10px 36px 0px, rgba(217, 156, 255, 0.06) 0px 0px 0px 1px;
+  --shadow-sm: rgba(217, 156, 255, 0.452) 0px 10px 36px 0px,
+    rgba(217, 156, 255, 0.06) 0px 0px 0px 1px;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -69,4 +70,9 @@ h6 {
   h4 {
     font-size: 20px;
   }
+}
+
+::selection {
+  background-color: var(--purple); 
+  color: white; 
 }
