@@ -47,7 +47,7 @@ const Box = ({
   }, [isFoldable]);
 
   return (
-    <div className={`rounded-lg shadow-custom-sm px-8 py-4`}>
+    <div className={`rounded-lg shadow-custom-sm ${isPhone ? "px-4 py-2" : "px-8 py-4"}`}>
       <div
         ref={headerRef}
         onClick={() => {

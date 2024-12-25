@@ -42,7 +42,7 @@ const ProjectDescription = ({
               }}
               src={img}
               alt=""
-              className="rounded-lg hover:cursor-pointer hover:outline-offset-2 hover:outline hover:outline-purple"
+              className="rounded-lg hover:cursor-pointer hover:outline-offset-4 hover:outline hover:outline-purple"
             />
           </div>
           <div

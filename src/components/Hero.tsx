@@ -104,7 +104,7 @@ const Hero = () => {
           } ${maxWidth} ${minWidth} mx-auto`}
         >
           <div
-            className={`flex gap-16 flex-col ${isTablet2 ? "text-center" : ""}`}
+            className={`flex gap-16 flex-col ${isTablet2 ? "text-center" : "max-w-[800px]"}`}
           >
             <h1>
               Transforming your ideas into{" "}
