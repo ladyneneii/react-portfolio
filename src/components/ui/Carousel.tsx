@@ -1,13 +1,13 @@
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { getConditionalSmoothTransition } from "@/shared";
-import { useContext, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import useOutsideClick from "@/hooks/useOutsideClick";
 
 type Props = {
   imgIdx: number;
-  setImgIdx: (value: number) => void;
+  setImgIdx: React.Dispatch<React.SetStateAction<number>>;
   carousel: string[];
   showCarousel: boolean;
   setShowCarousel: (value: boolean) => void;
@@ -31,6 +31,51 @@ const Carousel = ({
     refRight: refRight,
   });
 
+  useEffect(() => {
+    if (showCarousel) {
+      document.body.classList.add("modal-open");
+    } else {
+      // Delay the removal of the class
+      const timeoutId = setTimeout(() => {
+        document.body.classList.remove("modal-open");
+      }, 600); // Delay in milliseconds (adjust as needed)
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [showCarousel]);
+
+  const handlePrev = useCallback(() => {
+    setImgIdx((prev) => (prev === 0 ? carousel.length - 1 : prev - 1));
+  }, [carousel.length, setImgIdx]);
+
+  const handleNext = useCallback(() => {
+    setImgIdx((prev) => (prev + 1) % carousel.length);
+  }, [carousel.length, setImgIdx]);
+
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        handleNext();
+      } else if (e.key === "ArrowLeft") {
+        handlePrev();
+      } else if (e.key === "Escape") {
+        setShowCarousel(false); // Close on ESC
+      }
+    },
+    [setShowCarousel, handleNext, handlePrev]
+  );
+
+  useEffect(() => {
+    if (showCarousel) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [showCarousel, handleKeyDown]);
+
   const textHoverClassnames = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
     disableTransitions
   )}`;
@@ -38,7 +83,8 @@ const Carousel = ({
 
   return (
     showCarousel && (
-      <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/90 z-[200] flex items-center justify-center">
+      // has to be z-[1000] so it goes above the modal-open (pointer-events: none) class in the body
+      <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/90 z-[1000] flex items-center justify-center pointer-events-auto">
         <div
           className={`absolute top-2 right-2 ${buttonContainer} ${textHoverClassnames}`}
         >
@@ -58,21 +104,13 @@ const Carousel = ({
           ref={refLeft}
           className={`absolute top-1/2 transform -translate-y-1/2 z-[200] left-2 ${buttonContainer} ${textHoverClassnames}`}
         >
-          <FaChevronLeft
-            onClick={() => setImgIdx((imgIdx + 1) % carousel.length)}
-            size={30}
-          />
+          <FaChevronLeft onClick={handlePrev} size={30} />
         </div>
         <div
           ref={refRight}
           className={`absolute top-1/2 transform -translate-y-1/2 z-[200] right-2 ${buttonContainer} ${textHoverClassnames}`}
         >
-          <FaChevronRight
-            onClick={() =>
-              setImgIdx(imgIdx === 0 ? carousel.length - 1 : imgIdx - 1)
-            }
-            size={30}
-          />
+          <FaChevronRight onClick={handleNext} size={30} />
         </div>
       </div>
     )

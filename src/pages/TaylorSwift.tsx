@@ -67,21 +67,21 @@ const TaylorSwift = () => {
 
   const changeThemeInfo: VideoDescriptionInterface[] = [
     {
-      src: "/assets/taymother/ts-navbar.mp4",
+      src: "/assets/taymother/ts-change-theme.mp4",
       altLink:
-        "https://drive.google.com/file/d/18i9RS0hljEajKVjGc11Ih8y3oJOwfcxL/view?usp=sharing",
+        "https://drive.google.com/file/d/1ZMEy53dvNd82uJuSQVD1huSig_XgMHOj/view?usp=sharing",
       desc: "Desktop & Tablet Screens",
     },
     {
-      src: "/assets/taymother/mobile/ts-navbar-mobile-landscape.mp4",
+      src: "/assets/taymother/mobile/ts-change-theme-mobile-landscape.mp4",
       altLink:
-        "https://drive.google.com/file/d/1ehjGuBVcUmCcV9NA5k9qk6C-fl7zTCyZ/view?usp=sharing",
+        "https://drive.google.com/file/d/1MjzO2fsjgkY-rNzsBbobaQnRh2pMNrI8/view?usp=sharing",
       desc: "Phone Screens (Landscape)",
     },
     {
-      src: "/assets/taymother/mobile/ts-navbar-mobile.mp4",
+      src: "/assets/taymother/mobile/ts-change-theme-mobile.mp4",
       altLink:
-        "https://drive.google.com/file/d/1BAQiI4Y2ZmpeHSwz_8iKnimPBCB71NYL/view?usp=sharing",
+        "https://drive.google.com/file/d/1Pvm6jeZMJjuKglmF4iZrK37xNgNEhd_M/view?usp=sharing",
       desc: "Phone Screens (Portrait)",
       isPortrait: true,
     },
