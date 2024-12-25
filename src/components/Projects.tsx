@@ -113,6 +113,7 @@ const Projects = () => {
             index={index}
             websiteLink={websiteLink}
             learnMoreLink={learnMoreLink}
+            carousel={projectsInfo.map(({ img }) => img)}
           />
         </div>
       </Box>

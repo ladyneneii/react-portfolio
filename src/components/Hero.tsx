@@ -41,13 +41,17 @@ const Hero = () => {
 
   const renderIntroduction = () => {
     return (
-      <div className="flex flex-col gap-4">
+      <div
+        className={`flex flex-col gap-4 ${
+          isTablet2 ? "items-center text-center" : ""
+        }`}
+      >
         <h4 className="font-extralight">
           I am <span className="font-normal">Ernest Curativo</span>—a{" "}
           <span className="text-purple">software engineer</span> in{" "}
           <span className="whitespace-nowrap">Cebu, Philippines.</span>
         </h4>
-        <div className={`flex gap-2 ${isPhone ? "flex-col" : ""}`}>
+        <div className={`flex gap-2 ${isPhone ? "flex-col items-center" : ""}`}>
           <Button
             onClick={() =>
               window.open(
@@ -95,17 +99,19 @@ const Hero = () => {
       >
         <div
           ref={heroInfoContainerRef}
-          className={`absolute z-30 left-0 right-0 flex gap-16 px-4 justify-between top-1/2 -translate-y-1/2 ${
+          className={`absolute z-30 left-0 right-0 gap-12 flex px-4 justify-between top-1/2 -translate-y-1/2 ${
             !isTablet ? "" : "flex-col"
           } ${maxWidth} ${minWidth} mx-auto`}
         >
-          <div className={"flex gap-16 flex-col max-w-[700px]"}>
+          <div
+            className={`flex gap-16 flex-col ${isTablet2 ? "text-center" : "max-w-[800px]"}`}
+          >
             <h1>
               Transforming your ideas into{" "}
               <span className="text-purple font-extralight italic">
                 elegant
               </span>{" "}
-              code and{" "}
+              <span className="whitespace-nowrap">code and</span>{" "}
               <span className="text-purple font-extralight italic">
                 meaningful
               </span>{" "}
@@ -164,7 +170,11 @@ const Hero = () => {
               } gap-24`}
             >
               {isTablet && renderIntroduction()}
-              <div className={`flex gap-2 flex-col`}>
+              <div
+                className={`flex gap-2 flex-col ${
+                  isTablet2 ? "items-center" : ""
+                }`}
+              >
                 <SingleCheckbox
                   state={disableTransitions}
                   setState={setDisableTransitions}

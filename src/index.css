@@ -17,7 +17,8 @@ html {
 
   --purple: #c870ff;
   --shadow: 0 0 200px 50px rgba(217, 156, 255, 0.25);
-  --shadow-sm: rgba(217, 156, 255, 0.452) 0px 10px 36px 0px, rgba(217, 156, 255, 0.06) 0px 0px 0px 1px;
+  --shadow-sm: rgba(217, 156, 255, 0.452) 0px 10px 36px 0px,
+    rgba(217, 156, 255, 0.06) 0px 0px 0px 1px;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -62,6 +63,15 @@ h6 {
   }
 }
 
+@media (max-width: 430px) {
+  h1 {
+    font-size: 30px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+}
+
 @media (max-device-width: 940px) and (orientation: landscape) and (min-aspect-ratio: 3/2) {
   h1 {
     font-size: 40px;
@@ -69,4 +79,24 @@ h6 {
   h4 {
     font-size: 20px;
   }
+}
+
+::selection {
+  background-color: var(--purple);
+  color: white;
+}
+
+video {
+  cursor: pointer;
+}
+
+video::-webkit-media-controls-volume-slider {
+  display: none;
+}
+video::-webkit-media-controls-mute-button {
+  display: none;
+}
+
+.modal-open {
+  pointer-events: none;
 }

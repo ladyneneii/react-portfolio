@@ -10,6 +10,7 @@ import useHeightResize from "@/hooks/useHeightResize";
 import {
   boxContainerClassnames,
   EXTRA_HEIGHT,
+  itemsContainerClass,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
@@ -41,8 +42,6 @@ const Skills = () => {
   const mtsContainerRef = useRef<HTMLDivElement | null>(null);
   const [mtsContainerHeight, setMtsContainerHeight] = useState(0);
   useHeightResize({ ref: mtsContainerRef, setHeight: setMtsContainerHeight });
-
-  const itemsContainerClass = "flex justify-center flex-wrap";
 
   const navigate = useNavigate();
 

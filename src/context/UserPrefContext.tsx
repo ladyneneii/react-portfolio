@@ -36,7 +36,7 @@ export const UserPrefContextProvider = ({
     localStorage.getItem("disableTransitions") === "true" || false
   );
   const [disableAnimations, setDisableAnimations] = useState<boolean>(
-    localStorage.getItem("disableAnimations") === "true" || false
+    localStorage.getItem("disableAnimations") !== "false"
   );
   const [selectedTheme, setSelectedTheme] = useState<AvailableThemesType>(
     (localStorage.getItem("selectedTheme") as AvailableThemesType) || "Dark"

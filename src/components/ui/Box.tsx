@@ -36,7 +36,7 @@ const Box = ({
         setIsSticky(rect.top <= NAVBAR_HEIGHT);
       }
     };
-    
+
     // Listen for scroll events
     window.addEventListener("scroll", handleScroll);
 
@@ -47,15 +47,15 @@ const Box = ({
   }, [isFoldable]);
 
   return (
-    <div className={`rounded-lg shadow-custom-sm px-8 py-4`}>
+    <div className={`rounded-lg shadow-custom-sm ${isPhone ? "py-2" : "py-4"}`}>
       <div
         ref={headerRef}
         onClick={() => {
           if (isFoldable) setUnfold(!unfold);
         }}
         className={`flex justify-between gap-4 mb-8 py-4 ${
-          isPhone ? "flex-col" : "items-center"
-        } ${
+          isPhone ? "px-4 py-2" : "px-8 py-4"
+        } ${isPhone ? "flex-col" : "items-center"} ${
           isFoldable ? "hover:text-purple" : ""
         } cursor-pointer ${getConditionalSmoothTransition(
           disableTransitions
@@ -84,7 +84,7 @@ const Box = ({
         )}
       </div>
       <div
-        className={`${
+        className={`${isPhone ? "px-4" : "px-8"} ${
           foldCondition ? "opacity-100" : "opacity-0 invisible"
         } ${getConditionalSmoothTransition(disableTransitions)}`}
         style={

@@ -70,7 +70,10 @@ const Experience = () => {
           companyName="BEfied (fka Edufied)"
           startAndEndDates="Sept 2024 - Dec 2024"
         >
-          <div ref={fpContainerRef} className={`mt-16 flex flex-col ${isTablet ? "gap-16" : "gap-12"}`}>
+          <div
+            ref={fpContainerRef}
+            className={`mt-16 flex flex-col ${isTablet ? "gap-16" : "gap-12"}`}
+          >
             {experienceInfo.map(
               (
                 {
@@ -90,6 +93,7 @@ const Experience = () => {
                   index={index}
                   websiteLink={websiteLink}
                   learnMoreLink={learnMoreLink}
+                  carousel={experienceInfo.map(({ img }) => img)}
                 />
               )
             )}
