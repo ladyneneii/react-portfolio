@@ -43,6 +43,10 @@ const TaylorSwift = () => {
   const [ctContainerHeight, setCtContainerHeight] = useState(0);
   useHeightResize({ ref: ctContainerRef, setHeight: setCtContainerHeight });
 
+  const gContainerRef = useRef<HTMLDivElement | null>(null);
+  const [gContainerHeight, setGContainerHeight] = useState(0);
+  useHeightResize({ ref: gContainerRef, setHeight: setGContainerHeight });
+
   const responsiveNavbarInfo: VideoDescriptionInterface[] = [
     {
       src: "/assets/taymother/ts-navbar.mp4",
@@ -82,6 +86,28 @@ const TaylorSwift = () => {
       src: "/assets/taymother/mobile/ts-change-theme-mobile.mp4",
       altLink:
         "https://drive.google.com/file/d/1Pvm6jeZMJjuKglmF4iZrK37xNgNEhd_M/view?usp=sharing",
+      desc: "Phone Screens (Portrait)",
+      isPortrait: true,
+    },
+  ];
+
+  const gridInfo: VideoDescriptionInterface[] = [
+    {
+      src: "/assets/taymother/ts-grid.mp4",
+      altLink:
+        "https://drive.google.com/file/d/19FqVDIgC-AuJqM4ldOWBYxqzA8fBvMxq/view?usp=sharing",
+      desc: "Desktop & Tablet Screens",
+    },
+    {
+      src: "/assets/taymother/mobile/ts-grid-mobile-landscape.mp4",
+      altLink:
+        "https://drive.google.com/file/d/13fO8dliczui7tL3YXetXubTcdORouhn9/view?usp=sharing",
+      desc: "Phone Screens (Landscape)",
+    },
+    {
+      src: "/assets/taymother/mobile/ts-grid-mobile.mp4",
+      altLink:
+        "https://drive.google.com/file/d/10CTQgrtY-JWlwKCfH4mBOhlPemdaUrcy/view?usp=sharing",
       desc: "Phone Screens (Portrait)",
       isPortrait: true,
     },
@@ -144,6 +170,12 @@ const TaylorSwift = () => {
       height: ctContainerHeight,
       ref: ctContainerRef,
       featureInfo: changeThemeInfo,
+    },
+    {
+      title: "Animated Grid",
+      height: gContainerHeight,
+      ref: gContainerRef,
+      featureInfo: gridInfo,
     },
   ];
 

@@ -69,6 +69,7 @@ const VideoDescription = ({
           controls
           onPlay={handlePlay}
           onPause={handlePause}
+          // poster="/assets/thumbnail-synthesizer.png"
         >
           <source src={src} type="video/mp4" />
           <div className="flex flex-col gap-4 items-center">
