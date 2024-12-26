@@ -3,6 +3,7 @@ import Button from "./Button";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useState } from "react";
 import Carousel from "./Carousel";
+import { imgClassnames } from "@/shared";
 
 interface ProjectExtraInfo {
   index: number;
@@ -40,7 +41,7 @@ const ProjectDescription = ({
               }}
               src={img}
               alt=""
-              className="rounded-lg hover:cursor-pointer hover:outline-offset-4 hover:outline hover:outline-purple"
+              className={imgClassnames}
             />
           </div>
           <div

@@ -58,6 +58,10 @@ const Table = () => {
   const [cfeContainerHeight, setCfeContainerHeight] = useState(0);
   useHeightResize({ ref: cfeContainerRef, setHeight: setCfeContainerHeight });
 
+  const cContainerRef = useRef<HTMLDivElement | null>(null);
+  const [cContainerHeight, setCContainerHeight] = useState(0);
+  useHeightResize({ ref: cContainerRef, setHeight: setCContainerHeight });
+
   const globalColumnFiltersInfo: VideoDescriptionInterface[] = [
     {
       src: "/assets/table/t-global-column-search.mp4",
@@ -181,7 +185,7 @@ const Table = () => {
         "https://drive.google.com/file/d/1uJE2isDHOaP1T-2oNR2rbmY4hax3zXT1/view?usp=sharing",
       desc: renderLongDesc(
         "Table Responsiveness",
-        "The table is both tablet and mobile-responsive. However, the table does not 'look' responsive because the entire page (i.e. the table's surrounding components) and the rest of the pages on the website are not mobile responsive as specified by the product owner. If they were, the table would be mobile responsive as it was created to be so."
+        "The table is both tablet and mobile-responsive. However, the table does not 'look' responsive because the entire page (i.e. the table's surrounding components) and the rest of the pages on the website are not mobile responsive as specified by the product owner. If they were, the table would be mobile responsive as it was created to be so. The table also features a pair of left and right buttons that allow the user to scroll through wide tables horizontally. They are fixed to the page, so users can still access them no matter how far they have scrolled through the entire page vertically."
       ),
 
       thumbnail: "/assets/table/thumbnails/t-responsive-thumbnail.png",
@@ -233,6 +237,33 @@ const Table = () => {
     },
   ];
 
+  const customizeInfo: VideoDescriptionInterface[] = [
+    {
+      src: "/assets/table/t-multiple-tables.png",
+      altLink: "",
+      desc: "No Filter Preset, Clear Filters, and Download Buttons",
+      isImg: true,
+    },
+    {
+      src: "/assets/table/t-noFilters-download.png",
+      altLink: "",
+      desc: renderLongDesc(
+        "Multiple Tables",
+        "Here, the two pairs of left and right buttons for each table do not interfere with each other as they are now positioned relative to their respective table instead of being positioned fixed to the entire page."
+      ),
+      isImg: true,
+    },
+    {
+      src: "/assets/table/t-small.png",
+      altLink: "",
+      desc: renderLongDesc(
+        "Small Table",
+        "This is a table without any filter or download options above it. It also does not contain any column filters. It is possible to specify which columns do not contain any column filters, making it easier for customization by the developers. The table is also able to store link values (in blue) that fulfill a defined action as shown above."
+      ),
+      isImg: true,
+    },
+  ];
+
   const renderTFeatureVids = (
     ref: MutableRefObject<HTMLDivElement | null>,
     featureInfo: VideoDescriptionInterface[]
@@ -244,13 +275,16 @@ const Table = () => {
           isTablet2 ? "flex-col" : ""
         }`}
       >
-        {featureInfo.map(({ src, altLink, desc, thumbnail }) => (
+        {featureInfo.map(({ src, altLink, desc, thumbnail, isImg }, index) => (
           <VideoDescription
             key={src}
             src={src}
             altLink={altLink}
             desc={desc}
             thumbnail={thumbnail}
+            isImg={isImg}
+            index={index}
+            carousel={customizeInfo.map(({ src }) => src)}
           />
         ))}
       </div>
@@ -299,6 +333,12 @@ const Table = () => {
       height: cfeContainerHeight,
       ref: cfeContainerRef,
       featureInfo: clearExportInfo,
+    },
+    {
+      title: "Table Variants",
+      height: cContainerHeight,
+      ref: cContainerRef,
+      featureInfo: customizeInfo,
     },
   ];
 

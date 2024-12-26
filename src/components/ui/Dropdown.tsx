@@ -7,7 +7,7 @@ type Props = {
   trigger: React.ReactNode;
   content: React.ReactNode;
   position: string;
-  dropdownHeight: number,
+  dropdownHeight: number;
 };
 
 const Dropdown = ({ trigger, content, position, dropdownHeight }: Props) => {
@@ -20,9 +20,11 @@ const Dropdown = ({ trigger, content, position, dropdownHeight }: Props) => {
     <div className="relative">
       <div onClick={() => setShowDropdown(!showDropdown)}>{trigger}</div>
       <div
-      ref={contentRef}
-        className={`absolute rounded-lg flex flex-col justify-center ${
-          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+        ref={contentRef}
+        className={`absolute rounded-lg flex flex-col justify-center border-2 ${
+          selectedTheme === "Dark"
+            ? "bg-black border-white"
+            : "bg-white border-black"
         } ${position} ${getConditionalSmoothTransition(disableTransitions)} ${
           showDropdown ? "p-2" : ""
         } ${showDropdown ? "opacity-100" : "opacity-0 invisible"}`}
