@@ -11,7 +11,7 @@ import useHeightResize from "@/hooks/useHeightResize";
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
 
-const Calculators = () => {
+const Table = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
   const plContainerRef = useRef<HTMLDivElement | null>(null);
   const [plContainerHeight, setPlContainerHeight] = useState(0);
@@ -24,7 +24,7 @@ const Calculators = () => {
   return (
     <div className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h1>Taylor Swift's Discography</h1>
+        <h1>FilPass V2 Table</h1>
       </div>
       <div className={boxContainerClassnames}>
         <Box
@@ -43,4 +43,4 @@ const Calculators = () => {
   );
 };
 
-export default Calculators;
+export default Table;

@@ -75,7 +75,7 @@ const ProjectDescription = ({
                     />
                   )}
                   {learnMoreLink && (
-                    <a href={learnMoreLink} target="_blank">
+                    <a href={learnMoreLink}>
                       <Button
                         onClick={() => {
                           // navigate(`${learnMoreLink}`);

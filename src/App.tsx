@@ -10,6 +10,8 @@ import SkillsList from "./pages/SkillsList";
 import Footer from "./components/Footer";
 import Projects from "./components/Projects";
 import TaylorSwift from "./pages/TaylorSwift";
+import Table from "./pages/Table";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
@@ -70,6 +72,20 @@ const App = () => {
               </div>
             }
           />
+
+          <Route
+            path="/filpass-v2-table"
+            element={
+              <div
+                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+              >
+                <Table />
+              </div>
+            }
+          />
+
+          {/* 404 Route */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer />
