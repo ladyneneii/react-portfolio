@@ -12,10 +12,17 @@ import Projects from "./components/Projects";
 import TaylorSwift from "./pages/TaylorSwift";
 
 const App = () => {
-  const { selectedTheme } = useContext(UserPrefContext);
+  const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
+
+  const conditionalGlobalStyles = `
+    html {
+      scroll-behavior: ${disableTransitions ? "auto" : "smooth"};
+    }
+  `;
 
   return (
     <Router>
+      <style>{conditionalGlobalStyles}</style>
       <div
         className={`${minWidth} ${
           selectedTheme === "Dark"

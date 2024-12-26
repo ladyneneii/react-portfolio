@@ -63,10 +63,13 @@ const Navbar = () => {
     // Delay scroll to allow page navigation
     setTimeout(() => {
       const targetSection = document.getElementById(sectionHash.slice(1));
+    
       if (targetSection) {
-        targetSection.scrollIntoView({ behavior: "smooth" });
+        targetSection.scrollIntoView({
+          behavior: disableTransitions ? "auto" : "smooth",
+        });
       }
-    }, 100); // Adjust timing if necessary
+    }, 300); // Longer delay to allow resizing to finish so it is able to navigate to the right section
   };
 
   const renderLinks = () => {

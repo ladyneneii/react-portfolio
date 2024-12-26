@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { ProjectsInterface } from "../Projects";
 import Button from "./Button";
 import useMediaQuery from "@/hooks/useMediaQuery";
@@ -20,7 +19,6 @@ const ProjectDescription = ({
   learnMoreLink,
   carousel,
 }: ProjectDescription) => {
-  const navigate = useNavigate();
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");
   const [showCarousel, setShowCarousel] = useState(false);
@@ -29,7 +27,7 @@ const ProjectDescription = ({
   return (
     <>
       <div key={img} className="flex flex-col gap-4">
-        <div className={`flex gap-8 ${isTablet ? "flex-col " : ""}`}>
+        <div className={`flex gap-8 ${isTablet ? "flex-col" : ""}`}>
           <div
             className={`${isTablet ? "w-full" : "w-1/2"} ${
               index % 2 === 0 || isTablet ? "order-1" : "order-2"
@@ -77,13 +75,17 @@ const ProjectDescription = ({
                     />
                   )}
                   {learnMoreLink && (
-                    <Button
-                      onClick={() => {
-                        navigate(`${learnMoreLink}`);
-                        window.scrollTo(0, 0);
-                      }}
-                      content="Learn more"
-                    />
+                    <a href={learnMoreLink} target="_blank">
+                      <Button
+                        onClick={() => {
+                          // navigate(`${learnMoreLink}`);
+                          // setTimeout(() => {
+                          //   window.scrollTo(0, 0);
+                          // }, 100);
+                        }}
+                        content="Learn more"
+                      />
+                    </a>
                   )}
                 </div>
               )}
