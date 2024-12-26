@@ -70,7 +70,13 @@ const ProjectDescription = ({
                 >
                   {websiteLink && (
                     <Button
-                      onClick={() => window.open(`${websiteLink}`, "_blank")}
+                      onClick={() =>
+                        window.open(
+                          `${websiteLink}`,
+                          "_blank",
+                          "noopener,noreferrer"
+                        )
+                      }
                       content="Visit website"
                     />
                   )}

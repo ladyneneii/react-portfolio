@@ -13,6 +13,7 @@ import Toggle from "./ui/Toggle";
 import { SectionsType } from "@/types";
 import SingleCheckbox from "./ui/SingleCheckbox";
 import { useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 
 const Navbar = () => {
   // LANGUAGE & DISABLE TRANSITIONS
@@ -115,14 +116,26 @@ const Navbar = () => {
           className={`${maxWidth} px-4 py-2 flex justify-between items-center mx-auto relative`}
         >
           <div>
-            <img
-              onClick={() => navigateToSection("Home")}
-              src={"/assets/logo-transparent.png"}
-              alt=""
-              width={50}
-              height={50}
-              className="hover:cursor-pointer"
-            />
+            {window.location.pathname === "/" ? (
+              <img
+                onClick={() => navigateToSection("Home")}
+                src={"/assets/logo-transparent.png"}
+                alt=""
+                width={50}
+                height={50}
+                className="hover:cursor-pointer"
+              />
+            ) : (
+              <div
+                className={`rounded-full w-[50px] h-[50px] border-2 ${
+                  selectedTheme === "Dark" ? "border-white" : "border-black"
+                } flex justify-center items-center hover:cursor-pointer hover:text-purple hover:border-purple ${getConditionalSmoothTransition(
+                  disableTransitions
+                )}`}
+              >
+                <IoArrowBack onClick={() => window.history.back()} size={25} />
+              </div>
+            )}
           </div>
           {!isTablet && (
             <div

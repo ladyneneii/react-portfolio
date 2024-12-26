@@ -23,7 +23,7 @@ const VideoDescription = ({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false); // State to handle fading out
-  const isTablet = useMediaQuery("(max-width: 1020px)");
+  const isTablet2 = useMediaQuery("(max-width: 880px)");
 
   useEffect(() => {
     if (videoRef.current) {
@@ -62,7 +62,7 @@ const VideoDescription = ({
   return (
     <div
       className={`flex flex-col gap-2 items-center text-center ${
-        isTablet || hasDiffScreenSizes ? "w-[100%]" : "w-[45%]"
+        isTablet2 || hasDiffScreenSizes ? "w-[100%]" : "w-[45%]"
       }`}
     >
       <div className={`relative ${"w-full"}`}>
@@ -83,7 +83,9 @@ const VideoDescription = ({
               You can view the video here instead:
             </p>
             <Button
-              onClick={() => window.open(`${altLink}`, "_blank")}
+              onClick={() =>
+                window.open(`${altLink}`, "_blank", "noopener,noreferrer")
+              }
               content="Watch video"
             />
           </div>

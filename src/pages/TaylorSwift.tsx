@@ -3,6 +3,7 @@ import {
   EXTRA_HEIGHT,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
+  videosContainerClass,
 } from "@/shared";
 import Button from "../components/ui/Button";
 import Box from "../components/ui/Box";
@@ -20,7 +21,7 @@ import VideoDescription, {
 } from "@/components/ui/VideoDescription";
 import useMediaQuery from "@/hooks/useMediaQuery";
 
-interface FeaturesList {
+export interface FeaturesList {
   title: string;
   height: number;
   ref: MutableRefObject<HTMLDivElement | null>;
@@ -159,7 +160,7 @@ const TaylorSwift = () => {
     {
       src: "/assets/taymother/mobile/ts-search-mobile-landscape.mp4",
       altLink:
-        "https://drive.google.com/file/d/1ehjGuBVcUmCcV9NA5k9qk6C-fl7zTCyZ/view?usp=sharing",
+        "https://drive.google.com/file/d/1Kk38BALT8KhejrME05D8KzrDqdWHEjWh/view?usp=sharing",
       desc: "Phone Screens (Landscape)",
       thumbnail:
         "/assets/taymother/thumbnails/ts-search-mobile-landscape-thumbnail.PNG",
@@ -243,7 +244,7 @@ const TaylorSwift = () => {
     return (
       <div
         ref={ref}
-        className={`flex gap-8 items-center justify-center ${isTablet2 ? "flex-col" : ""}`}
+        className={`${videosContainerClass} items-center ${isTablet2 ? "flex-col" : ""}`}
       >
         <div
           className={`flex flex-col gap-8 justify-center ${

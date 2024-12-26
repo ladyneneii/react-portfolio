@@ -56,7 +56,8 @@ const Hero = () => {
             onClick={() =>
               window.open(
                 "https://drive.google.com/file/d/1ta_HLzIx5MN4DGbTTlYkPlWe12cfC23O/view?usp=sharing",
-                "_blank"
+                "_blank",
+                "noopener,noreferrer"
               )
             }
             content="View CV"

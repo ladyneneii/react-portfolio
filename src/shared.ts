@@ -26,6 +26,7 @@ export const sectionTitleContainerClassnames =
   "flex flex-col gap-2 items-center text-center";
 export const boxContainerClassnames = "flex flex-col gap-4";
 export const itemsContainerClass = "flex justify-center flex-wrap mb-8";
+export const videosContainerClass = `flex gap-8 justify-center`;
 
 
 
