@@ -243,7 +243,7 @@ const TaylorSwift = () => {
     return (
       <div
         ref={ref}
-        className={`flex gap-8 items-center ${isTablet2 ? "flex-col" : ""}`}
+        className={`flex gap-8 items-center justify-center ${isTablet2 ? "flex-col" : ""}`}
       >
         <div
           className={`flex flex-col gap-8 justify-center ${
@@ -265,7 +265,7 @@ const TaylorSwift = () => {
             ))}
         </div>
         <div
-          className={`${isTablet2 ? "w-full" : "w-1/2"} ${
+          className={`${isTablet2 ? "w-1/2" : "w-1/4"} ${
             index % 2 === 1 || isTablet2 ? "order-1" : "order-2"
           }`}
         >

@@ -16,7 +16,7 @@ const VideoDescription = ({
   src,
   desc,
   altLink,
-  isPortrait,
+  // isPortrait,
   hasDiffScreenSizes,
   thumbnail,
 }: VideoDescriptionInterface) => {
@@ -61,10 +61,11 @@ const VideoDescription = ({
 
   return (
     <div
-      className={`flex flex-col gap-2 items-center text-center 
-          ${!isTablet && !hasDiffScreenSizes ? "w-[45%]" : "w-[100%]"}`}
+      className={`flex flex-col gap-2 items-center text-center ${
+        isTablet || hasDiffScreenSizes ? "w-[100%]" : "w-[45%]"
+      }`}
     >
-      <div className={`relative ${isPortrait ? "w-[60%]" : "w-full"}`}>
+      <div className={`relative ${"w-full"}`}>
         <video
           ref={videoRef}
           className="rounded-lg hover:outline-offset-4 hover:outline hover:outline-purple flex-grow"

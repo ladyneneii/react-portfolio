@@ -56,6 +56,11 @@ const Navbar = () => {
       section.charAt(0).toLowerCase() + section.slice(1)
     }`;
 
+    // this should come BEFORE navigate() so currentUrl gets the url of the non-root page
+    const currentUrl = window.location.href;
+    console.log(currentUrl);
+    const delay = currentUrl.includes("/#") ? 100 : 1000;
+
     navigate(`/${sectionHash}`); // Navigate to root with hash
     setSelectedSection(section);
     setShowNavbar(false);
@@ -63,13 +68,13 @@ const Navbar = () => {
     // Delay scroll to allow page navigation
     setTimeout(() => {
       const targetSection = document.getElementById(sectionHash.slice(1));
-    
+
       if (targetSection) {
         targetSection.scrollIntoView({
           behavior: disableTransitions ? "auto" : "smooth",
         });
       }
-    }, 300); // Longer delay to allow resizing to finish so it is able to navigate to the right section
+    }, delay); // Longer delay to allow resizing to finish so it is able to navigate to the right section
   };
 
   const renderLinks = () => {
