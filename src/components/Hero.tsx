@@ -39,6 +39,10 @@ const Hero = () => {
   const [heroImageHeight, setHeroImageHeight] = useState(700);
   useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
 
+  const onHoverStyle = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+    disableTransitions
+  )}`;
+
   const renderIntroduction = () => {
     return (
       <div
@@ -105,7 +109,9 @@ const Hero = () => {
           } ${maxWidth} ${minWidth} mx-auto`}
         >
           <div
-            className={`flex gap-16 flex-col ${isTablet2 ? "text-center" : "max-w-[800px]"}`}
+            className={`flex gap-16 flex-col ${
+              isTablet2 ? "text-center" : "max-w-[800px]"
+            }`}
           >
             <h1>
               Transforming your ideas into{" "}
@@ -138,30 +144,10 @@ const Hero = () => {
                 className="rounded-full shadow-custom"
               />
               <div className="flex gap-3 justify-center">
-                <IoMail
-                  size={25}
-                  className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                    disableTransitions
-                  )}`}
-                />
-                <FaGithub
-                  size={25}
-                  className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                    disableTransitions
-                  )}`}
-                />
-                <FaLinkedin
-                  size={25}
-                  className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                    disableTransitions
-                  )}`}
-                />
-                <FaInstagram
-                  size={25}
-                  className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                    disableTransitions
-                  )}`}
-                />
+                <IoMail size={25} className={onHoverStyle} />
+                <FaGithub size={25} className={onHoverStyle} />
+                <FaLinkedin size={25} className={onHoverStyle} />
+                <FaInstagram size={25} className={onHoverStyle} />
               </div>
             </div>
 
@@ -173,7 +159,7 @@ const Hero = () => {
               {isTablet && renderIntroduction()}
               <div
                 className={`flex gap-2 flex-col ${
-                  isTablet2 ? "items-center" : ""
+                  isTablet && !isTablet2 ? "" : "items-center"
                 }`}
               >
                 <SingleCheckbox

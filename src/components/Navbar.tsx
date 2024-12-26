@@ -14,6 +14,8 @@ import { SectionsType } from "@/types";
 import SingleCheckbox from "./ui/SingleCheckbox";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import Dropdown from "./ui/Dropdown";
 
 const Navbar = () => {
   // LANGUAGE & DISABLE TRANSITIONS
@@ -78,14 +80,18 @@ const Navbar = () => {
     }, delay); // Longer delay to allow resizing to finish so it is able to navigate to the right section
   };
 
+  const onHoverStyle = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+    disableTransitions
+  )}`;
+
   const renderLinks = () => {
     return sections.map((section) => (
       <div
         key={section}
         onClick={() => navigateToSection(section)}
-        className={`hover:cursor-pointer hover:text-purple ${
+        className={`${onHoverStyle} ${
           selectedSection === section ? "text-purple" : ""
-        } ${getConditionalSmoothTransition(disableTransitions)}`}
+        }`}
       >
         {section}
       </div>
@@ -102,6 +108,32 @@ const Navbar = () => {
 
     return retVal;
   };
+
+  const renderExtraFeatures = () => {
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="flex justify-between flex-wrap gap-4 gap-y-2">
+          <Radio
+            availableOptions={languages}
+            selectedOption={selectedLanguage}
+            setSelectedOption={setSelectedLanguage}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <SingleCheckbox
+            state={disableTransitions}
+            setState={setDisableTransitions}
+            label="Disable transitions"
+          />
+          <SingleCheckbox
+            state={disableAnimations}
+            setState={setDisableAnimations}
+            label="Disable animations"
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="whitespace-nowrap">
@@ -129,9 +161,7 @@ const Navbar = () => {
               <div
                 className={`rounded-full w-[50px] h-[50px] border-2 ${
                   selectedTheme === "Dark" ? "border-white" : "border-black"
-                } flex justify-center items-center hover:cursor-pointer hover:text-purple hover:border-purple ${getConditionalSmoothTransition(
-                  disableTransitions
-                )}`}
+                } flex justify-center items-center ${onHoverStyle} hover:border-purple`}
               >
                 <IoArrowBack onClick={() => window.history.back()} size={25} />
               </div>
@@ -147,20 +177,27 @@ const Navbar = () => {
             </div>
           )}
           {!isTablet ? (
-            // <FaMoon size={35} className="text-purple hover:cursor-pointer" />
-            <Toggle
-              firstOption={{ label: <FaMoon />, value: "Dark" }}
-              secondOption={{ label: <FiSun />, value: "Light" }}
-              selectedOption={selectedTheme}
-              setSelectedOption={setSelectedTheme}
-            />
+            <div className="flex gap-2 items-center">
+              <Toggle
+                firstOption={{ label: <FaMoon />, value: "Dark" }}
+                secondOption={{ label: <FiSun />, value: "Light" }}
+                selectedOption={selectedTheme}
+                setSelectedOption={setSelectedTheme}
+              />
+              <Dropdown
+                trigger={
+                  <BsThreeDotsVertical size={35} className={onHoverStyle} />
+                }
+                content={renderExtraFeatures()}
+                position="right-2 top-12"
+                dropdownHeight={190}
+              />
+            </div>
           ) : (
             <RxHamburgerMenu
               onClick={() => setShowNavbar(!showNavbar)}
               size={35}
-              className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                disableTransitions
-              )}`}
+              className={onHoverStyle}
             />
           )}
         </div>
@@ -185,9 +222,7 @@ const Navbar = () => {
             <IoClose
               onClick={() => setShowNavbar(false)}
               size={35}
-              className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                disableTransitions
-              )}`}
+              className={onHoverStyle}
             />
           </div>
           <div
@@ -200,27 +235,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-4">
-            <div className="flex justify-between flex-wrap gap-4 gap-y-2">
-              <Radio
-                availableOptions={languages}
-                selectedOption={selectedLanguage}
-                setSelectedOption={setSelectedLanguage}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <SingleCheckbox
-                state={disableTransitions}
-                setState={setDisableTransitions}
-                label="Disable transitions"
-              />
-              <SingleCheckbox
-                state={disableAnimations}
-                setState={setDisableAnimations}
-                label="Disable animations"
-              />
-            </div>
-          </div>
+          {renderExtraFeatures()}
         </div>
       </div>
     </div>
