@@ -27,8 +27,8 @@ const Carousel = ({
   useOutsideClick({
     ref: imgRef,
     setVisibility: setShowCarousel,
-    refLeft: refLeft,
-    refRight: refRight,
+    refLeft: carousel.length > 1 ? refLeft : undefined,
+    refRight: carousel.length > 1 ? refRight : undefined,
   });
 
   useEffect(() => {
@@ -100,18 +100,22 @@ const Carousel = ({
           />
         </div>
 
-        <div
-          ref={refLeft}
-          className={`absolute top-1/2 transform -translate-y-1/2 z-[200] left-2 ${buttonContainer} ${textHoverClassnames}`}
-        >
-          <FaChevronLeft onClick={handlePrev} size={30} />
-        </div>
-        <div
-          ref={refRight}
-          className={`absolute top-1/2 transform -translate-y-1/2 z-[200] right-2 ${buttonContainer} ${textHoverClassnames}`}
-        >
-          <FaChevronRight onClick={handleNext} size={30} />
-        </div>
+        {carousel.length > 1 && (
+          <>
+            <div
+              ref={refLeft}
+              className={`absolute top-1/2 transform -translate-y-1/2 z-[200] left-2 ${buttonContainer} ${textHoverClassnames}`}
+            >
+              <FaChevronLeft onClick={handlePrev} size={30} />
+            </div>
+            <div
+              ref={refRight}
+              className={`absolute top-1/2 transform -translate-y-1/2 z-[200] right-2 ${buttonContainer} ${textHoverClassnames}`}
+            >
+              <FaChevronRight onClick={handleNext} size={30} />
+            </div>
+          </>
+        )}
       </div>
     )
   );

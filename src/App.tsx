@@ -12,6 +12,7 @@ import Projects from "./components/Projects";
 import TaylorSwift from "./pages/TaylorSwift";
 import Table from "./pages/Table";
 import NotFound from "./pages/NotFound";
+import Padayon from "./pages/Padayon";
 
 const App = () => {
   const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
@@ -80,6 +81,17 @@ const App = () => {
                 className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
               >
                 <Table />
+              </div>
+            }
+          />
+
+          <Route
+            path="/padayon"
+            element={
+              <div
+                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+              >
+                <Padayon />
               </div>
             }
           />

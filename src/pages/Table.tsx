@@ -21,6 +21,7 @@ import VideoDescription, {
 } from "@/components/ui/VideoDescription";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { FeaturesList } from "./TaylorSwift";
+import { renderLongDesc } from "@/components/functions/renderLongDesc";
 
 const Table = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
@@ -94,17 +95,6 @@ const Table = () => {
     },
   ];
 
-  const renderLongDesc = (title: string, desc: string) => {
-    return (
-      <div className="flex flex-col gap-2">
-        <p>{title}</p>
-        <div className="text-sm font-extralight leading-[24px] text-justify">
-          {desc}
-        </div>
-      </div>
-    );
-  };
-
   const sortingInfo: VideoDescriptionInterface[] = [
     {
       src: "/assets/table/t-sorting.mp4",
@@ -114,7 +104,6 @@ const Table = () => {
         "Simple Sorting (Ascend, Descend, None)",
         "This also allows multi-sorting where multiple columns can be sorted in case the previous columns being sorted have the same values."
       ),
-
       thumbnail: "/assets/table/thumbnails/t-sorting-thumbnail.png",
     },
     {
@@ -241,16 +230,16 @@ const Table = () => {
     {
       src: "/assets/table/t-multiple-tables.png",
       altLink: "",
-      desc: "No Filter Preset, Clear Filters, and Download Buttons",
-      isImg: true,
-    },
-    {
-      src: "/assets/table/t-noFilters-download.png",
-      altLink: "",
       desc: renderLongDesc(
         "Multiple Tables",
         "Here, the two pairs of left and right buttons for each table do not interfere with each other as they are now positioned relative to their respective table instead of being positioned fixed to the entire page."
       ),
+      isImg: true,
+    },
+    {
+      src: "/assets/table/t-noFilters-download.png",
+      desc: "No Filter Preset, Clear Filters, and Download Buttons",
+      altLink: "",
       isImg: true,
     },
     {

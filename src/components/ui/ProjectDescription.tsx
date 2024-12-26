@@ -3,7 +3,7 @@ import Button from "./Button";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { useState } from "react";
 import Carousel from "./Carousel";
-import { imgClassnames } from "@/shared";
+import { getConditionalSmoothTransition, imgClassnames } from "@/shared";
 
 interface ProjectExtraInfo {
   index: number;
@@ -41,7 +41,7 @@ const ProjectDescription = ({
               }}
               src={img}
               alt=""
-              className={imgClassnames}
+              className={`${imgClassnames} ${getConditionalSmoothTransition}`}
             />
           </div>
           <div

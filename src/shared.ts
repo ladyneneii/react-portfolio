@@ -30,5 +30,7 @@ export const videosContainerClass = `flex gap-8 justify-center`;
 export const imgClassnames =
   "rounded-lg hover:cursor-pointer hover:outline-offset-4 hover:outline hover:outline-purple";
 
+  
+
 
 
