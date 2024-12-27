@@ -52,7 +52,7 @@ const Projects = () => {
   const projectsInfo: ProjectsWithTitleInterface[] = [
     {
       title: "Taylor Swift's Discography",
-      img: "/assets/thumbnail-taylor-swift.png",
+      img: "/assets/thumbnails/thumbnail-taylor-swift.png",
       desc: "Created and deployed a website about Taylor Swift's discography.",
       techUsed: "React TypeScript, Cloudflare, SCSS",
       websiteLink: "https://taymother.pages.dev/",
@@ -62,7 +62,7 @@ const Projects = () => {
     },
     {
       title: "Calculators",
-      img: "/assets/collage-calculators.png",
+      img: "/assets/thumbnails/thumbnail-calculators.png",
       desc: "Created and deployed a Flask website of calculators using CPU scheduling, page replacement, disk scheduling, and cryptographic algorithms.",
       techUsed: "Python, Flask, Vanilla Javascript",
       websiteLink: "https://calculators-flask.onrender.com/",
@@ -72,7 +72,7 @@ const Projects = () => {
     },
     {
       title: "Padayon;",
-      img: "/assets/thumbnail-padayon.png",
+      img: "/assets/thumbnails/thumbnail-padayon.png",
       desc: "Created a full-stack app with the following features: user authentication, profile viewing & sorting according to location, a forum with multi-tiered/infinitely nested comments and replies, private and group messaging, a global map, and different permissions and privileges depending on user type.",
       techUsed: "React TypeScript, Node.js, Express.js, Firebase, Bootstrap",
       learnMoreLink: "/padayon",
@@ -82,7 +82,7 @@ const Projects = () => {
     },
     {
       title: "FM-AM Synthesizer",
-      img: "/assets/thumbnail-synthesizer.png",
+      img: "/assets/thumbnails/thumbnail-synthesizer.png",
       desc: "Designed an FM-AM Synthesizer with mobile (portrait & landscape) responsiveness.",
       techUsed: "React TypeScript, Tailwind CSS",
       websiteLink: "https://noodlesushi.github.io/FM-AM-Synth/",

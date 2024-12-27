@@ -27,7 +27,7 @@ const Hero = () => {
     selectedTheme,
     setSelectedSection,
   } = useContext(UserPrefContext);
-  const marginTop = "mt-[66px]";
+  const marginTop = "mt-[66px]"; // navbar height
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isTablet2 = useMediaQuery("(max-width: 800px)");
   const isPhone = useMediaQuery("(max-width: 660px)");
@@ -92,8 +92,8 @@ const Hero = () => {
         style={{
           backgroundImage: `url(${
             selectedTheme === "Dark"
-              ? "/assets/background-transparent-black.png"
-              : "/assets/background-transparent-white.png"
+              ? "/assets/hero/background-transparent-black.png"
+              : "/assets/hero/background-transparent-white.png"
           })`,
           backgroundSize: "cover",
           // backgroundSize: "auto",
@@ -137,7 +137,7 @@ const Hero = () => {
           >
             <div className="flex flex-col gap-4 flex-shrink-0">
               <img
-                src="/assets/hero-me.jpg"
+                src="/assets/hero/hero-me.jpg"
                 alt=""
                 width={!isPhone && !isLandscapePhone ? 300 : 250}
                 height={!isPhone && !isLandscapePhone ? 300 : 250}

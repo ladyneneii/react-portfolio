@@ -329,7 +329,7 @@ const TaylorSwift = () => {
     ));
   };
 
-  const img = "/assets/thumbnail-taylor-swift.png";
+  const img = "/assets/thumbnails/thumbnail-taylor-swift.png";
 
   return (
     <div className={sectionPaddingClassnames}>

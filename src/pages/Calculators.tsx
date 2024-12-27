@@ -185,7 +185,7 @@ const Calculators = () => {
     ));
   };
 
-  const img = "/assets/collage-calculators.png";
+  const img = "/assets/thumbnails/thumbnail-calculators.png";
 
   return (
     <div className={sectionPaddingClassnames}>

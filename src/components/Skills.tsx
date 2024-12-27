@@ -28,16 +28,16 @@ export interface SkillsInterface {
 const Skills = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
   const mts = [
-    { name: "TypeScript", src: "/assets/pl-typescript.png" },
-    { name: "JavaScript", src: "/assets/pl-javascript.png" },
-    { name: "Python", src: "/assets/pl-python.png" },
-    { name: "HTML", src: "/assets/wd-html.png" },
-    { name: "CSS", src: "/assets/wd-css.svg" },
-    { name: "SCSS", src: "/assets/wd-scss.svg" },
-    { name: "React", src: "/assets/wd-react.png" },
-    { name: "Node.js", src: "/assets/wd-node.webp" },
-    { name: "SQL", src: "/assets/wd-sql.png" },
-    { name: "Express.js", src: "/assets/wd-expressjs.webp" },
+    { name: "TypeScript", src: "/assets/skills/pl-typescript.png" },
+    { name: "JavaScript", src: "/assets/skills/pl-javascript.png" },
+    { name: "Python", src: "/assets/skills/pl-python.png" },
+    { name: "HTML", src: "/assets/skills/wd-html.png" },
+    { name: "CSS", src: "/assets/skills/wd-css.svg" },
+    { name: "SCSS", src: "/assets/skills/wd-scss.svg" },
+    { name: "React", src: "/assets/skills/wd-react.png" },
+    { name: "Node.js", src: "/assets/skills/wd-node.webp" },
+    { name: "SQL", src: "/assets/skills/wd-sql.png" },
+    { name: "Express.js", src: "/assets/skills/wd-expressjs.webp" },
   ];
   const mtsContainerRef = useRef<HTMLDivElement | null>(null);
   const [mtsContainerHeight, setMtsContainerHeight] = useState(0);

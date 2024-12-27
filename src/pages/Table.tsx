@@ -345,7 +345,7 @@ const Table = () => {
   };
 
   const extraImgs = [
-    "/assets/thumbnail-table.png",
+    "/assets/thumbnails/thumbnail-table.png",
     "/assets/table/thumbnails/t-filter-presets-thumbnail.png",
   ];
 

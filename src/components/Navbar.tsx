@@ -151,7 +151,7 @@ const Navbar = () => {
             {window.location.pathname === "/" ? (
               <img
                 onClick={() => navigateToSection("Home")}
-                src={"/assets/logo-transparent.png"}
+                src={"/assets/navbar/logo-transparent.png"}
                 alt=""
                 width={50}
                 height={50}

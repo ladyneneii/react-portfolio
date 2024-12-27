@@ -22,14 +22,14 @@ const Experience = () => {
 
   const experienceInfo: ProjectsInterface[] = [
     {
-      img: "/assets/thumbnail-filpass.png",
+      img: "/assets/thumbnails/thumbnail-filpass.png",
       desc: "Worked full-time with a project manager, product owner, and a team of frontend developers and QA testers on Filpass v2.0.",
       techUsed: "Next.js, TypeScript, Tailwind CSS, Bitbucket, Jira",
       // websiteLink: "https://filpassv2.netlify.app/",
       // learnMoreLink: "/filpass-v2",
     },
     {
-      img: "/assets/thumbnail-table.png",
+      img: "/assets/thumbnails/thumbnail-table.png",
       desc: "Created a dynamic & customizable table component with global & column filtering, date range filtering, simple & custom sorting, drag & drop, row selection, export, pagination, group by, dependent & independent actions, custom filters preset, and advanced filtering features with CRUD operations.",
       techUsed: "Next.js, TypeScript, Tailwind CSS, Bitbucket, Jira",
       // websiteLink: "https://filpassv2.netlify.app/ia/drm/applications",
@@ -37,7 +37,7 @@ const Experience = () => {
       isDescLong: true
     },
     {
-      img: "/assets/thumbnail-verifierTemplate-transparent.png",
+      img: "/assets/thumbnails/thumbnail-verifierTemplate-transparent.png",
       desc: "Redesigned an old verifier and email templates.",
       techUsed:
         "Next.js, TypeScript, Tailwind CSS, Bitbucket, Jira, Handlebars",

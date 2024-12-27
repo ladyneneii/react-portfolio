@@ -307,7 +307,7 @@ const Padayon = () => {
   };
 
   const extraImgs = [
-    "/assets/thumbnail-padayon.png",
+    "/assets/thumbnails/thumbnail-padayon.png",
     "/assets/padayon/thumbnails/p-about-thumbnail.png",
   ];
 
