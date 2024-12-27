@@ -147,11 +147,10 @@ const Table = () => {
       src: "/assets/table/t-col-reordering.mp4",
       altLink:
         "https://drive.google.com/file/d/1czcVa0Zj3jjbyCF_ciUcJEL671Al8Dfv/view?usp=sharing",
-      desc: (
-        <span className="text-sm font-extralight">
-          Move the columns and change their positions using the drag & drop
-          column feature.
-        </span>
+      desc: renderLongDesc(
+        "",
+        "Move the columns and change their positions using the drag & drop column feature.",
+        true
       ),
       thumbnail: "/assets/table/thumbnails/t-col-reordering-thumbnail.png",
     },

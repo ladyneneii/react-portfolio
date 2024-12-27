@@ -93,7 +93,7 @@ const Padayon = () => {
         "https://drive.google.com/file/d/1NbehsAHYOkltmXzBtnjXM9Ca3K0nrYH6/view?usp=sharing",
       desc: renderLongDesc(
         "Post & Reply CRUD",
-        "The Safe Space page is essentially a forum where users interact with each other by posting and replying to posts. Users can perform CRUD (Create, Read, Update, and Delete) operations on their posts and replies, which are reflected on the database. Deleted posts can be undone only if they have replies; otherwise, they are permanently deleted."
+        "The Safe Space page is essentially a forum where users interact with each other by posting and replying to posts. Users can perform CRUD (Create, Read, Update, and Delete) operations on their posts and replies, which are reflected in the database. Deleted posts can be undone only if they have replies; otherwise, they are permanently deleted."
       ),
       thumbnail: "/assets/padayon/thumbnails/p-post-reply-crud-thumbnail.png",
     },
@@ -180,7 +180,7 @@ const Padayon = () => {
         "https://drive.google.com/file/d/1akaaz4XGT4FnOn5ccUd-ukhxxLmz4X8r/view?usp=sharing",
       desc: renderLongDesc(
         "Verify/Unverify MHP",
-        "Users who are registered as MHP have to fill out a form where they provide their credentials as registered mental health professionals. Upon submitting the form, their accounts will be considered as NMHP until one of the admins reviews their filled-out form and verifies them as MHP. Upon verification, admins hold the power to unverify them if they violate any standards on the platform."
+        "Users who are registered as MHPs have to fill out a form where they provide their credentials as registered mental health professionals. Upon submitting the form, their accounts will be considered as NMHP until one of the admins reviews their filled-out form and verifies them as MHP. Upon verification, admins hold the power to unverify them if they violate any standards on the platform."
       ),
 
       thumbnail: "/assets/padayon/thumbnails/p-verify-thumbnail.png",
@@ -206,7 +206,16 @@ const Padayon = () => {
     {
       src: "/assets/padayon/p-guest.png",
       altLink: "",
-      desc: "Guests are not registered users of Padayon, so their credentials do not exist on the database. Guests can still access some of the website's features, but they are unable to interact with the registered users or affect changes to the website in any way. As seen in the photo above, the input fields on the Messages page are disabled.",
+      desc: (
+        <div className="leading-[24px] font-extralight text-justify">
+          Guests are not registered users of Padayon, so their credentials do
+          not exist in the database. Guests can still access some of the
+          website's features, but they are unable to interact with the
+          registered users or affect changes to the website in any way. As seen
+          in the photo above, the input fields on the Messages page are
+          disabled.
+        </div>
+      ),
       isImg: true,
     },
   ];

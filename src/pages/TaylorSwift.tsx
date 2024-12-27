@@ -20,6 +20,7 @@ import VideoDescription, {
   VideoDescriptionInterface,
 } from "@/components/ui/VideoDescription";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { renderLongDesc } from "@/components/functions/renderLongDesc";
 
 export interface FeaturesList {
   title: string;
@@ -144,16 +145,10 @@ const TaylorSwift = () => {
       src: "/assets/taymother/ts-search.mp4",
       altLink:
         "https://drive.google.com/file/d/1PP2oeh_S0hAxJlHjzQfW9JzXae2LDzwM/view?usp=sharing",
-      desc: (
-        <p>
-          Desktop & Tablet Screens
-          <br />
-          <span className="text-sm font-extralight">
-            The up and down arrow keys can also be used in navigating through
-            the search results, while the Enter key can be used for selecting a
-            song.
-          </span>
-        </p>
+      desc: renderLongDesc(
+        "Desktop & Tablet Screens",
+        "The up and down arrow keys can also be used in navigating through the search results, while the Enter key can be used for selecting a song.",
+        true
       ),
       thumbnail: "/assets/taymother/thumbnails/ts-search-thumbnail.png",
     },
@@ -207,14 +202,10 @@ const TaylorSwift = () => {
       src: "/assets/taymother/ts-modal.mp4",
       altLink:
         "https://drive.google.com/file/d/1hP1l9gYo04x64Oxpd0ydiXC96FwHZ3x5/view?usp=sharing",
-      desc: (
-        <p>
-          Desktop & Tablet Screens
-          <br />
-          <span className="text-sm font-extralight">
-            The entire photo is always displayed no matter the screen size.
-          </span>
-        </p>
+      desc: renderLongDesc(
+        "Desktop & Tablet Screens",
+        "The entire photo is always displayed no matter the screen size.",
+        true
       ),
       thumbnail: "/assets/taymother/thumbnails/ts-modal-thumbnail.png",
     },
@@ -244,7 +235,9 @@ const TaylorSwift = () => {
     return (
       <div
         ref={ref}
-        className={`${videosContainerClass} items-center ${isTablet2 ? "flex-col" : ""}`}
+        className={`${videosContainerClass} items-center ${
+          isTablet2 ? "flex-col" : ""
+        }`}
       >
         <div
           className={`flex flex-col gap-8 justify-center ${
