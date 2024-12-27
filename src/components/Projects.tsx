@@ -17,6 +17,9 @@ export interface ProjectsInterface {
   techUsed: string;
   websiteLink?: string;
   learnMoreLink?: string;
+  linkedInLink?: string;
+  isDescLong?: boolean;
+  extraImgs?: string[];
 }
 
 interface BoxInfoInterface {
@@ -80,7 +83,7 @@ const Projects = () => {
       title: "FM-AM Synthesizer",
       img: "/assets/thumbnail-synthesizer.png",
       desc: "Designed an FM-AM Synthesizer with mobile (portrait & landscape) responsiveness.",
-      techUsed: "React TypeScript, Node.js, Express.js, Firebase, Bootstrap",
+      techUsed: "React TypeScript, Tailwind CSS",
       websiteLink: "https://noodlesushi.github.io/FM-AM-Synth/",
       ref: fasContainerRef,
       height: fasContainerHeight,
@@ -130,7 +133,7 @@ const Projects = () => {
   return (
     <div ref={projectsRef} id="projects" className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h1>Projects</h1>
+        <h2>Projects</h2>
       </div>
       <div className={boxContainerClassnames}>
         {projectsInfo.map(

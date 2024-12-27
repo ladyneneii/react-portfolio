@@ -187,7 +187,7 @@ const Calculators = () => {
   return (
     <div className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h1>Calculators</h1>
+        <h2>Calculators</h2>
       </div>
       <div className={boxContainerClassnames}>{renderCBoxes()}</div>
       <div className="flex justify-center">

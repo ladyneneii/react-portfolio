@@ -22,6 +22,7 @@ import VideoDescription, {
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { FeaturesList } from "./TaylorSwift";
 import { renderLongDesc } from "@/components/functions/renderLongDesc";
+import ProjectDescription from "@/components/ui/ProjectDescription";
 
 const Table = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
@@ -343,11 +344,32 @@ const Table = () => {
     ));
   };
 
+  const extraImgs = [
+    "/assets/thumbnail-table.png",
+    "/assets/table/thumbnails/t-filter-presets-thumbnail.png",
+  ];
+
   return (
     <div className={sectionPaddingClassnames}>
-      <div className={sectionTitleContainerClassnames}>
-        <h1>FilPass V2 Table</h1>
-      </div>
+      <ProjectDescription
+        img=""
+        desc="The table was one of the most complex components I have created so far. Although there are already a lot of table libraries on the Internet, I had to make sure that the one I chose was easy to customize and implement, hence I chose the TanStack library for this component. It is a headless UI library, which meant I had to code all of the UI from scratch. Because of this, it was very easy to follow the table's design in Figma as I did not have to override any predefined classes as they did not exist in the first place. The library only provided me with the convenient functions for sorting, filtering, and other table features, which I was able to easily override and customize to meet the growing specifications required by the product owner. Had I chosen another library that conveniently gives the codes for its UI and functions for me to simply copy and paste, I would have had a difficult time trying to customize the table to match its Figma designs and expected functionalities."
+        techUsed="Next.js, TypeScript, Tailwind CSS, Bitbucket, Jira"
+        index={0}
+        carousel={extraImgs}
+        upperContent={
+          <div className={`${sectionTitleContainerClassnames} mb-8`}>
+            <h2>FilPass V2 Table</h2>
+          </div>
+        }
+        lowerContent={
+          <div className="text-center mt-16">
+            <h2>Features</h2>
+          </div>
+        }
+        isDescLong={true}
+        extraImgs={extraImgs}
+      />
       <div className={boxContainerClassnames}>{renderTBoxes()}</div>
       <div className="flex justify-center">
         <Button onClick={() => window.history.back()} content="Go back" />

@@ -308,7 +308,7 @@ const Padayon = () => {
   return (
     <div className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h1>Padayon;</h1>
+        <h2>Padayon;</h2>
       </div>
       <div className={boxContainerClassnames}>{renderTBoxes()}</div>
       <div className="flex justify-center">

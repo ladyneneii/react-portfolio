@@ -1,104 +1,141 @@
 import { ProjectsInterface } from "../Projects";
 import Button from "./Button";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import Carousel from "./Carousel";
 import { getConditionalSmoothTransition, imgClassnames } from "@/shared";
 
 interface ProjectExtraInfo {
   index: number;
   carousel: string[];
+  upperContent?: ReactNode;
+  lowerContent?: ReactNode;
 }
 type ProjectDescription = ProjectsInterface & ProjectExtraInfo;
 
 const ProjectDescription = ({
-  img,
+  img, // can be set to ""
   desc,
   techUsed,
   index,
   websiteLink,
   learnMoreLink,
+  linkedInLink,
   carousel,
+  isDescLong,
+  upperContent,
+  lowerContent,
+  extraImgs,
 }: ProjectDescription) => {
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");
   const [showCarousel, setShowCarousel] = useState(false);
   const [imgIdx, setImgIdx] = useState(-1);
 
+  const renderImg = (idx: number, img: string) => {
+    return (
+      <img
+        onClick={() => {
+          setShowCarousel(true);
+          setImgIdx(idx);
+        }}
+        src={img}
+        alt=""
+        className={`${imgClassnames} ${getConditionalSmoothTransition}`}
+      />
+    );
+  };
+
   return (
     <>
-      <div key={img} className="flex flex-col gap-4">
-        <div className={`flex gap-8 ${isTablet ? "flex-col" : ""}`}>
+      <div>
+        {upperContent}
+        <div key={img} className="flex flex-col gap-4">
           <div
-            className={`${isTablet ? "w-full" : "w-1/2"} ${
-              index % 2 === 0 || isTablet ? "order-1" : "order-2"
+            className={`flex gap-8 ${isDescLong ? "items-center" : ""} ${
+              isTablet ? "flex-col" : ""
             }`}
           >
-            <img
-              onClick={() => {
-                setShowCarousel(true);
-                setImgIdx(index);
-              }}
-              src={img}
-              alt=""
-              className={`${imgClassnames} ${getConditionalSmoothTransition}`}
-            />
-          </div>
-          <div
-            className={`${
-              isTablet ? "w-full" : "w-1/2"
-            } flex flex-col justify-between gap-8 ${
-              index % 2 === 1 || isTablet ? "order-1" : "order-2"
-            }`}
-          >
-            <h6>{desc}</h6>
             <div
-              className={`flex ${
-                !isTablet || isPhone
-                  ? "flex-col"
-                  : "justify-between items-center"
-              } gap-4`}
+              className={`${isTablet ? "w-full" : "w-1/2"} ${
+                index % 2 === 0 || isTablet ? "order-1" : "order-2"
+              }`}
             >
-              <div className="flex flex-col text-purple">
-                <p>Technologies used:</p>
-                <p className="font-extralight italic">{techUsed}</p>
+              {img && renderImg(index, img)}
+              <div className="flex flex-col gap-4">
+                {extraImgs &&
+                  extraImgs.map((xtraImg, idx) => renderImg(idx, xtraImg))}
               </div>
-              {(websiteLink || learnMoreLink) && (
-                <div
-                  className={`flex ${
-                    isPhone ? "flex-col gap-2 items-center" : "gap-4"
-                  }`}
-                >
-                  {websiteLink && (
-                    <Button
-                      onClick={() =>
-                        window.open(
-                          `${websiteLink}`,
-                          "_blank",
-                          "noopener,noreferrer"
-                        )
-                      }
-                      content="Visit website"
-                    />
-                  )}
-                  {learnMoreLink && (
-                    <a href={learnMoreLink}>
-                      <Button
-                        onClick={() => {
-                          // navigate(`${learnMoreLink}`);
-                          // setTimeout(() => {
-                          //   window.scrollTo(0, 0);
-                          // }, 100);
-                        }}
-                        content="Learn more"
-                      />
-                    </a>
-                  )}
+            </div>
+            <div
+              className={`${
+                isTablet ? "w-full" : "w-1/2"
+              } flex flex-col justify-between gap-8 ${
+                index % 2 === 1 || isTablet ? "order-1" : "order-2"
+              }`}
+            >
+              <h6 className="font-extralight">{desc}</h6>
+              <div
+                className={`flex ${
+                  !isTablet || isPhone
+                    ? "flex-col"
+                    : "justify-between items-center"
+                } gap-4`}
+              >
+                <div className="flex flex-col text-purple">
+                  <p>Technologies used:</p>
+                  <p className="font-extralight italic">{techUsed}</p>
                 </div>
-              )}
+                {(websiteLink || learnMoreLink || linkedInLink) && (
+                  <div
+                    className={`flex ${
+                      isPhone ? "flex-col gap-2 items-center" : "gap-4"
+                    }`}
+                  >
+                    {websiteLink && (
+                      <Button
+                        onClick={() =>
+                          window.open(
+                            `${websiteLink}`,
+                            "_blank",
+                            "noopener,noreferrer"
+                          )
+                        }
+                        content="Visit website"
+                      />
+                    )}
+                    {learnMoreLink && (
+                      <a href={learnMoreLink}>
+                        <Button
+                          onClick={() => {
+                            // navigate(`${learnMoreLink}`);
+                            // setTimeout(() => {
+                            //   window.scrollTo(0, 0);
+                            // }, 100);
+                          }}
+                          content="Learn more"
+                        />
+                      </a>
+                    )}
+                    {linkedInLink && (
+                      <Button
+                        onClick={() =>
+                          window.open(
+                            `${linkedInLink}`,
+                            "_blank",
+                            "noopener,noreferrer"
+                          )
+                        }
+                        content="View post on LinkedIn"
+                      />
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
+        {lowerContent}
       </div>
 
       <Carousel

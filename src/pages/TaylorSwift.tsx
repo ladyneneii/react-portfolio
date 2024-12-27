@@ -21,6 +21,7 @@ import VideoDescription, {
 } from "@/components/ui/VideoDescription";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { renderLongDesc } from "@/components/functions/renderLongDesc";
+import ProjectDescription from "@/components/ui/ProjectDescription";
 
 export interface FeaturesList {
   title: string;
@@ -328,11 +329,30 @@ const TaylorSwift = () => {
     ));
   };
 
+  const img = "/assets/thumbnail-taylor-swift.png";
+
   return (
     <div className={sectionPaddingClassnames}>
-      <div className={sectionTitleContainerClassnames}>
-        <h1>Taylor Swift's Discography</h1>
-      </div>
+      <ProjectDescription
+        img={img}
+        desc="I created this website to understand flexbox, grid, and positioning CSS properties better, hence I used SCSS instead of Tailwind CSS. I believe that knowing how to code these properties from scratch instead of using predefined classes allows you to truly understand how each property-value pair works together. The only reason I used SCSS instead of the regular CSS is so I could easily nest class names, which made it all the way more convenient for me and saved me a lot of time as I did not have to keep repeating class names."
+        techUsed="React TypeScript, Cloudflare, SCSS"
+        index={0}
+        websiteLink="https://taymother.pages.dev/"
+        linkedInLink="https://www.linkedin.com/feed/update/urn:li:activity:7228041664273997826/"
+        carousel={[img]}
+        upperContent={
+          <div className={`${sectionTitleContainerClassnames} mb-8`}>
+            <h2>Taylor Swift's Discography</h2>
+          </div>
+        }
+        lowerContent={
+          <div className="text-center mt-16">
+            <h2>Features</h2>
+          </div>
+        }
+        isDescLong={true}
+      />
       <div className={boxContainerClassnames}>{renderTsBoxes()}</div>
       <div className="flex justify-center">
         <Button onClick={() => window.history.back()} content="Go back" />
