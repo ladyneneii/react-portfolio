@@ -49,7 +49,11 @@ const Box = ({
   }, [isFoldable]);
 
   return (
-    <div className={`rounded-lg shadow-custom-sm ${isPhone ? "py-2" : "py-4"}`}>
+    <div
+      className={`rounded-lg shadow-custom-sm ${
+        selectedTheme === "Dark" ? "bg-black/50" : "bg-white/50"
+      } ${isPhone ? "py-2" : "py-4"}`}
+    >
       <div
         ref={headerRef}
         onClick={() => {

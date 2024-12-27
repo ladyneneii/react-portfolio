@@ -51,6 +51,8 @@ const App = () => {
                   <Experience />
                   <Projects />
                   <Thesis />
+                </div>
+                <div className="bg-black">
                   <Testimonials />
                 </div>
               </div>

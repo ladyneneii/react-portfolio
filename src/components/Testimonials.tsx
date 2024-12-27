@@ -11,6 +11,7 @@ import {
   boxContainerClassnames,
   EXTRA_HEIGHT,
   itemsContainerClass,
+  maxWidth,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
@@ -27,9 +28,9 @@ const Testimonials = () => {
     selectedTheme,
   } = useContext(UserPrefContext);
   const { setSelectedSection } = useContext(UserPrefContext);
-  const tContainerRef = useRef<HTMLDivElement | null>(null);
-  const [tContainerHeight, setTContainerHeight] = useState(0);
-  useHeightResize({ ref: tContainerRef, setHeight: setTContainerHeight });
+  const mdContainerRef = useRef<HTMLDivElement | null>(null);
+  const [mdContainerHeight, setMdContainerHeight] = useState(0);
+  useHeightResize({ ref: mdContainerRef, setHeight: setMdContainerHeight });
 
   const testimonialsRef = useRef<HTMLDivElement | null>(null);
   useHighlightSection({
@@ -42,13 +43,9 @@ const Testimonials = () => {
     <div
       ref={testimonialsRef}
       id="testimonials"
-      className={`${sectionPaddingClassnames} border-2 border-blue-500`}
+      className={`${sectionPaddingClassnames} border-2 border-blue-500 ${maxWidth} mx-auto`}
       style={{
-        backgroundImage: `url(${
-          selectedTheme === "Dark"
-            ? "/assets/background-transparent-black.png"
-            : "/assets/background-transparent-white.png"
-        })`,
+        backgroundImage: `url("/assets/testimonials/testimonials-bg.png")`,
         backgroundSize: "cover",
         // backgroundSize: "auto",
         // backgroundRepeat: "repeat",
@@ -59,7 +56,29 @@ const Testimonials = () => {
       <div className={sectionTitleContainerClassnames}>
         <h2>Testimonials</h2>
       </div>
-      <div className={boxContainerClassnames}></div>
+      <div className={`border-2 flex justify-between gap-24`}>
+        <div className="border-2 border-red-500">
+          <Box
+            key="miguelDailisan"
+            title="Miguel Dailisan"
+            isFoldable={true}
+            childrenHeight={mdContainerHeight - EXTRA_HEIGHT}
+          >
+            <div ref={mdContainerRef} className={itemsContainerClass}></div>
+          </Box>
+        </div>
+        <div className="border-2 border-red-500">
+          {" "}
+          <Box
+            key="miguelDailisan"
+            title="Miguel Dailisan"
+            isFoldable={true}
+            childrenHeight={mdContainerHeight - EXTRA_HEIGHT}
+          >
+            <div ref={mdContainerRef} className={itemsContainerClass}></div>
+          </Box>
+        </div>
+      </div>
     </div>
   );
 };
