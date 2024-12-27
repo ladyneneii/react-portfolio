@@ -13,6 +13,9 @@ import Toggle from "./ui/Toggle";
 import { SectionsType } from "@/types";
 import SingleCheckbox from "./ui/SingleCheckbox";
 import { useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import Dropdown from "./ui/Dropdown";
 
 const Navbar = () => {
   // LANGUAGE & DISABLE TRANSITIONS
@@ -49,32 +52,46 @@ const Navbar = () => {
     if (!isTablet) setShowNavbar(false);
   }, [isTablet]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const navigateToSection = (section: SectionsType) => {
+    const sectionHash = `#${
+      section.charAt(0).toLowerCase() + section.slice(1)
+    }`;
+
+    // this should come BEFORE navigate() so currentUrl gets the url of the non-root page
+    const currentUrl = window.location.href;
+    console.log(currentUrl);
+    const delay = currentUrl.includes("/#") ? 100 : 800;
+
+    navigate(`/${sectionHash}`); // Navigate to root with hash
+    setSelectedSection(section);
+    setShowNavbar(false);
+
+    // Delay scroll to allow page navigation
+    setTimeout(() => {
+      const targetSection = document.getElementById(sectionHash.slice(1));
+
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: disableTransitions ? "auto" : "smooth",
+        });
+      }
+    }, delay); // Longer delay to allow resizing to finish so it is able to navigate to the right section
+  };
+
+  const onHoverStyle = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+    disableTransitions
+  )}`;
 
   const renderLinks = () => {
     return sections.map((section) => (
       <div
         key={section}
-        onClick={() => {
-          const sectionHash = `#${
-            section.charAt(0).toLowerCase() + section.slice(1)
-          }`;
-
-          navigate(`/${sectionHash}`); // Navigate to root with hash
-          setSelectedSection(section);
-          setShowNavbar(false);
-
-          // Delay scroll to allow page navigation
-          setTimeout(() => {
-            const targetSection = document.getElementById(sectionHash.slice(1));
-            if (targetSection) {
-              targetSection.scrollIntoView({ behavior: "smooth" });
-            }
-          }, 100); // Adjust timing if necessary
-        }}
-        className={`hover:cursor-pointer hover:text-purple ${
+        onClick={() => navigateToSection(section)}
+        className={`${onHoverStyle} ${
           selectedSection === section ? "text-purple" : ""
-        } ${getConditionalSmoothTransition(disableTransitions)}`}
+        }`}
       >
         {section}
       </div>
@@ -92,6 +109,32 @@ const Navbar = () => {
     return retVal;
   };
 
+  const renderExtraFeatures = () => {
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="flex justify-between flex-wrap gap-4 gap-y-2">
+          <Radio
+            availableOptions={languages}
+            selectedOption={selectedLanguage}
+            setSelectedOption={setSelectedLanguage}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <SingleCheckbox
+            state={disableTransitions}
+            setState={setDisableTransitions}
+            label="Disable transitions"
+          />
+          <SingleCheckbox
+            state={disableAnimations}
+            setState={setDisableAnimations}
+            label="Disable animations"
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="whitespace-nowrap">
       <div
@@ -105,13 +148,24 @@ const Navbar = () => {
           className={`${maxWidth} px-4 py-2 flex justify-between items-center mx-auto relative`}
         >
           <div>
-            <img
-              src={"/assets/logo-transparent.png"}
-              alt=""
-              width={50}
-              height={50}
-              className="hover:cursor-pointer"
-            />
+            {window.location.pathname === "/" ? (
+              <img
+                onClick={() => navigateToSection("Home")}
+                src={"/assets/logo-transparent.png"}
+                alt=""
+                width={50}
+                height={50}
+                className="hover:cursor-pointer"
+              />
+            ) : (
+              <div
+                className={`rounded-full w-[50px] h-[50px] border-2 ${
+                  selectedTheme === "Dark" ? "border-white" : "border-black"
+                } flex justify-center items-center ${onHoverStyle} hover:border-purple`}
+              >
+                <IoArrowBack onClick={() => window.history.back()} size={25} />
+              </div>
+            )}
           </div>
           {!isTablet && (
             <div
@@ -123,20 +177,27 @@ const Navbar = () => {
             </div>
           )}
           {!isTablet ? (
-            // <FaMoon size={35} className="text-purple hover:cursor-pointer" />
-            <Toggle
-              firstOption={{ label: <FaMoon />, value: "Dark" }}
-              secondOption={{ label: <FiSun />, value: "Light" }}
-              selectedOption={selectedTheme}
-              setSelectedOption={setSelectedTheme}
-            />
+            <div className="flex gap-2 items-center">
+              <Toggle
+                firstOption={{ label: <FaMoon />, value: "Dark" }}
+                secondOption={{ label: <FiSun />, value: "Light" }}
+                selectedOption={selectedTheme}
+                setSelectedOption={setSelectedTheme}
+              />
+              <Dropdown
+                trigger={
+                  <BsThreeDotsVertical size={35} className={onHoverStyle} />
+                }
+                content={renderExtraFeatures()}
+                position="right-2 top-12"
+                dropdownHeight={190}
+              />
+            </div>
           ) : (
             <RxHamburgerMenu
               onClick={() => setShowNavbar(!showNavbar)}
               size={35}
-              className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                disableTransitions
-              )}`}
+              className={onHoverStyle}
             />
           )}
         </div>
@@ -161,9 +222,7 @@ const Navbar = () => {
             <IoClose
               onClick={() => setShowNavbar(false)}
               size={35}
-              className={`hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-                disableTransitions
-              )}`}
+              className={onHoverStyle}
             />
           </div>
           <div
@@ -176,27 +235,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-4">
-            <div className="flex justify-between flex-wrap gap-4 gap-y-2">
-              <Radio
-                availableOptions={languages}
-                selectedOption={selectedLanguage}
-                setSelectedOption={setSelectedLanguage}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <SingleCheckbox
-                state={disableTransitions}
-                setState={setDisableTransitions}
-                label="Disable transitions"
-              />
-              <SingleCheckbox
-                state={disableAnimations}
-                setState={setDisableAnimations}
-                label="Disable animations"
-              />
-            </div>
-          </div>
+          {renderExtraFeatures()}
         </div>
       </div>
     </div>

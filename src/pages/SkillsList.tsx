@@ -113,7 +113,7 @@ const SkillsList = () => {
   return (
     <div className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h1>All Skills</h1>
+        <h2>All Skills</h2>
       </div>
       <div className={boxContainerClassnames}>
         <Box

@@ -13,10 +13,13 @@ import ProjectDescription from "./ui/ProjectDescription";
 
 export interface ProjectsInterface {
   img: string;
-  desc: string;
+  desc: string | React.ReactNode;
   techUsed: string;
   websiteLink?: string;
   learnMoreLink?: string;
+  linkedInLink?: string;
+  isDescLong?: boolean;
+  extraImgs?: string[];
 }
 
 interface BoxInfoInterface {
@@ -75,12 +78,13 @@ const Projects = () => {
       learnMoreLink: "/padayon",
       ref: pContainerRef,
       height: pContainerHeight,
+      isDescLong: true,
     },
     {
       title: "FM-AM Synthesizer",
       img: "/assets/thumbnail-synthesizer.png",
       desc: "Designed an FM-AM Synthesizer with mobile (portrait & landscape) responsiveness.",
-      techUsed: "React TypeScript, Node.js, Express.js, Firebase, Bootstrap",
+      techUsed: "React TypeScript, Tailwind CSS",
       websiteLink: "https://noodlesushi.github.io/FM-AM-Synth/",
       ref: fasContainerRef,
       height: fasContainerHeight,
@@ -90,13 +94,14 @@ const Projects = () => {
   const renderProjectBox = (
     title: string,
     img: string,
-    desc: string,
+    desc: string | React.ReactNode,
     techUsed: string,
     websiteLink: string | undefined,
     learnMoreLink: string | undefined,
     index: number,
     ref: MutableRefObject<HTMLDivElement | null>,
-    height: number
+    height: number,
+    isDescLong?: boolean
   ) => {
     return (
       <Box
@@ -114,6 +119,7 @@ const Projects = () => {
             websiteLink={websiteLink}
             learnMoreLink={learnMoreLink}
             carousel={projectsInfo.map(({ img }) => img)}
+            isDescLong={isDescLong}
           />
         </div>
       </Box>
@@ -130,7 +136,7 @@ const Projects = () => {
   return (
     <div ref={projectsRef} id="projects" className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h1>Projects</h1>
+        <h2>Projects</h2>
       </div>
       <div className={boxContainerClassnames}>
         {projectsInfo.map(
@@ -144,6 +150,7 @@ const Projects = () => {
               learnMoreLink,
               ref,
               height,
+              isDescLong,
             }: ProjectsWithTitleInterface,
             index
           ) =>
@@ -156,7 +163,8 @@ const Projects = () => {
               learnMoreLink,
               index,
               ref,
-              height
+              height,
+              isDescLong
             )
         )}
       </div>

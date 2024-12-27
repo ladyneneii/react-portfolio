@@ -55,7 +55,7 @@ const Skills = () => {
   return (
     <div ref={skillsRef} id="skills" className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h1>Skills</h1>
+        <h2>Skills</h2>
       </div>
       <div className={boxContainerClassnames}>
         <Box

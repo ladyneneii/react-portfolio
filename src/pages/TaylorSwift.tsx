@@ -3,6 +3,7 @@ import {
   EXTRA_HEIGHT,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
+  videosContainerClass,
 } from "@/shared";
 import Button from "../components/ui/Button";
 import Box from "../components/ui/Box";
@@ -19,8 +20,10 @@ import VideoDescription, {
   VideoDescriptionInterface,
 } from "@/components/ui/VideoDescription";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { renderLongDesc } from "@/components/functions/renderLongDesc";
+import ProjectDescription from "@/components/ui/ProjectDescription";
 
-interface FeaturesList {
+export interface FeaturesList {
   title: string;
   height: number;
   ref: MutableRefObject<HTMLDivElement | null>;
@@ -47,24 +50,40 @@ const TaylorSwift = () => {
   const [gContainerHeight, setGContainerHeight] = useState(0);
   useHeightResize({ ref: gContainerRef, setHeight: setGContainerHeight });
 
+  const sContainerRef = useRef<HTMLDivElement | null>(null);
+  const [sContainerHeight, setSContainerHeight] = useState(0);
+  useHeightResize({ ref: sContainerRef, setHeight: setSContainerHeight });
+
+  const cContainerRef = useRef<HTMLDivElement | null>(null);
+  const [cContainerHeight, setCContainerHeight] = useState(0);
+  useHeightResize({ ref: cContainerRef, setHeight: setCContainerHeight });
+
+  const mContainerRef = useRef<HTMLDivElement | null>(null);
+  const [mContainerHeight, setMContainerHeight] = useState(0);
+  useHeightResize({ ref: mContainerRef, setHeight: setMContainerHeight });
+
   const responsiveNavbarInfo: VideoDescriptionInterface[] = [
     {
       src: "/assets/taymother/ts-navbar.mp4",
       altLink:
         "https://drive.google.com/file/d/18i9RS0hljEajKVjGc11Ih8y3oJOwfcxL/view?usp=sharing",
       desc: "Desktop & Tablet Screens",
+      thumbnail: "/assets/taymother/thumbnails/ts-navbar-thumbnail.png",
     },
     {
       src: "/assets/taymother/mobile/ts-navbar-mobile-landscape.mp4",
       altLink:
         "https://drive.google.com/file/d/1ehjGuBVcUmCcV9NA5k9qk6C-fl7zTCyZ/view?usp=sharing",
       desc: "Phone Screens (Landscape)",
+      thumbnail:
+        "/assets/taymother/thumbnails/ts-navbar-mobile-landscape-thumbnail.PNG",
     },
     {
       src: "/assets/taymother/mobile/ts-navbar-mobile.mp4",
       altLink:
         "https://drive.google.com/file/d/1BAQiI4Y2ZmpeHSwz_8iKnimPBCB71NYL/view?usp=sharing",
       desc: "Phone Screens (Portrait)",
+      thumbnail: "/assets/taymother/thumbnails/ts-navbar-mobile-thumbnail.PNG",
       isPortrait: true,
     },
   ];
@@ -75,18 +94,23 @@ const TaylorSwift = () => {
       altLink:
         "https://drive.google.com/file/d/1ZMEy53dvNd82uJuSQVD1huSig_XgMHOj/view?usp=sharing",
       desc: "Desktop & Tablet Screens",
+      thumbnail: "/assets/taymother/thumbnails/ts-change-theme-thumbnail.png",
     },
     {
       src: "/assets/taymother/mobile/ts-change-theme-mobile-landscape.mp4",
       altLink:
         "https://drive.google.com/file/d/1MjzO2fsjgkY-rNzsBbobaQnRh2pMNrI8/view?usp=sharing",
       desc: "Phone Screens (Landscape)",
+      thumbnail:
+        "/assets/taymother/thumbnails/ts-change-theme-mobile-landscape-thumbnail.PNG",
     },
     {
       src: "/assets/taymother/mobile/ts-change-theme-mobile.mp4",
       altLink:
         "https://drive.google.com/file/d/1Pvm6jeZMJjuKglmF4iZrK37xNgNEhd_M/view?usp=sharing",
       desc: "Phone Screens (Portrait)",
+      thumbnail:
+        "/assets/taymother/thumbnails/ts-change-theme-mobile-thumbnail.PNG",
       isPortrait: true,
     },
   ];
@@ -97,18 +121,109 @@ const TaylorSwift = () => {
       altLink:
         "https://drive.google.com/file/d/19FqVDIgC-AuJqM4ldOWBYxqzA8fBvMxq/view?usp=sharing",
       desc: "Desktop & Tablet Screens",
+      thumbnail: "/assets/taymother/thumbnails/ts-grid-thumbnail.png",
     },
     {
       src: "/assets/taymother/mobile/ts-grid-mobile-landscape.mp4",
       altLink:
         "https://drive.google.com/file/d/13fO8dliczui7tL3YXetXubTcdORouhn9/view?usp=sharing",
       desc: "Phone Screens (Landscape)",
+      thumbnail:
+        "/assets/taymother/thumbnails/ts-grid-mobile-landscape-thumbnail.PNG",
     },
     {
       src: "/assets/taymother/mobile/ts-grid-mobile.mp4",
       altLink:
         "https://drive.google.com/file/d/10CTQgrtY-JWlwKCfH4mBOhlPemdaUrcy/view?usp=sharing",
       desc: "Phone Screens (Portrait)",
+      thumbnail: "/assets/taymother/thumbnails/ts-grid-mobile-thumbnail.PNG",
+      isPortrait: true,
+    },
+  ];
+
+  const searchInfo: VideoDescriptionInterface[] = [
+    {
+      src: "/assets/taymother/ts-search.mp4",
+      altLink:
+        "https://drive.google.com/file/d/1PP2oeh_S0hAxJlHjzQfW9JzXae2LDzwM/view?usp=sharing",
+      desc: renderLongDesc(
+        "Desktop & Tablet Screens",
+        "The up and down arrow keys can also be used in navigating through the search results, while the Enter key can be used for selecting a song.",
+        true
+      ),
+      thumbnail: "/assets/taymother/thumbnails/ts-search-thumbnail.png",
+    },
+    {
+      src: "/assets/taymother/mobile/ts-search-mobile-landscape.mp4",
+      altLink:
+        "https://drive.google.com/file/d/1Kk38BALT8KhejrME05D8KzrDqdWHEjWh/view?usp=sharing",
+      desc: "Phone Screens (Landscape)",
+      thumbnail:
+        "/assets/taymother/thumbnails/ts-search-mobile-landscape-thumbnail.PNG",
+    },
+    {
+      src: "/assets/taymother/mobile/ts-search-mobile.mp4",
+      altLink:
+        "https://drive.google.com/file/d/1BAQiI4Y2ZmpeHSwz_8iKnimPBCB71NYL/view?usp=sharing",
+      desc: "Phone Screens (Portrait)",
+      thumbnail: "/assets/taymother/thumbnails/ts-search-mobile-thumbnail.PNG",
+      isPortrait: true,
+    },
+  ];
+
+  const carouselInfo: VideoDescriptionInterface[] = [
+    {
+      src: "/assets/taymother/ts-carousel.mp4",
+      altLink:
+        "https://drive.google.com/file/d/1hbT9GTCUfHIZ19nbiU2ey5oGAPvesIsU/view?usp=sharing",
+      desc: "Desktop & Tablet Screens",
+      thumbnail: "/assets/taymother/thumbnails/ts-carousel-thumbnail.png",
+    },
+    {
+      src: "/assets/taymother/mobile/ts-carousel-mobile-landscape.mp4",
+      altLink:
+        "https://drive.google.com/file/d/1BZ6BhdF1RqDVqO4r7xWIADDoutyAUW7p/view?usp=sharing",
+      desc: "Phone Screens (Landscape)",
+      thumbnail:
+        "/assets/taymother/thumbnails/ts-carousel-mobile-landscape-thumbnail.PNG",
+    },
+    {
+      src: "/assets/taymother/mobile/ts-carousel-mobile.mp4",
+      altLink:
+        "https://drive.google.com/file/d/1fAiNs0GTbVucxw8FhSZdcEYrtNQbwC15/view?usp=sharing",
+      desc: "Phone Screens (Portrait)",
+      thumbnail:
+        "/assets/taymother/thumbnails/ts-carousel-mobile-thumbnail.PNG",
+      isPortrait: true,
+    },
+  ];
+
+  const modalInfo: VideoDescriptionInterface[] = [
+    {
+      src: "/assets/taymother/ts-modal.mp4",
+      altLink:
+        "https://drive.google.com/file/d/1hP1l9gYo04x64Oxpd0ydiXC96FwHZ3x5/view?usp=sharing",
+      desc: renderLongDesc(
+        "Desktop & Tablet Screens",
+        "The entire photo is always displayed no matter the screen size.",
+        true
+      ),
+      thumbnail: "/assets/taymother/thumbnails/ts-modal-thumbnail.png",
+    },
+    {
+      src: "/assets/taymother/mobile/ts-modal-mobile-landscape.mp4",
+      altLink:
+        "https://drive.google.com/file/d/173ui6F6BYkSNbGSjBJBtnFl91qdFMs7F/view?usp=sharing",
+      desc: "Phone Screens (Landscape)",
+      thumbnail:
+        "/assets/taymother/thumbnails/ts-modal-mobile-landscape-thumbnail.PNG",
+    },
+    {
+      src: "/assets/taymother/mobile/ts-modal-mobile.mp4",
+      altLink:
+        "https://drive.google.com/file/d/1oWlyqpZBFd5iJ0ncTE2IgsyhSXjP256E/view?usp=sharing",
+      desc: "Phone Screens (Portrait)",
+      thumbnail: "/assets/taymother/thumbnails/ts-modal-mobile-thumbnail.PNG",
       isPortrait: true,
     },
   ];
@@ -121,7 +236,9 @@ const TaylorSwift = () => {
     return (
       <div
         ref={ref}
-        className={`flex gap-8 items-center ${isTablet2 ? "flex-col" : ""}`}
+        className={`${videosContainerClass} items-center ${
+          isTablet2 ? "flex-col" : ""
+        }`}
       >
         <div
           className={`flex flex-col gap-8 justify-center ${
@@ -130,19 +247,20 @@ const TaylorSwift = () => {
         >
           {featureInfo
             .slice(0, -1)
-            .map(({ src, altLink, desc, isPortrait }) => (
+            .map(({ src, altLink, desc, thumbnail, isPortrait }) => (
               <VideoDescription
                 key={src}
                 src={src}
                 altLink={altLink}
                 desc={desc}
+                thumbnail={thumbnail}
                 isPortrait={isPortrait}
                 hasDiffScreenSizes={true}
               />
             ))}
         </div>
         <div
-          className={`${isTablet2 ? "w-full" : "w-1/2"} ${
+          className={`${isTablet2 ? "w-1/2" : "w-1/4"} ${
             index % 2 === 1 || isTablet2 ? "order-1" : "order-2"
           }`}
         >
@@ -150,6 +268,7 @@ const TaylorSwift = () => {
             src={featureInfo[2].src}
             altLink={featureInfo[2].altLink}
             desc={featureInfo[2].desc}
+            thumbnail={featureInfo[2].thumbnail}
             isPortrait={true}
             hasDiffScreenSizes={true}
           />
@@ -177,6 +296,24 @@ const TaylorSwift = () => {
       ref: gContainerRef,
       featureInfo: gridInfo,
     },
+    {
+      title: "Songs Search",
+      height: sContainerHeight,
+      ref: sContainerRef,
+      featureInfo: searchInfo,
+    },
+    {
+      title: "Carousel",
+      height: cContainerHeight,
+      ref: cContainerRef,
+      featureInfo: carouselInfo,
+    },
+    {
+      title: "Responsive Modal",
+      height: mContainerHeight,
+      ref: mContainerRef,
+      featureInfo: modalInfo,
+    },
   ];
 
   const renderTsBoxes = () => {
@@ -192,11 +329,30 @@ const TaylorSwift = () => {
     ));
   };
 
+  const img = "/assets/thumbnail-taylor-swift.png";
+
   return (
     <div className={sectionPaddingClassnames}>
-      <div className={sectionTitleContainerClassnames}>
-        <h1>Taylor Swift's Discography</h1>
-      </div>
+      <ProjectDescription
+        img={img}
+        desc="I created this website to understand flexbox, grid, and positioning CSS properties better, hence I used SCSS instead of Tailwind CSS. I believe that knowing how to code these properties from scratch instead of using predefined classes allows you to truly understand how each property-value pair works together. The only reason I used SCSS instead of the regular CSS is so I could easily nest class names, which made it all the way more convenient for me and saved me a lot of time as I did not have to keep repeating class names. I finished this website in September of 2024."
+        techUsed="React TypeScript, Cloudflare, SCSS"
+        index={0}
+        websiteLink="https://taymother.pages.dev/"
+        linkedInLink="https://www.linkedin.com/feed/update/urn:li:activity:7228041664273997826/"
+        carousel={[img]}
+        upperContent={
+          <div className={`${sectionTitleContainerClassnames} mb-8`}>
+            <h2>Taylor Swift's Discography</h2>
+          </div>
+        }
+        lowerContent={
+          <div className="text-center mt-16">
+            <h2>Features</h2>
+          </div>
+        }
+        isDescLong={true}
+      />
       <div className={boxContainerClassnames}>{renderTsBoxes()}</div>
       <div className="flex justify-center">
         <Button onClick={() => window.history.back()} content="Go back" />

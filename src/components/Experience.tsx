@@ -34,6 +34,7 @@ const Experience = () => {
       techUsed: "Next.js, TypeScript, Tailwind CSS, Bitbucket, Jira",
       // websiteLink: "https://filpassv2.netlify.app/ia/drm/applications",
       learnMoreLink: "/filpass-v2-table",
+      isDescLong: true
     },
     {
       img: "/assets/thumbnail-verifierTemplate-transparent.png",
@@ -59,7 +60,7 @@ const Experience = () => {
       className={sectionPaddingClassnames}
     >
       <div className={sectionTitleContainerClassnames}>
-        <h1>Experience</h1>
+        <h2>Experience</h2>
       </div>
       <div className={boxContainerClassnames}>
         <Box
@@ -82,6 +83,7 @@ const Experience = () => {
                   techUsed,
                   websiteLink,
                   learnMoreLink,
+                  isDescLong,
                 }: ProjectsInterface,
                 index
               ) => (
@@ -94,6 +96,7 @@ const Experience = () => {
                   websiteLink={websiteLink}
                   learnMoreLink={learnMoreLink}
                   carousel={experienceInfo.map(({ img }) => img)}
+                  isDescLong={isDescLong}
                 />
               )
             )}
