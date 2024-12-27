@@ -35,6 +35,7 @@ const ProjectDescription = ({
   const renderImg = (idx: number, img: string) => {
     return (
       <img
+        key={img}
         onClick={() => {
           setShowCarousel(true);
           setImgIdx(idx);

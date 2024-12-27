@@ -62,7 +62,7 @@ const Navbar = () => {
     // this should come BEFORE navigate() so currentUrl gets the url of the non-root page
     const currentUrl = window.location.href;
     console.log(currentUrl);
-    const delay = currentUrl.includes("/#") ? 100 : 1000;
+    const delay = currentUrl.includes("/#") ? 100 : 800;
 
     navigate(`/${sectionHash}`); // Navigate to root with hash
     setSelectedSection(section);

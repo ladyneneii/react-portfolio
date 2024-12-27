@@ -22,6 +22,7 @@ import VideoDescription, {
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { FeaturesList } from "./TaylorSwift";
 import { renderLongDesc } from "@/components/functions/renderLongDesc";
+import ProjectDescription from "@/components/ui/ProjectDescription";
 
 const Padayon = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
@@ -305,11 +306,32 @@ const Padayon = () => {
     ));
   };
 
+  const extraImgs = [
+    "/assets/thumbnail-padayon.png",
+    "/assets/padayon/thumbnails/p-about-thumbnail.png",
+  ];
+
   return (
     <div className={sectionPaddingClassnames}>
-      <div className={sectionTitleContainerClassnames}>
-        <h2>Padayon;</h2>
-      </div>
+      <ProjectDescription
+        img=""
+        desc="This was a project my partner and I built for my Software Development class last December 2023 and the first full-stack website I created with React TypeScript. I am particularly proud of this as I was able to pull its features off despite being new to React at the time. I had just been watching tutorials and emulating them on the website. I created the entire frontend and backend, including the database design, while my partner touched on some of the designs and created the entire documentation. I tried to deploy the website but realized it was a lot more complicated than I thought, so I tried recreating the website with better UI using MERN (MongoDB, Express.js, React TS, and Node). While I was able to successfully deploy it thanks to the tutorials, it was far from finished, and I do not have any plans on finishing it yet as I realized how big the project is for one person."
+        techUsed="React TypeScript, Node.js, Express.js, Firebase, Bootstrap"
+        index={0}
+        carousel={extraImgs}
+        upperContent={
+          <div className={`${sectionTitleContainerClassnames} mb-8`}>
+            <h2>Padayon;</h2>
+          </div>
+        }
+        lowerContent={
+          <div className="text-center mt-16">
+            <h2>Features</h2>
+          </div>
+        }
+        isDescLong={true}
+        extraImgs={extraImgs}
+      />
       <div className={boxContainerClassnames}>{renderTBoxes()}</div>
       <div className="flex justify-center">
         <Button onClick={() => window.history.back()} content="Go back" />

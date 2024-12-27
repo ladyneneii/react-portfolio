@@ -22,6 +22,7 @@ import VideoDescription, {
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { FeaturesList } from "./TaylorSwift";
 import { renderLongDesc } from "@/components/functions/renderLongDesc";
+import ProjectDescription from "@/components/ui/ProjectDescription";
 
 const Calculators = () => {
   const { setSelectedSection } = useContext(UserPrefContext);
@@ -184,11 +185,30 @@ const Calculators = () => {
     ));
   };
 
+  const img = "/assets/collage-calculators.png";
+
   return (
     <div className={sectionPaddingClassnames}>
-      <div className={sectionTitleContainerClassnames}>
-        <h2>Calculators</h2>
-      </div>
+      <ProjectDescription
+        img={img}
+        desc="This was a website I created for my Operating Systems and Information, Assurance, & Security Classes. While this website is not frontend nor backend-heavy, it is full of algorithms, which I was able to code from scratch. Our professor showed us the visualization of each algorithm, and we had to translate it into code ourselves. We were not required to create a website, but I did anyway and used Flask to do it since I was already coding the algorithms in Python. I also did not use any frameworks for the frontend, only pure and vanilla JavaScript, which allowed me to really understand the language at its core."
+        techUsed="Python, Flask, Vanilla Javascript"
+        index={0}
+        carousel={[img]}
+        websiteLink="https://calculators-flask.onrender.com/"
+        linkedInLink="https://www.linkedin.com/feed/update/urn:li:activity:7145080070557040640/"
+        upperContent={
+          <div className={`${sectionTitleContainerClassnames} mb-8`}>
+            <h2>Calculators</h2>
+          </div>
+        }
+        lowerContent={
+          <div className="text-center mt-16">
+            <h2>Features</h2>
+          </div>
+        }
+        isDescLong={true}
+      />
       <div className={boxContainerClassnames}>{renderCBoxes()}</div>
       <div className="flex justify-center">
         <Button onClick={() => window.history.back()} content="Go back" />
