@@ -14,6 +14,7 @@ import Table from "./pages/Table";
 import NotFound from "./pages/NotFound";
 import Padayon from "./pages/Padayon";
 import Calculators from "./pages/Calculators";
+import Thesis from "./components/Thesis";
 
 const App = () => {
   const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
@@ -48,6 +49,7 @@ const App = () => {
                   <Skills />
                   <Experience />
                   <Projects />
+                  <Thesis />
                 </div>
               </div>
             }

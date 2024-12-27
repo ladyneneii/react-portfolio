@@ -13,7 +13,7 @@ import ProjectDescription from "./ui/ProjectDescription";
 
 export interface ProjectsInterface {
   img: string;
-  desc: string;
+  desc: string | React.ReactNode;
   techUsed: string;
   websiteLink?: string;
   learnMoreLink?: string;
@@ -78,6 +78,7 @@ const Projects = () => {
       learnMoreLink: "/padayon",
       ref: pContainerRef,
       height: pContainerHeight,
+      isDescLong: true,
     },
     {
       title: "FM-AM Synthesizer",
@@ -93,13 +94,14 @@ const Projects = () => {
   const renderProjectBox = (
     title: string,
     img: string,
-    desc: string,
+    desc: string | React.ReactNode,
     techUsed: string,
     websiteLink: string | undefined,
     learnMoreLink: string | undefined,
     index: number,
     ref: MutableRefObject<HTMLDivElement | null>,
-    height: number
+    height: number,
+    isDescLong?: boolean
   ) => {
     return (
       <Box
@@ -117,6 +119,7 @@ const Projects = () => {
             websiteLink={websiteLink}
             learnMoreLink={learnMoreLink}
             carousel={projectsInfo.map(({ img }) => img)}
+            isDescLong={isDescLong}
           />
         </div>
       </Box>
@@ -147,6 +150,7 @@ const Projects = () => {
               learnMoreLink,
               ref,
               height,
+              isDescLong,
             }: ProjectsWithTitleInterface,
             index
           ) =>
@@ -159,7 +163,8 @@ const Projects = () => {
               learnMoreLink,
               index,
               ref,
-              height
+              height,
+              isDescLong
             )
         )}
       </div>

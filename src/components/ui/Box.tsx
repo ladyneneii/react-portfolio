@@ -11,6 +11,7 @@ type Props = {
   childrenHeight?: number;
   companyName?: string;
   startAndEndDates?: string;
+  isUnfolded?: boolean;
 };
 
 const Box = ({
@@ -20,10 +21,11 @@ const Box = ({
   childrenHeight,
   companyName,
   startAndEndDates,
+  isUnfolded = true,
 }: Props) => {
   const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
   const isPhone = useMediaQuery("(max-width: 660px)");
-  const [unfold, setUnfold] = useState(true);
+  const [unfold, setUnfold] = useState<boolean>(isUnfolded);
 
   const foldCondition = !isFoldable || (isFoldable && unfold);
   const headerRef = useRef<HTMLDivElement | null>(null);

@@ -191,7 +191,7 @@ const Calculators = () => {
     <div className={sectionPaddingClassnames}>
       <ProjectDescription
         img={img}
-        desc="This was a website I created for my Operating Systems and Information, Assurance, & Security Classes. While this website is not frontend nor backend-heavy, it is full of algorithms, which I was able to code from scratch. Our professor showed us the visualization of each algorithm, and we had to translate it into code ourselves. We were not required to create a website, but I did anyway and used Flask to do it since I was already coding the algorithms in Python. I also did not use any frameworks for the frontend, only pure and vanilla JavaScript, which allowed me to really understand the language at its core."
+        desc="This was a website I created for my Operating Systems and Information, Assurance, & Security Classes. While this website is not frontend nor backend-heavy, it is full of algorithms, which I was able to code from scratch. Our professor showed us the visualization of each algorithm, and we had to translate it into code ourselves. We were not required to create a website, but I did anyway using Flask since I was already coding the algorithms in Python. I also did not use any frameworks for the frontend, only pure and vanilla JavaScript, which allowed me to really understand the language at its core."
         techUsed="Python, Flask, Vanilla Javascript"
         index={0}
         carousel={[img]}

@@ -58,9 +58,9 @@ const ProjectDescription = ({
             }`}
           >
             <div
-              className={`${isTablet ? "w-full" : "w-1/2"} ${
-                index % 2 === 0 || isTablet ? "order-1" : "order-2"
-              }`}
+              className={`${
+                isTablet ? "w-full flex justify-center" : "w-1/2"
+              } ${index % 2 === 0 || isTablet ? "order-1" : "order-2"}`}
             >
               {img && renderImg(index, img)}
               <div className="flex flex-col gap-4">
@@ -75,7 +75,11 @@ const ProjectDescription = ({
                 index % 2 === 1 || isTablet ? "order-1" : "order-2"
               }`}
             >
-              <h6 className="font-extralight">{desc}</h6>
+              {typeof desc === "string" ? (
+                <h6 className="font-extralight">{desc}</h6>
+              ) : (
+                desc
+              )}
               <div
                 className={`flex ${
                   !isTablet || isPhone
@@ -83,10 +87,12 @@ const ProjectDescription = ({
                     : "justify-between items-center"
                 } gap-4`}
               >
-                <div className="flex flex-col text-purple">
-                  <p>Technologies used:</p>
-                  <p className="font-extralight italic">{techUsed}</p>
-                </div>
+                {techUsed && (
+                  <div className="flex flex-col text-purple">
+                    <p>Technologies used:</p>
+                    <p className="font-extralight italic">{techUsed}</p>
+                  </div>
+                )}
                 {(websiteLink || learnMoreLink || linkedInLink) && (
                   <div
                     className={`flex ${
