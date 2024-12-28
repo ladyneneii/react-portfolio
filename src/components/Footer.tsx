@@ -8,9 +8,10 @@ import {
 import { renderSocials } from "./functions/renderSocials";
 import { useContext } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
+import { getDownloadCVLabel, getViewCVLabel } from "@/data/getHeroData";
 
 const Footer = () => {
-  const { disableTransitions } = useContext(UserPrefContext);
+  const { disableTransitions, selectedLanguage } = useContext(UserPrefContext);
   const currentYear = new Date().getFullYear();
 
   const colItemsCenter = "flex flex-col items-center";
@@ -34,7 +35,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className={getHoverStyles(disableTransitions)}
               >
-                View CV
+                {getViewCVLabel(selectedLanguage)}
               </a>
               <p>|</p>
               <a
@@ -42,7 +43,7 @@ const Footer = () => {
                 download={CVFilename}
                 className={getHoverStyles(disableTransitions)}
               >
-                Download CV
+                {getDownloadCVLabel(selectedLanguage)}
               </a>
             </div>
           </div>

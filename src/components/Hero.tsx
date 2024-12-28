@@ -1,5 +1,6 @@
 import Button from "./ui/Button";
 import {
+  camelToTitleCase,
   CVFilename,
   CVFilepath,
   languages,
@@ -18,6 +19,14 @@ import SingleCheckbox from "./ui/SingleCheckbox";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import { renderSocials } from "./functions/renderSocials";
 import { motion } from "framer-motion";
+import {
+  getAnimationsLabel,
+  getDownloadCVLabel,
+  getIntro,
+  getTransitionsLabel,
+  getValueProp,
+  getViewCVLabel,
+} from "@/data/getHeroData";
 
 const Hero = () => {
   const {
@@ -49,35 +58,40 @@ const Hero = () => {
           isTablet2 ? "items-center text-center" : ""
         }`}
       >
-        <h4 className="font-extralight">
-          I am <span className="font-normal">Ernest Curativo</span>—a{" "}
-          <span className="text-purple">software engineer</span> in{" "}
-          <span className="whitespace-nowrap">Cebu, Philippines.</span>
-        </h4>
+        {getIntro(selectedLanguage)}
         <div className={`flex gap-2 ${isPhone ? "flex-col items-center" : ""}`}>
           <Button
             onClick={() => redirectToNewPage(viewCVLink)}
-            content="View CV"
+            content={getViewCVLabel(selectedLanguage)}
           />
           <a href={CVFilepath} download={CVFilename}>
-            <Button onClick={() => null} content="Download CV" />
+            <Button onClick={() => null} content={getDownloadCVLabel(selectedLanguage)} />
           </a>
         </div>
       </div>
     );
   };
 
+  const getSectionName = () => {
+    let name = "home"
+    if (selectedLanguage === "Filipino") {
+      name = "pahina"
+    }
+
+    return name
+  }
+
   const homeRef = useRef<HTMLDivElement | null>(null);
   useHighlightSection({
     ref: homeRef,
     setSection: setSelectedSection,
-    section: "Home",
+    section: camelToTitleCase(getSectionName()),
   });
 
   const Wrapper = disableAnimations ? "div" : motion.div;
 
   return (
-    <div id="home" className="border-[0.5px] border-black">
+    <div id={getSectionName()} className="border-[0.5px] border-black">
       <div
         ref={homeRef}
         className={`relative ${marginTop} ${minWidth}`}
@@ -113,18 +127,7 @@ const Hero = () => {
               isTablet2 ? "text-center" : "max-w-[800px]"
             }`}
           >
-            <h1>
-              Transforming your ideas into{" "}
-              <span className="text-purple font-extralight italic">
-                elegant
-              </span>{" "}
-              <span className="whitespace-nowrap">code and</span>{" "}
-              <span className="text-purple font-extralight italic">
-                meaningful
-              </span>{" "}
-              creations
-            </h1>
-
+            {getValueProp(selectedLanguage)}
             {!isTablet && renderIntroduction()}
           </Wrapper>
 
@@ -168,12 +171,12 @@ const Hero = () => {
                 <SingleCheckbox
                   state={disableTransitions}
                   setState={setDisableTransitions}
-                  label="Disable transitions"
+                  label={getTransitionsLabel(selectedLanguage)}
                 />
                 <SingleCheckbox
                   state={disableAnimations}
                   setState={setDisableAnimations}
-                  label="Disable animations"
+                  label={getAnimationsLabel(selectedLanguage)}
                 />
                 <Select
                   selectedOption={selectedLanguage}

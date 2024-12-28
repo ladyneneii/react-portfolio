@@ -31,7 +31,6 @@ body {
   font-family: "Poppins", serif;
 }
 
-
 @layer utilities {
   .shadow-custom {
     box-shadow: var(--shadow);

@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Dropdown from "./ui/Dropdown";
+import { getAnimationsLabel, getTransitionsLabel } from "@/data/getHeroData";
 
 const Navbar = () => {
   // LANGUAGE & DISABLE TRANSITIONS
@@ -37,14 +38,31 @@ const Navbar = () => {
     setSelectedSection,
   } = useContext(UserPrefContext);
 
-  const sections: SectionsType[] = [
-    "Home",
-    "Skills",
-    "Experience",
-    "Projects",
-    "Thesis",
-    "Testimonials",
-  ];
+  const getSections = () => {
+    let sections: SectionsType[] = [
+      "Home",
+      "Skills",
+      "Experience",
+      "Projects",
+      "Thesis",
+      "Testimonials",
+    ];
+
+    if (selectedLanguage === "Filipino") {
+      sections = [
+        "Pahina",
+        "Kasanayan",
+        "Karera",
+        "Mga Proyekto",
+        "Tesis",
+        "Mga Patotoo",
+      ];
+    }
+
+    return sections;
+  };
+
+  const sections: SectionsType[] = getSections();
 
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");
@@ -124,12 +142,12 @@ const Navbar = () => {
           <SingleCheckbox
             state={disableTransitions}
             setState={setDisableTransitions}
-            label="Disable transitions"
+            label={getTransitionsLabel(selectedLanguage)}
           />
           <SingleCheckbox
             state={disableAnimations}
             setState={setDisableAnimations}
-            label="Disable animations"
+            label={getAnimationsLabel(selectedLanguage)}
           />
         </div>
       </div>

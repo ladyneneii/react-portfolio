@@ -1,4 +1,4 @@
-import { AvailableLanguagesType } from "./types";
+import { AvailableLanguagesType, SectionsType } from "./types";
 
 export const maxWidth = "max-w-[1280px]";
 export const minWidth = "min-w-[300px]";
@@ -16,7 +16,7 @@ export const getConditionalSmoothTransition = (disableTransitions: boolean) => {
 export const languages: AvailableLanguagesType[] = [
   "English",
   "Filipino",
-  "Bisaya",
+  // "Bisaya",
 ];
 
 export const getHoverStyles = (disableTransitions: boolean) => {
@@ -43,4 +43,11 @@ export const CVFilepath = `/src/data/${CVFilename}`;
 
 export const redirectToNewPage = (href: string) => {
   window.open(href, "_blank", "noopener,noreferrer");
-}
+};
+
+export const camelToTitleCase = (str: string): SectionsType => {
+  return str
+    .replace(/([A-Z])/g, " $1")
+    .replace(/^./, (match) => match.toUpperCase())
+    .trim() as SectionsType;
+};
