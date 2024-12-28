@@ -21,6 +21,7 @@ import { motion } from "framer-motion";
 
 interface TestimonialListInterface {
   name: string;
+  detail: string;
   img: string;
   testimonial: string;
   ref: MutableRefObject<HTMLDivElement | null>;
@@ -51,14 +52,16 @@ const Testimonials = () => {
     {
       name: "Miguel Dailisan",
       img: "/assets/testimonials/testimonials-miguel.jpg",
+      detail: "Worked together on FilPass V2.0",
       testimonial:
-        "Ernest is an excellent colleague. Working with him during our time at Edified alleviated a lot of the pressure off me as he is not only a quick learner, he is also very easy to work with. Watching him, I can also say that he is extremely adaptable, being able to adjust and work on several projects at a time while still giving more than what is being asked. He has proven himself to be a truly skillful developer and a great coworker.",
+        "Ernest is an excellent colleague. Working with him during our time at Edufied alleviated a lot of the pressure off me as he is not only a quick learner, he is also very easy to work with. Watching him, I can also say that he is extremely adaptable, being able to adjust and work on several projects at a time while still giving more than what is being asked. He has proven himself to be a truly skillful developer and a great coworker.",
       ref: mdContainerRef,
       height: mdContainerHeight,
     },
     {
       name: "Neil Sagun",
       img: "/assets/testimonials/testimonials-miguel.jpg",
+      detail: "Worked together on thesis and Padayon;",
       testimonial:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
       ref: nsContainerRef,
@@ -74,7 +77,7 @@ const Testimonials = () => {
     testimonialInfo: TestimonialListInterface,
     index: number
   ) => {
-    const { name, img, testimonial, ref, height } = testimonialInfo;
+    const { name, img, testimonial, ref, height, detail } = testimonialInfo;
 
     return (
       <Wrapper
@@ -106,13 +109,16 @@ const Testimonials = () => {
                   disableTransitions
                 )}`}
               />
-              <h4>{name}</h4>
+              <div>
+                <h4>{name}</h4>
+                <p className="text-sm">{detail}</p>
+              </div>
             </div>
           }
           isFoldable={true}
           childrenHeight={height - EXTRA_HEIGHT}
           isSmall={true}
-          overrideClasses="!bg-black/50 !text-white"
+          theme="Dark"
         >
           <div ref={ref} className="">
             <p>{testimonial}</p>
@@ -126,7 +132,7 @@ const Testimonials = () => {
     let height = 700;
 
     if (isTablet2) height = 1000;
-    if (IsSmallPhone) height = 1350;
+    if (IsSmallPhone) height = 1400;
 
     return height;
   };

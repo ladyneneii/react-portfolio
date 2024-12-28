@@ -1,6 +1,7 @@
 import { UserPrefContext } from "@/context/UserPrefContext";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { getConditionalSmoothTransition, NAVBAR_HEIGHT } from "@/shared";
+import { AvailableThemesType } from "@/types";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 
@@ -13,7 +14,7 @@ type Props = {
   startAndEndDates?: string;
   isUnfolded?: boolean;
   isSmall?: boolean;
-  overrideClasses?: string,
+  theme?: AvailableThemesType,
 };
 
 const Box = ({
@@ -25,7 +26,7 @@ const Box = ({
   startAndEndDates,
   isUnfolded = true,
   isSmall,
-  overrideClasses,
+  theme,
 }: Props) => {
   const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
   const isPhone = useMediaQuery("(max-width: 660px)");
@@ -60,8 +61,8 @@ const Box = ({
   return (
     <div
       className={`rounded-lg shadow-custom-sm ${
-        selectedTheme === "Dark" ? "bg-black/50" : "bg-white/50"
-      } ${getOuterDivPadding()} ${overrideClasses}`}
+        selectedTheme === "Dark" || theme === "Dark" ? "bg-black/50 text-white" : "bg-white/50 text-black"
+      } ${getOuterDivPadding()}`}
     >
       <div
         ref={headerRef}
@@ -77,7 +78,7 @@ const Box = ({
         )} ${
           isSticky && unfold
             ? `sticky z-10 ${
-                selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
+                selectedTheme === "Dark" || theme === "Dark" ? "bg-black" : "bg-purpleLight"
               }`
             : ""
         }`}

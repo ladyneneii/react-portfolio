@@ -68,8 +68,7 @@ const Footer = () => {
       className={`p-8 border-2 border-pink-500 bg-black text-white ${minWidth} mx-auto flex justify-center items-center`}
     >
       <div className="flex flex-col justify-between items-center gap-16">
-        {renderLinks("invisible")}
-        <div className={`${colItemsCenter}`}>
+        <div className={`${colItemsCenter} mt-16`}>
           <div className="flex items-center gap-1">
             <p>
               Loosely designed in Figma and translated into code by yours truly
