@@ -1,5 +1,76 @@
+import {
+  CVFilename,
+  CVFilepath,
+  getHoverStyles,
+  maxWidth,
+  minWidth,
+  viewCVLink,
+} from "@/shared";
+import { CiHeart } from "react-icons/ci";
+import { renderSocials } from "./functions/renderSocials";
+import { useContext } from "react";
+import { UserPrefContext } from "@/context/UserPrefContext";
+
 const Footer = () => {
-  return <div className={`h-[30vh]`}>Footer</div>;
+  const { disableTransitions } = useContext(UserPrefContext);
+  const currentYear = new Date().getFullYear();
+
+  const colItemsCenter = "flex flex-col items-center";
+
+  const renderLinks = (classes?: string) => {
+    return (
+      <div className={classes}>
+        <div className={`${colItemsCenter} gap-2`}>
+          {renderSocials(disableTransitions)}
+          <a
+            href="mailto:ernestcurativo@gmail.com"
+            className={getHoverStyles(disableTransitions)}
+          >
+            ernestcurativo@gmail.com
+          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href={viewCVLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={getHoverStyles(disableTransitions)}
+            >
+              View CV
+            </a>
+            <p>|</p>
+            <a
+              href={CVFilepath}
+              download={CVFilename}
+              className={getHoverStyles(disableTransitions)}
+            >
+              Download CV
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div
+      className={`p-8 border-2 border-pink-500 ${maxWidth} ${minWidth} mx-auto flex justify-center items-center`}
+    >
+      <div className="flex flex-col justify-between items-center gap-16">
+        {renderLinks("invisible")}
+        <div className={`${colItemsCenter}`}>
+          <div className="flex items-center gap-1">
+            <p>
+              Loosely designed in Figma and translated into code by yours truly
+            </p>
+            <CiHeart size={20} />
+          </div>
+          <p>&copy; {currentYear} Ernest Curativo. All rights reserved.</p>
+          <p>Website last updated on the 29th of December, 2024.</p>
+        </div>
+        {renderLinks()}
+      </div>
+    </div>
+  );
 };
 
 export default Footer;

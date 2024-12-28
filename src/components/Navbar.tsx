@@ -5,7 +5,12 @@ import { FaMoon } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { getConditionalSmoothTransition, languages, maxWidth } from "../shared";
+import {
+  getConditionalSmoothTransition,
+  getHoverStyles,
+  languages,
+  maxWidth,
+} from "../shared";
 import { IoClose } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import Radio from "./ui/Radio";
@@ -80,16 +85,12 @@ const Navbar = () => {
     }, delay); // Longer delay to allow resizing to finish so it is able to navigate to the right section
   };
 
-  const onHoverStyle = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-    disableTransitions
-  )}`;
-
   const renderLinks = () => {
     return sections.map((section) => (
       <div
         key={section}
         onClick={() => navigateToSection(section)}
-        className={`${onHoverStyle} ${
+        className={`${getHoverStyles(disableTransitions)} ${
           selectedSection === section ? "text-purple" : ""
         }`}
       >
@@ -133,7 +134,7 @@ const Navbar = () => {
         </div>
       </div>
     );
-  }
+  };
 
   return (
     <div className="whitespace-nowrap">
@@ -161,7 +162,9 @@ const Navbar = () => {
               <div
                 className={`rounded-full w-[50px] h-[50px] border-2 ${
                   selectedTheme === "Dark" ? "border-white" : "border-black"
-                } flex justify-center items-center ${onHoverStyle} hover:border-purple`}
+                } flex justify-center items-center ${getHoverStyles(
+                  disableTransitions
+                )} hover:border-purple`}
               >
                 <IoArrowBack onClick={() => window.history.back()} size={25} />
               </div>
@@ -186,7 +189,10 @@ const Navbar = () => {
               />
               <Dropdown
                 trigger={
-                  <BsThreeDotsVertical size={35} className={onHoverStyle} />
+                  <BsThreeDotsVertical
+                    size={35}
+                    className={getHoverStyles(disableTransitions)}
+                  />
                 }
                 content={renderExtraFeatures()}
                 position="right-2 top-12"
@@ -197,7 +203,7 @@ const Navbar = () => {
             <RxHamburgerMenu
               onClick={() => setShowNavbar(!showNavbar)}
               size={35}
-              className={onHoverStyle}
+              className={getHoverStyles(disableTransitions)}
             />
           )}
         </div>
@@ -222,7 +228,7 @@ const Navbar = () => {
             <IoClose
               onClick={() => setShowNavbar(false)}
               size={35}
-              className={onHoverStyle}
+              className={getHoverStyles(disableTransitions)}
             />
           </div>
           <div
@@ -234,9 +240,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-12">
-          {renderExtraFeatures()}
-        </div>
+        <div className="flex flex-col gap-12">{renderExtraFeatures()}</div>
       </div>
     </div>
   );

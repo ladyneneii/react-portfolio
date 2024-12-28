@@ -75,7 +75,6 @@ const Thesis = () => {
             <h2>Thesis</h2>
           </div>
         }
-        isDescLong={true}
       />
       <div className={boxContainerClassnames}>
         <Box
@@ -139,7 +138,6 @@ const Thesis = () => {
               techUsed=""
               index={1}
               carousel={imgs}
-              isDescLong={true}
             />
           </div>
         </Box>

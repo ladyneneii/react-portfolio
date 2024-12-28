@@ -96,19 +96,21 @@ const Box = ({
           </div>
         )}
       </div>
-      <div
-        className={`${isPhone ? "px-4" : "px-8"} ${
-          foldCondition ? "opacity-100" : "opacity-0 invisible"
-        } ${getConditionalSmoothTransition(disableTransitions)}`}
-        style={
-          isFoldable && childrenHeight
-            ? {
-                height: foldCondition ? childrenHeight : 0,
-              }
-            : {}
-        }
-      >
-        {children}
+      <div className={`${isPhone ? "px-4" : "px-8"}`}>
+        <div
+          className={`${
+            foldCondition ? "opacity-100" : "opacity-0 invisible"
+          } ${getConditionalSmoothTransition(disableTransitions)}`}
+          style={
+            isFoldable && childrenHeight
+              ? {
+                  height: foldCondition ? childrenHeight : 0,
+                }
+              : {}
+          }
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

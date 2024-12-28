@@ -22,7 +22,7 @@ const ProjectDescription = ({
   learnMoreLink,
   linkedInLink,
   carousel,
-  isDescLong,
+  // isDescLong,
   upperContent,
   lowerContent,
   extraImgs,
@@ -53,7 +53,7 @@ const ProjectDescription = ({
         {upperContent}
         <div key={img} className="flex flex-col gap-4">
           <div
-            className={`flex gap-8 ${isDescLong ? "items-center" : ""} ${
+            className={`flex gap-8 items-center ${
               isTablet ? "flex-col" : ""
             }`}
           >

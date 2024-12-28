@@ -23,6 +23,7 @@ const App = () => {
   const conditionalGlobalStyles = `
     html {
       scroll-behavior: ${disableTransitions ? "auto" : "smooth"};
+      background-color: ${selectedTheme === "Dark" ? "black" : ""};
     }
   `;
 
@@ -34,7 +35,7 @@ const App = () => {
           selectedTheme === "Dark"
             ? "bg-black text-white"
             : "bg-white text-black"
-        }`}
+        } border-2 border-yellow-500`}
       >
         <Navbar />
 

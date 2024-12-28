@@ -19,6 +19,12 @@ export const languages: AvailableLanguagesType[] = [
   "Bisaya",
 ];
 
+export const getHoverStyles = (disableTransitions: boolean) => {
+  return `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
+    disableTransitions
+  )}`;
+};
+
 export const NAVBAR_HEIGHT = 65;
 export const EXTRA_HEIGHT = 80; // extra height added to when a user unfolds a box
 export const sectionPaddingClassnames = "py-16 flex flex-col gap-8";
@@ -30,7 +36,11 @@ export const videosContainerClass = `flex gap-8 justify-center`;
 export const imgClassnames =
   "rounded-lg hover:cursor-pointer hover:outline-offset-4 hover:outline hover:outline-purple";
 
-  
+export const viewCVLink =
+  "https://drive.google.com/file/d/1ta_HLzIx5MN4DGbTTlYkPlWe12cfC23O/view?usp=sharing";
+export const CVFilename = "Curativo-CV.pdf";
+export const CVFilepath = `/src/data/${CVFilename}`;
 
-
-
+export const redirectToNewPage = (href: string) => {
+  window.open(href, "_blank", "noopener,noreferrer");
+}

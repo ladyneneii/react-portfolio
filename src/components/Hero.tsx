@@ -1,11 +1,12 @@
 import Button from "./ui/Button";
-import { IoMail } from "react-icons/io5";
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import {
-  getConditionalSmoothTransition,
+  CVFilename,
+  CVFilepath,
   languages,
   maxWidth,
   minWidth,
+  redirectToNewPage,
+  viewCVLink,
 } from "@/shared";
 import { useContext, useRef, useState } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
@@ -15,6 +16,7 @@ import { AvailableLanguagesType } from "@/types";
 import useHeightResize from "@/hooks/useHeightResize";
 import SingleCheckbox from "./ui/SingleCheckbox";
 import useHighlightSection from "@/hooks/useHighlightSection";
+import { renderSocials } from "./functions/renderSocials";
 
 const Hero = () => {
   const {
@@ -39,10 +41,6 @@ const Hero = () => {
   const [heroImageHeight, setHeroImageHeight] = useState(700);
   useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
 
-  const onHoverStyle = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-    disableTransitions
-  )}`;
-
   const renderIntroduction = () => {
     return (
       <div
@@ -57,19 +55,10 @@ const Hero = () => {
         </h4>
         <div className={`flex gap-2 ${isPhone ? "flex-col items-center" : ""}`}>
           <Button
-            onClick={() =>
-              window.open(
-                "https://drive.google.com/file/d/1ta_HLzIx5MN4DGbTTlYkPlWe12cfC23O/view?usp=sharing",
-                "_blank",
-                "noopener,noreferrer"
-              )
-            }
+            onClick={() => redirectToNewPage(viewCVLink)}
             content="View CV"
           />
-          <a
-            href="/src/data/Curativo-CV.pdf" // Path to the PDF file
-            download="Curativo-CV.pdf" // File name for the download
-          >
+          <a href={CVFilepath} download={CVFilename}>
             <Button onClick={() => null} content="Download CV" />
           </a>
         </div>
@@ -143,12 +132,7 @@ const Hero = () => {
                 height={!isPhone && !isLandscapePhone ? 300 : 250}
                 className="rounded-full shadow-custom"
               />
-              <div className="flex gap-3 justify-center">
-                <IoMail size={25} className={onHoverStyle} />
-                <FaGithub size={25} className={onHoverStyle} />
-                <FaLinkedin size={25} className={onHoverStyle} />
-                <FaInstagram size={25} className={onHoverStyle} />
-              </div>
+              {renderSocials(disableTransitions)}
             </div>
 
             <div

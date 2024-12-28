@@ -69,6 +69,7 @@ const Projects = () => {
       learnMoreLink: "/calculators",
       ref: cContainerRef,
       height: cContainerHeight,
+      isDescLong: true,
     },
     {
       title: "Padayon;",
