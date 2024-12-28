@@ -23,9 +23,36 @@ const App = () => {
     useContext(UserPrefContext);
 
   const conditionalGlobalStyles = `
+    :root,
+    #root,
+    html {
+      --purple:  ${
+        selectedTheme === "Dark" ? "rgb(200, 112, 255)" : "rgb(157, 0, 255)"
+      };
+      --shadow: 0 0 200px 50px ${
+        selectedTheme === "Dark"
+          ? "rgba(217, 156, 255, 0.25)"
+          : "rgba(116, 54, 155, 0.25)"
+      };
+      --shadow-sm: rgba(217, 156, 255, 0.452) 0px 10px 36px 0px,
+        rgba(217, 156, 255, 0.06) 0px 0px 0px 1px;
+    }
+    
     html {
       scroll-behavior: ${disableTransitions ? "auto" : "smooth"};
-      background-color: ${selectedTheme === "Dark" ? "black" : ""};
+      color: ${selectedTheme === "Dark" ? "white" : "black"};
+    }
+
+    .font-extralight, p, h6 {
+      font-weight: ${selectedTheme === "Dark" ? 200 : 400};
+    }
+
+    .font-normal, h2, h4, div, span {
+      font-weight: ${selectedTheme === "Dark" ? 400 : 600};
+    }
+
+    .firefly::before {
+      background: ${selectedTheme === "Dark" ? "black" : "white"};
     }
   `;
 
@@ -35,11 +62,9 @@ const App = () => {
     <Router>
       <style>{conditionalGlobalStyles}</style>
       <div
-        className={`${minWidth} ${
-          selectedTheme === "Dark"
-            ? "bg-black text-white"
-            : "bg-white text-black"
-        } border-2 border-yellow-500`}
+        className={`${minWidth} border-2 border-yellow-500 ${
+          selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
+        }`}
       >
         <Navbar />
 

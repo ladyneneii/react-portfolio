@@ -14,11 +14,10 @@ html {
 
   /* --background: #ffffff;
   --foreground: #000000; */
+  background-color: black;
 
-  --purple: #c870ff;
-  --shadow: 0 0 200px 50px rgba(217, 156, 255, 0.25);
-  --shadow-sm: rgba(217, 156, 255, 0.452) 0px 10px 36px 0px,
-    rgba(217, 156, 255, 0.06) 0px 0px 0px 1px;
+  --purple-light: rgb(239, 213, 255);
+  --purple-light-half: rgb(239, 213, 255, 0.5);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -31,6 +30,7 @@ html {
 body {
   font-family: "Poppins", serif;
 }
+
 
 @layer utilities {
   .shadow-custom {
@@ -56,11 +56,9 @@ h4 {
 
 h6 {
   font-size: 20px;
-  font-weight: 200;
 }
 
 p {
-  font-weight: 200;
   line-height: 28px;
 }
 
@@ -128,4 +126,6 @@ video::-webkit-media-controls-mute-button {
   pointer-events: none;
 }
 
-
+.bg-purpleLight {
+  background-color: var(--purple-light);
+}

@@ -83,7 +83,7 @@ const VideoDescription = ({
         transition={{ delay: index ? index * 0.2 : 0, duration: 0.5 }}
         variants={{
           hidden: { opacity: 0 },
-          visible: { opacity: 1, x: 0 },
+          visible: { opacity: 1 },
         }}
         className={`flex flex-col gap-2 items-center text-center ${
           isTablet2 || hasDiffScreenSizes ? "w-[100%]" : "w-[45%]"

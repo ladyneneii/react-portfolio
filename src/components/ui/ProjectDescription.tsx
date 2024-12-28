@@ -64,8 +64,11 @@ const ProjectDescription = ({
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
         variants={{
-          hidden: { opacity: 0, x: index % 2 !== 0 ? -50 : 50 },
-          visible: { opacity: 1, x: 0 },
+          hidden: {
+            opacity: 0,
+            transform: `translate3d(${index % 2 !== 0 ? "5%" : "-5%"}, 0, 0)`,
+          },
+          visible: { opacity: 1, transform: "translate3d(0, 0, 0)" },
         }}
       >
         {upperContent}

@@ -83,8 +83,11 @@ const Testimonials = () => {
         viewport={{ once: true, amount: 0.5 }}
         transition={{ delay: index * 0.2, duration: 0.5 }}
         variants={{
-          hidden: { opacity: 0, x: index % 2 !== 0 ? 50 : -50 },
-          visible: { opacity: 1, x: 0 },
+          hidden: {
+            opacity: 0,
+            transform: `translate3d(${index % 2 !== 0 ? "5%" : "-5%"}, 0, 0)`,
+          },
+          visible: { opacity: 1, transform: "translate3d(0, 0, 0)" },
         }}
         className={`${isTablet2 ? "w-full" : "w-1/2"}`}
       >
@@ -109,6 +112,7 @@ const Testimonials = () => {
           isFoldable={true}
           childrenHeight={height - EXTRA_HEIGHT}
           isSmall={true}
+          overrideClasses="!bg-black/50 !text-white"
         >
           <div ref={ref} className="">
             <p>{testimonial}</p>
@@ -142,7 +146,7 @@ const Testimonials = () => {
       }}
     >
       <div className={sectionTitleContainerClassnames}>
-        <h2>Testimonials</h2>
+        <h2 className="text-white">Testimonials</h2>
       </div>
       <div
         className={`flex justify-between ${

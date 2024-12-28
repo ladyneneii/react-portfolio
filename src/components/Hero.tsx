@@ -85,7 +85,7 @@ const Hero = () => {
           backgroundImage: `url(${
             selectedTheme === "Dark"
               ? "/assets/hero/background-transparent-black.png"
-              : "/assets/hero/background-transparent-white.png"
+              : "/assets/hero/background-transparent-purple-light.png"
           })`,
           backgroundSize: "cover",
           // backgroundSize: "auto",
@@ -106,8 +106,8 @@ const Hero = () => {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5 }}
             variants={{
-              hidden: { opacity: 0, x: -50 },
-              visible: { opacity: 1, x: 0 },
+              hidden: { opacity: 0, transform: "translate3d(-5%, 0, 0)" },
+              visible: { opacity: 1, transform: "translate3d(0, 0, 0)" },
             }}
             className={`flex gap-16 flex-col ${
               isTablet2 ? "text-center" : "max-w-[800px]"
@@ -134,8 +134,8 @@ const Hero = () => {
             viewport={{ once: true, amount: 0.5 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             variants={{
-              hidden: { opacity: 0, x: 50 },
-              visible: { opacity: 1, x: 0 },
+              hidden: { opacity: 0, transform: "translate3d(5%, 0, 0)" },
+              visible: { opacity: 1, transform: "translate3d(0, 0, 0)" },
             }}
             className={`flex ${
               !isTablet || isTablet2

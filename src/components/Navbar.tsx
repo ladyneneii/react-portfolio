@@ -140,7 +140,7 @@ const Navbar = () => {
     <div className="whitespace-nowrap">
       <div
         className={`${
-          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+          selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
         } fixed top-0 left-0 right-0 z-[100] ${getConditionalSmoothTransition(
           disableTransitions
         )}`}
@@ -214,7 +214,7 @@ const Navbar = () => {
         className={`fixed right-0 top-0 bottom-0 ${
           !disableTransitions ? "transition-all duration-500" : ""
         } flex flex-col justify-between overflow-auto gap-16 z-[100] ${
-          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+          selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
         } ${handleShowNavbar()}`}
       >
         <div>

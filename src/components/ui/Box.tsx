@@ -13,6 +13,7 @@ type Props = {
   startAndEndDates?: string;
   isUnfolded?: boolean;
   isSmall?: boolean;
+  overrideClasses?: string,
 };
 
 const Box = ({
@@ -24,6 +25,7 @@ const Box = ({
   startAndEndDates,
   isUnfolded = true,
   isSmall,
+  overrideClasses,
 }: Props) => {
   const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
   const isPhone = useMediaQuery("(max-width: 660px)");
@@ -59,7 +61,7 @@ const Box = ({
     <div
       className={`rounded-lg shadow-custom-sm ${
         selectedTheme === "Dark" ? "bg-black/50" : "bg-white/50"
-      } ${getOuterDivPadding()}`}
+      } ${getOuterDivPadding()} ${overrideClasses}`}
     >
       <div
         ref={headerRef}
@@ -75,7 +77,7 @@ const Box = ({
         )} ${
           isSticky && unfold
             ? `sticky z-10 ${
-                selectedTheme === "Dark" ? "bg-black" : "bg-white"
+                selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
               }`
             : ""
         }`}

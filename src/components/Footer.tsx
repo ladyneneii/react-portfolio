@@ -2,7 +2,6 @@ import {
   CVFilename,
   CVFilepath,
   getHoverStyles,
-  maxWidth,
   minWidth,
   viewCVLink,
 } from "@/shared";
@@ -66,7 +65,7 @@ const Footer = () => {
 
   return (
     <div
-      className={`p-8 border-2 border-pink-500 ${maxWidth} ${minWidth} mx-auto flex justify-center items-center`}
+      className={`p-8 border-2 border-pink-500 bg-black text-white ${minWidth} mx-auto flex justify-center items-center`}
     >
       <div className="flex flex-col justify-between items-center gap-16">
         {renderLinks("invisible")}
