@@ -5,7 +5,6 @@ import {
   minWidth,
   viewCVLink,
 } from "@/shared";
-import { CiHeart } from "react-icons/ci";
 import { renderSocials } from "./functions/renderSocials";
 import { useContext } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
@@ -65,16 +64,13 @@ const Footer = () => {
 
   return (
     <div
-      className={`p-8 border-2 border-pink-500 bg-black text-white ${minWidth} mx-auto flex justify-center items-center`}
+      className={`p-8 border-2 border-pink-500 bg-black text-white ${minWidth} mx-auto flex justify-center items-center text-center`}
     >
       <div className="flex flex-col justify-between items-center gap-16">
-        <div className={`${colItemsCenter} mt-16`}>
-          <div className="flex items-center gap-1">
-            <p>
-              Loosely designed in Figma and translated into code by yours truly
-            </p>
-            <CiHeart size={20} />
-          </div>
+        <div className={`${colItemsCenter} mt-16 gap-2`}>
+          <p>
+            Loosely designed in Figma and translated into code by yours truly ♡.
+          </p>
           <p>
             &copy; {currentYear} Ernest Joseph S. Curativo. All rights reserved.
           </p>

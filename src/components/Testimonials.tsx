@@ -10,7 +10,9 @@ import useHeightResize from "@/hooks/useHeightResize";
 import {
   EXTRA_HEIGHT,
   getConditionalSmoothTransition,
+  getHoverStyles,
   maxWidth,
+  redirectToNewPage,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
 } from "@/shared";
@@ -18,6 +20,7 @@ import { UserPrefContext } from "@/context/UserPrefContext";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { motion } from "framer-motion";
+import { FaLinkedin } from "react-icons/fa";
 
 interface TestimonialListInterface {
   name: string;
@@ -26,6 +29,7 @@ interface TestimonialListInterface {
   testimonial: string;
   ref: MutableRefObject<HTMLDivElement | null>;
   height: number;
+  linkedIn?: string;
 }
 
 const Testimonials = () => {
@@ -57,13 +61,14 @@ const Testimonials = () => {
         "Ernest is an excellent colleague. Working with him during our time at Edufied alleviated a lot of the pressure off me as he is not only a quick learner, he is also very easy to work with. Watching him, I can also say that he is extremely adaptable, being able to adjust and work on several projects at a time while still giving more than what is being asked. He has proven himself to be a truly skillful developer and a great coworker.",
       ref: mdContainerRef,
       height: mdContainerHeight,
+      linkedIn: "https://www.linkedin.com/in/miguel-dailisan-1157b2231/",
     },
     {
       name: "Neil Sagun",
-      img: "/assets/testimonials/testimonials-miguel.jpg",
+      img: "/assets/testimonials/testimonials-neil.jpg",
       detail: "Worked together on thesis and Padayon;",
       testimonial:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+        "When I knew I was working with Ernest on our thesis, I realized we could make it work. Being his partner and groupmate in so many projects, I had seen firsthand how hardworking he is based on his work ethic. He was able to successfully implement my designs and our ideas for Padayon; despite being new to React. Now, we were able to pull off our thesis despite the fact that we were new to machine learning and natural language processing. It really goes to show how easily he is able to adapt to unfamiliar technologies—and it is all because of how hardworking and passionate he is. He is always persistent in delivering results, and whenever problems come his way, he never fails to solve them or think up a clever way around them. Never once have I regretted working with him, ever.",
       ref: nsContainerRef,
       height: nsContainerHeight,
     },
@@ -77,7 +82,8 @@ const Testimonials = () => {
     testimonialInfo: TestimonialListInterface,
     index: number
   ) => {
-    const { name, img, testimonial, ref, height, detail } = testimonialInfo;
+    const { name, img, testimonial, ref, height, detail, linkedIn } =
+      testimonialInfo;
 
     return (
       <Wrapper
@@ -120,8 +126,20 @@ const Testimonials = () => {
           isSmall={true}
           theme="Dark"
         >
-          <div ref={ref} className="">
+          <div ref={ref} className="flex flex-col gap-4">
             <p>{testimonial}</p>
+            {linkedIn && (
+              <div className="flex gap-2 items-center">
+                <p>Contact:</p>
+                {linkedIn && (
+                  <FaLinkedin
+                    onClick={() => redirectToNewPage(linkedIn)}
+                    size={25}
+                    className={getHoverStyles(disableTransitions)}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </Box>
       </Wrapper>
@@ -129,10 +147,10 @@ const Testimonials = () => {
   };
 
   const getBgImgHeight = () => {
-    let height = 700;
+    let height = 1100;
 
-    if (isTablet2) height = 1000;
-    if (IsSmallPhone) height = 1400;
+    if (isTablet2) height = 1400;
+    if (IsSmallPhone) height = 1900;
 
     return height;
   };
