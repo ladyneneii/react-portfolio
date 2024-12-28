@@ -194,10 +194,10 @@ const Padayon = () => {
       altLink:
         "https://drive.google.com/file/d/1W4c1U3aYFtHhZew_hkykZT4dEMgu6JyX/view?usp=sharing",
       desc: (
-        <span className="text-sm font-extralight">
+        <p>
           The website is also mobile-responsive, although the UI can be
           improved.
-        </span>
+        </p>
       ),
       thumbnail: "/assets/padayon/thumbnails/p-responsive-thumbnail.png",
     },
@@ -208,14 +208,14 @@ const Padayon = () => {
       src: "/assets/padayon/p-guest.png",
       altLink: "",
       desc: (
-        <div className="leading-[24px] font-extralight text-justify">
+        <p className="text-justify">
           Guests are not registered users of Padayon, so their credentials do
           not exist in the database. Guests can still access some of the
           website's features, but they are unable to interact with the
           registered users or affect changes to the website in any way. As seen
           in the photo above, the input fields on the Messages page are
           disabled.
-        </div>
+        </p>
       ),
       isImg: true,
     },

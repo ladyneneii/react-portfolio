@@ -46,7 +46,7 @@ const Thesis = () => {
       <ProjectDescription
         img={imgs[0]}
         desc={
-          <h6 className="font-extralight">
+          <h6>
             Neil Sagun and I, along with Dr. Angie Ceniza's guidance, crafted
             our undergraduate thesis as one of the requirements for our
             graduation in the BSCS (Bachelor of Science in Computer Science)
@@ -89,7 +89,7 @@ const Thesis = () => {
             <ProjectDescription
               img={imgs[1]}
               desc={
-                <p className="font-extralight leading-[28px]">
+                <p>
                   The Sexual Orientation, Gender Identity, and Expression
                   (SOGIE) Bill is a proposed law seeking to address
                   discrimination based on an individual's SOGIE. The SOGIE Bill

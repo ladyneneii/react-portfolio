@@ -75,11 +75,7 @@ const ProjectDescription = ({
                 index % 2 === 1 || isTablet ? "order-1" : "order-2"
               }`}
             >
-              {typeof desc === "string" ? (
-                <h6 className="font-extralight">{desc}</h6>
-              ) : (
-                desc
-              )}
+              {typeof desc === "string" ? <h6>{desc}</h6> : desc}
               <div
                 className={`flex ${
                   !isTablet || isPhone
@@ -89,8 +85,8 @@ const ProjectDescription = ({
               >
                 {techUsed && (
                   <div className="flex flex-col text-purple">
-                    <p>Technologies used:</p>
-                    <p className="font-extralight italic">{techUsed}</p>
+                    <p className="font-normal">Technologies used:</p>
+                    <p className="italic">{techUsed}</p>
                   </div>
                 )}
                 {(websiteLink || learnMoreLink || linkedInLink) && (

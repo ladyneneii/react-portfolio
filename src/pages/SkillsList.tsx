@@ -134,12 +134,12 @@ const SkillsList = () => {
         >
           <div ref={wdContainerRef} className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
-              <h6 className="text-center">Frontend</h6>
+              <h6 className="text-center font-normal">Frontend</h6>
               <div className={itemsContainerClass}>{renderSkills(wdFront)}</div>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h6 className="text-center">Backend</h6>
+              <h6 className="text-center font-normal">Backend</h6>
               <div className={itemsContainerClass}>{renderSkills(wdBack)}</div>
             </div>
           </div>
