@@ -3,7 +3,11 @@ import Button from "./Button";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { ReactNode, useState } from "react";
 import Carousel from "./Carousel";
-import { getConditionalSmoothTransition, imgClassnames } from "@/shared";
+import {
+  getConditionalSmoothTransition,
+  imgClassnames,
+  redirectToNewPage,
+} from "@/shared";
 
 interface ProjectExtraInfo {
   index: number;
@@ -53,9 +57,7 @@ const ProjectDescription = ({
         {upperContent}
         <div key={img} className="flex flex-col gap-4">
           <div
-            className={`flex gap-8 items-center ${
-              isTablet ? "flex-col" : ""
-            }`}
+            className={`flex gap-8 items-center ${isTablet ? "flex-col" : ""}`}
           >
             <div
               className={`${
@@ -97,13 +99,7 @@ const ProjectDescription = ({
                   >
                     {websiteLink && (
                       <Button
-                        onClick={() =>
-                          window.open(
-                            `${websiteLink}`,
-                            "_blank",
-                            "noopener,noreferrer"
-                          )
-                        }
+                        onClick={() => redirectToNewPage(websiteLink)}
                         content="Visit website"
                       />
                     )}
@@ -122,13 +118,7 @@ const ProjectDescription = ({
                     )}
                     {linkedInLink && (
                       <Button
-                        onClick={() =>
-                          window.open(
-                            `${linkedInLink}`,
-                            "_blank",
-                            "noopener,noreferrer"
-                          )
-                        }
+                        onClick={() => redirectToNewPage(linkedInLink)}
                         content="View post on LinkedIn"
                       />
                     )}

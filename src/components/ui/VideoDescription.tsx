@@ -2,7 +2,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import React, { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
-import { imgClassnames } from "@/shared";
+import { imgClassnames, redirectToNewPage } from "@/shared";
 import Carousel from "./Carousel";
 
 export interface VideoDescriptionInterface {
@@ -96,7 +96,7 @@ const VideoDescription = ({
                 </p>
                 <Button
                   onClick={() =>
-                    window.open(`${altLink}`, "_blank", "noopener,noreferrer")
+                    redirectToNewPage(altLink)
                   }
                   content="Watch video"
                 />

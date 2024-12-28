@@ -22,30 +22,43 @@ const Footer = () => {
       <div className={classes}>
         <div className={`${colItemsCenter} gap-2`}>
           {renderSocials(disableTransitions)}
-          <a
-            href="mailto:ernestcurativo@gmail.com"
-            className={getHoverStyles(disableTransitions)}
-          >
-            ernestcurativo@gmail.com
-          </a>
-          <div className="flex items-center gap-2">
+          <div className={colItemsCenter}>
             <a
-              href={viewCVLink}
+              href="mailto:ernestcurativo@gmail.com"
+              className={getHoverStyles(disableTransitions)}
+            >
+              ernestcurativo@gmail.com
+            </a>
+            <div className="flex items-center gap-2">
+              <a
+                href={viewCVLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={getHoverStyles(disableTransitions)}
+              >
+                View CV
+              </a>
+              <p>|</p>
+              <a
+                href={CVFilepath}
+                download={CVFilename}
+                className={getHoverStyles(disableTransitions)}
+              >
+                Download CV
+              </a>
+            </div>
+          </div>
+          <p>
+            Fireflies animation by{" "}
+            <a
+              href="https://codepen.io/mikegolus/pen/Jegvym"
               target="_blank"
               rel="noopener noreferrer"
-              className={getHoverStyles(disableTransitions)}
+              className={`font-normal ${getHoverStyles(disableTransitions)}`}
             >
-              View CV
+              Mike Golus
             </a>
-            <p>|</p>
-            <a
-              href={CVFilepath}
-              download={CVFilename}
-              className={getHoverStyles(disableTransitions)}
-            >
-              Download CV
-            </a>
-          </div>
+          </p>
         </div>
       </div>
     );
@@ -64,7 +77,9 @@ const Footer = () => {
             </p>
             <CiHeart size={20} />
           </div>
-          <p>&copy; {currentYear} Ernest Curativo. All rights reserved.</p>
+          <p>
+            &copy; {currentYear} Ernest Joseph S. Curativo. All rights reserved.
+          </p>
           <p>Website last updated on the 29th of December, 2024.</p>
         </div>
         {renderLinks()}

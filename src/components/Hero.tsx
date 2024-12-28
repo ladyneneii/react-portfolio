@@ -17,6 +17,7 @@ import useHeightResize from "@/hooks/useHeightResize";
 import SingleCheckbox from "./ui/SingleCheckbox";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import { renderSocials } from "./functions/renderSocials";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   const {
@@ -97,7 +98,15 @@ const Hero = () => {
             !isTablet ? "" : "flex-col"
           } ${maxWidth} ${minWidth} mx-auto`}
         >
-          <div
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, x: -50 },
+              visible: { opacity: 1, x: 0 },
+            }}
             className={`flex gap-16 flex-col ${
               isTablet2 ? "text-center" : "max-w-[800px]"
             }`}
@@ -115,9 +124,17 @@ const Hero = () => {
             </h1>
 
             {!isTablet && renderIntroduction()}
-          </div>
+          </motion.div>
 
-          <div
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, x: 50 },
+              visible: { opacity: 1, x: 0 },
+            }}
             className={`flex ${
               !isTablet || isTablet2
                 ? "flex-col justify-between items-center gap-12"
@@ -168,7 +185,7 @@ const Hero = () => {
                 />
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

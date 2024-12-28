@@ -66,7 +66,7 @@ const Box = ({
         onClick={() => {
           if (isFoldable) setUnfold(!unfold);
         }}
-        className={`flex justify-between gap-4 ${!isSmall ? "mb-8" : ""} py-4 ${
+        className={`flex justify-between gap-4 rounded-lg ${!isSmall ? "mb-8" : ""} py-4 ${
           isPhone ? "px-4 py-2" : "px-8 py-4"
         } ${isPhone ? "flex-col" : "items-center"} ${
           isFoldable ? "hover:text-purple group" : ""

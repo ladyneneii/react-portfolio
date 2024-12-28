@@ -16,9 +16,11 @@ import Padayon from "./pages/Padayon";
 import Calculators from "./pages/Calculators";
 import Thesis from "./components/Thesis";
 import Testimonials from "./components/Testimonials";
+import "@/fireflies.css";
 
 const App = () => {
-  const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
+  const { selectedTheme, disableTransitions, disableAnimations } =
+    useContext(UserPrefContext);
 
   const conditionalGlobalStyles = `
     html {
@@ -26,6 +28,8 @@ const App = () => {
       background-color: ${selectedTheme === "Dark" ? "black" : ""};
     }
   `;
+
+  const numOfFireflies = 15;
 
   return (
     <Router>
@@ -121,6 +125,11 @@ const App = () => {
 
         <Footer />
       </div>
+      {/* fireflies */}
+      {!disableAnimations &&
+        Array.from({ length: numOfFireflies }, (_, i) => (
+          <div key={i} className="firefly"></div>
+        ))}
     </Router>
   );
 };
