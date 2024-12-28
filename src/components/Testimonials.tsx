@@ -17,6 +17,7 @@ import {
 import { UserPrefContext } from "@/context/UserPrefContext";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import useMediaQuery from "@/hooks/useMediaQuery";
+import { motion } from "framer-motion";
 
 interface TestimonialListInterface {
   name: string;
@@ -27,7 +28,8 @@ interface TestimonialListInterface {
 }
 
 const Testimonials = () => {
-  const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
+  const { selectedTheme, disableTransitions, disableAnimations } =
+    useContext(UserPrefContext);
   const { setSelectedSection } = useContext(UserPrefContext);
 
   const testimonialsRef = useRef<HTMLDivElement | null>(null);
@@ -66,11 +68,26 @@ const Testimonials = () => {
   const isTablet2 = useMediaQuery("(max-width: 880px)");
   const IsSmallPhone = useMediaQuery("(max-width: 420px)");
 
-  const renderTestimonialBox = (testimonialInfo: TestimonialListInterface) => {
+  const Wrapper = disableAnimations ? "div" : motion.div;
+
+  const renderTestimonialBox = (
+    testimonialInfo: TestimonialListInterface,
+    index: number
+  ) => {
     const { name, img, testimonial, ref, height } = testimonialInfo;
 
     return (
-      <div className={`${isTablet2 ? "w-full" : "w-1/2"}`}>
+      <Wrapper
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ delay: index * 0.2, duration: 0.5 }}
+        variants={{
+          hidden: { opacity: 0, x: index % 2 !== 0 ? 50 : -50 },
+          visible: { opacity: 1, x: 0 },
+        }}
+        className={`${isTablet2 ? "w-full" : "w-1/2"}`}
+      >
         <Box
           key={name}
           title={
@@ -97,7 +114,7 @@ const Testimonials = () => {
             <p>{testimonial}</p>
           </div>
         </Box>
-      </div>
+      </Wrapper>
     );
   };
 
@@ -132,8 +149,8 @@ const Testimonials = () => {
           isTablet2 ? "flex-col items-center gap-8" : "gap-36"
         }`}
       >
-        {renderTestimonialBox(testimonialList[0])}
-        {renderTestimonialBox(testimonialList[1])}
+        {renderTestimonialBox(testimonialList[0], 0)}
+        {renderTestimonialBox(testimonialList[1], 1)}
       </div>
     </div>
   );

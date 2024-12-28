@@ -1,13 +1,15 @@
 import { ProjectsInterface } from "../Projects";
 import Button from "./Button";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { ReactNode, useState } from "react";
+import { ReactNode, useContext, useState } from "react";
 import Carousel from "./Carousel";
 import {
   getConditionalSmoothTransition,
   imgClassnames,
   redirectToNewPage,
 } from "@/shared";
+import { motion } from "framer-motion";
+import { UserPrefContext } from "@/context/UserPrefContext";
 
 interface ProjectExtraInfo {
   index: number;
@@ -31,6 +33,7 @@ const ProjectDescription = ({
   lowerContent,
   extraImgs,
 }: ProjectDescription) => {
+  const { disableAnimations } = useContext(UserPrefContext);
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");
   const [showCarousel, setShowCarousel] = useState(false);
@@ -51,9 +54,20 @@ const ProjectDescription = ({
     );
   };
 
+  const Wrapper = disableAnimations ? "div" : motion.div;
+
   return (
     <>
-      <div>
+      <Wrapper
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.5 }}
+        variants={{
+          hidden: { opacity: 0, x: index % 2 !== 0 ? -50 : 50 },
+          visible: { opacity: 1, x: 0 },
+        }}
+      >
         {upperContent}
         <div key={img} className="flex flex-col gap-4">
           <div
@@ -129,7 +143,7 @@ const ProjectDescription = ({
           </div>
         </div>
         {lowerContent}
-      </div>
+      </Wrapper>
 
       <Carousel
         imgIdx={imgIdx}

@@ -1,8 +1,19 @@
 import { SkillsInterface } from "@/components/Skills";
+import { motion } from "framer-motion";
 
-export const renderSkills = (list: SkillsInterface[]) => {
-  return list.map((item) => (
-    <div
+export const renderSkills = (list: SkillsInterface[], disableAnimations: boolean) => {
+  const Wrapper = disableAnimations ? "div" : motion.div;
+
+  return list.map((item, index) => (
+    <Wrapper
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ delay: index * 0.05, duration: 0.5 }}
+      variants={{
+        hidden: { opacity: 0, },
+        visible: { opacity: 1, },
+      }}
       key={item.name}
       className="flex gap-4 items-center justify-center w-[140px] flex-col"
     >
@@ -16,6 +27,6 @@ export const renderSkills = (list: SkillsInterface[]) => {
       <div>
         <p className="text-center h-[50px]">{item.name}</p>
       </div>
-    </div>
+    </Wrapper>
   ));
 };

@@ -74,6 +74,8 @@ const Hero = () => {
     section: "Home",
   });
 
+  const Wrapper = disableAnimations ? "div" : motion.div;
+
   return (
     <div id="home" className="border-[0.5px] border-black">
       <div
@@ -98,7 +100,7 @@ const Hero = () => {
             !isTablet ? "" : "flex-col"
           } ${maxWidth} ${minWidth} mx-auto`}
         >
-          <motion.div
+          <Wrapper
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -124,9 +126,9 @@ const Hero = () => {
             </h1>
 
             {!isTablet && renderIntroduction()}
-          </motion.div>
+          </Wrapper>
 
-          <motion.div
+          <Wrapper
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
@@ -185,7 +187,7 @@ const Hero = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </Wrapper>
         </div>
       </div>
     </div>

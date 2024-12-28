@@ -18,7 +18,8 @@ import { renderSkills } from "../components/functions/renderSkills";
 import { UserPrefContext } from "@/context/UserPrefContext";
 
 const SkillsList = () => {
-  const { selectedTheme, setSelectedSection } = useContext(UserPrefContext);
+  const { selectedTheme, setSelectedSection, disableAnimations } =
+    useContext(UserPrefContext);
 
   useEffect(() => {
     setSelectedSection("");
@@ -123,7 +124,7 @@ const SkillsList = () => {
           childrenHeight={plContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={plContainerRef} className={itemsContainerClass}>
-            {renderSkills(pl)}
+            {renderSkills(pl, disableAnimations)}
           </div>
         </Box>
         <Box
@@ -135,12 +136,16 @@ const SkillsList = () => {
           <div ref={wdContainerRef} className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
               <h6 className="text-center font-normal">Frontend</h6>
-              <div className={itemsContainerClass}>{renderSkills(wdFront)}</div>
+              <div className={itemsContainerClass}>
+                {renderSkills(wdFront, disableAnimations)}
+              </div>
             </div>
 
             <div className="flex flex-col gap-4">
               <h6 className="text-center font-normal">Backend</h6>
-              <div className={itemsContainerClass}>{renderSkills(wdBack)}</div>
+              <div className={itemsContainerClass}>
+                {renderSkills(wdBack, disableAnimations)}
+              </div>
             </div>
           </div>
         </Box>
@@ -151,7 +156,7 @@ const SkillsList = () => {
           childrenHeight={fltContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={fltContainerRef} className={itemsContainerClass}>
-            {renderSkills(flt)}
+            {renderSkills(flt, disableAnimations)}
           </div>
         </Box>
         <Box
@@ -161,7 +166,7 @@ const SkillsList = () => {
           childrenHeight={cwContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={cwContainerRef} className={itemsContainerClass}>
-            {renderSkills(cw)}
+            {renderSkills(cw, disableAnimations)}
           </div>
         </Box>
       </div>

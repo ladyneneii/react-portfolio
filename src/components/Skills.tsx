@@ -26,7 +26,7 @@ export interface SkillsInterface {
 }
 
 const Skills = () => {
-  const { setSelectedSection } = useContext(UserPrefContext);
+  const { setSelectedSection, disableAnimations } = useContext(UserPrefContext);
   const mts = [
     { name: "TypeScript", src: "/assets/skills/pl-typescript.png" },
     { name: "JavaScript", src: "/assets/skills/pl-javascript.png" },
@@ -65,7 +65,7 @@ const Skills = () => {
           childrenHeight={mtsContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={mtsContainerRef} className={itemsContainerClass}>
-            {renderSkills(mts)}
+            {renderSkills(mts, disableAnimations)}
           </div>
         </Box>
       </div>

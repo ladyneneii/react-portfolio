@@ -1,9 +1,11 @@
 import useMediaQuery from "@/hooks/useMediaQuery";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import { imgClassnames, redirectToNewPage } from "@/shared";
 import Carousel from "./Carousel";
+import { motion } from "framer-motion";
+import { UserPrefContext } from "@/context/UserPrefContext";
 
 export interface VideoDescriptionInterface {
   src: string;
@@ -28,6 +30,7 @@ const VideoDescription = ({
   index,
   carousel,
 }: VideoDescriptionInterface) => {
+  const { disableAnimations } = useContext(UserPrefContext);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false); // State to handle fading out
@@ -69,9 +72,19 @@ const VideoDescription = ({
     }
   }, [isPlaying]);
 
+  const Wrapper = disableAnimations ? "div" : motion.div;
+
   return (
     <>
-      <div
+      <Wrapper
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ delay: index ? index * 0.2 : 0, duration: 0.5 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1, x: 0 },
+        }}
         className={`flex flex-col gap-2 items-center text-center ${
           isTablet2 || hasDiffScreenSizes ? "w-[100%]" : "w-[45%]"
         }`}
@@ -95,27 +108,23 @@ const VideoDescription = ({
                   You can view the video here instead:
                 </p>
                 <Button
-                  onClick={() =>
-                    redirectToNewPage(altLink)
-                  }
+                  onClick={() => redirectToNewPage(altLink)}
                   content="Watch video"
                 />
               </div>
             </video>
           ) : (
-            (
-              <img
-                onClick={() => {
-                  if (index !== undefined && index !== null) {
-                    setShowCarousel(true);
-                    setImgIdx(index);
-                  }
-                }}
-                src={src}
-                alt={altLink}
-                className={imgClassnames}
-              />
-            )
+            <img
+              onClick={() => {
+                if (index !== undefined && index !== null) {
+                  setShowCarousel(true);
+                  setImgIdx(index);
+                }
+              }}
+              src={src}
+              alt={altLink}
+              className={imgClassnames}
+            />
           )}
 
           {!isImg && (
@@ -134,7 +143,7 @@ const VideoDescription = ({
           )}
         </div>
         {typeof desc === "string" ? <p>{desc}</p> : desc}
-      </div>
+      </Wrapper>
       <Carousel
         imgIdx={imgIdx}
         setImgIdx={setImgIdx}
