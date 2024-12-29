@@ -52,8 +52,10 @@ export const camelToTitleCase = (str: string): SectionsType => {
     .trim() as SectionsType;
 };
 
-export const getVariants = (index?: number) => {
-  const indexExists = index !== undefined && index !== null;
+export const getVariants = (
+  // index?: number
+) => {
+  // const indexExists = index !== undefined && index !== null;
   // return {
   //   hidden: {
   //     opacity: 0,
