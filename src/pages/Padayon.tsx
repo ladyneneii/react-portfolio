@@ -1,6 +1,7 @@
 import {
   boxContainerClassnames,
   EXTRA_HEIGHT,
+  noTransNote,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
   videosContainerClass,
@@ -194,10 +195,10 @@ const Padayon = () => {
       altLink:
         "https://drive.google.com/file/d/1W4c1U3aYFtHhZew_hkykZT4dEMgu6JyX/view?usp=sharing",
       desc: (
-        <span className="text-sm font-extralight">
+        <p>
           The website is also mobile-responsive, although the UI can be
           improved.
-        </span>
+        </p>
       ),
       thumbnail: "/assets/padayon/thumbnails/p-responsive-thumbnail.png",
     },
@@ -208,14 +209,14 @@ const Padayon = () => {
       src: "/assets/padayon/p-guest.png",
       altLink: "",
       desc: (
-        <div className="leading-[24px] font-extralight text-justify">
+        <p className="text-justify">
           Guests are not registered users of Padayon, so their credentials do
           not exist in the database. Guests can still access some of the
           website's features, but they are unable to interact with the
           registered users or affect changes to the website in any way. As seen
           in the photo above, the input fields on the Messages page are
           disabled.
-        </div>
+        </p>
       ),
       isImg: true,
     },
@@ -307,21 +308,25 @@ const Padayon = () => {
   };
 
   const extraImgs = [
-    "/assets/thumbnail-padayon.png",
+    "/assets/thumbnails/thumbnail-padayon.png",
     "/assets/padayon/thumbnails/p-about-thumbnail.png",
   ];
+
+  const desc =
+    "This was a project my partner and I built for my Software Development class last December 2023 and the first full-stack website I created with React TypeScript. I am particularly proud of this as I was able to pull its features off despite being new to React at the time. I had just been watching tutorials and emulating them on the website. I created the entire frontend and backend, including the database design, while my partner touched on some of the designs and created the entire documentation. I tried to deploy the website but realized it was a lot more complicated than I thought, so I tried recreating the website with better UI using MERN (MongoDB, Express.js, React TS, and Node). While I was able to successfully deploy it thanks to the tutorials, it was far from finished, and I do not have any plans on finishing it yet as I realized how big the project is for one person.";
 
   return (
     <div className={sectionPaddingClassnames}>
       <ProjectDescription
         img=""
-        desc="This was a project my partner and I built for my Software Development class last December 2023 and the first full-stack website I created with React TypeScript. I am particularly proud of this as I was able to pull its features off despite being new to React at the time. I had just been watching tutorials and emulating them on the website. I created the entire frontend and backend, including the database design, while my partner touched on some of the designs and created the entire documentation. I tried to deploy the website but realized it was a lot more complicated than I thought, so I tried recreating the website with better UI using MERN (MongoDB, Express.js, React TS, and Node). While I was able to successfully deploy it thanks to the tutorials, it was far from finished, and I do not have any plans on finishing it yet as I realized how big the project is for one person."
+        desc={{ English: desc, Filipino: desc, Bisaya: desc }}
         techUsed="React TypeScript, Node.js, Express.js, Firebase, Bootstrap"
         index={0}
         carousel={extraImgs}
         upperContent={
           <div className={`${sectionTitleContainerClassnames} mb-8`}>
             <h2>Padayon;</h2>
+            <p>{noTransNote}</p>
           </div>
         }
         lowerContent={

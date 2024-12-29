@@ -15,24 +15,59 @@ import NotFound from "./pages/NotFound";
 import Padayon from "./pages/Padayon";
 import Calculators from "./pages/Calculators";
 import Thesis from "./components/Thesis";
+import Testimonials from "./components/Testimonials";
+import "@/fireflies.css";
 
 const App = () => {
-  const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
+  const { selectedTheme, disableTransitions, disableAnimations } =
+    useContext(UserPrefContext);
 
   const conditionalGlobalStyles = `
+    :root,
+    #root,
+    html {
+      --purple:  ${
+        selectedTheme === "Dark" ? "rgb(200, 112, 255)" : "rgb(157, 0, 255)"
+      };
+      --shadow: 0 0 200px 50px ${
+        selectedTheme === "Dark"
+          ? "rgba(217, 156, 255, 0.25)"
+          : "rgba(116, 54, 155, 0.25)"
+      };
+      --shadow-sm: rgba(217, 156, 255, 0.452) 0px 10px 36px 0px,
+        rgba(217, 156, 255, 0.06) 0px 0px 0px 1px;
+    }
+    
     html {
       scroll-behavior: ${disableTransitions ? "auto" : "smooth"};
+      color: ${selectedTheme === "Dark" ? "white" : "black"};
+    }
+
+    .font-extralight, p, h6 {
+      font-weight: ${selectedTheme === "Dark" ? 200 : 400};
+    }
+
+    .font-normal, h2, h4, div, span {
+      font-weight: ${selectedTheme === "Dark" ? 400 : 600};
+    }
+
+    .border-2 {
+      border-width: ${selectedTheme === "Dark" ? "1px" : "2px"};
+    }
+
+    .firefly::before {
+      background: ${selectedTheme === "Dark" ? "black" : "white"};
     }
   `;
+
+  const numOfFireflies = 15;
 
   return (
     <Router>
       <style>{conditionalGlobalStyles}</style>
       <div
         className={`${minWidth} ${
-          selectedTheme === "Dark"
-            ? "bg-black text-white"
-            : "bg-white text-black"
+          selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
         }`}
       >
         <Navbar />
@@ -44,12 +79,15 @@ const App = () => {
               <div>
                 <Hero />
                 <div
-                  className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                  className={`${maxWidth} mx-auto px-4`}
                 >
                   <Skills />
                   <Experience />
                   <Projects />
                   <Thesis />
+                </div>
+                <div className="bg-black">
+                  <Testimonials />
                 </div>
               </div>
             }
@@ -59,7 +97,7 @@ const App = () => {
             path="/skills-list"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <SkillsList />
               </div>
@@ -70,7 +108,7 @@ const App = () => {
             path="/taylor-swift"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <TaylorSwift />
               </div>
@@ -81,7 +119,7 @@ const App = () => {
             path="/filpass-v2-table"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <Table />
               </div>
@@ -92,7 +130,7 @@ const App = () => {
             path="/padayon"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <Padayon />
               </div>
@@ -103,7 +141,7 @@ const App = () => {
             path="/calculators"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <Calculators />
               </div>
@@ -116,6 +154,11 @@ const App = () => {
 
         <Footer />
       </div>
+      {/* fireflies */}
+      {!disableAnimations &&
+        Array.from({ length: numOfFireflies }, (_, i) => (
+          <div key={i} className="firefly"></div>
+        ))}
     </Router>
   );
 };

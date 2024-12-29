@@ -1,6 +1,7 @@
 import {
   boxContainerClassnames,
   EXTRA_HEIGHT,
+  noTransNote,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
   videosContainerClass,
@@ -25,7 +26,7 @@ import { renderLongDesc } from "@/components/functions/renderLongDesc";
 import ProjectDescription from "@/components/ui/ProjectDescription";
 
 const Table = () => {
-  const { setSelectedSection } = useContext(UserPrefContext);
+  const { setSelectedSection, selectedLanguage } = useContext(UserPrefContext);
   const isTablet2 = useMediaQuery("(max-width: 880px)");
 
   useEffect(() => {
@@ -84,7 +85,10 @@ const Table = () => {
       src: "/assets/table/t-date-range.mp4",
       altLink:
         "https://drive.google.com/file/d/1H0bFjv4FcTcTC1J5fdlMF9Zz2Ieblu6d/view?usp=sharing",
-      desc: "Column Filters with Date Range",
+      desc: renderLongDesc(
+        "Column Filters with Date Range",
+        "The date range filter allows the user to set a date range using days, months, and years. They can also use the input fields above the filter to set precise start and end dates. Lastly, the date range filter offers multiple views—days, months, and years—for easy navigation. Note that the dates included in the date range are highlighted in blue. Darker blue tiles for days indicate the start or end day; the darker blue tiles for months indicate that all the days of those months are included in the date range; and the darker blue tiles for years indicate that all the months and their respective days are included in the date range."
+      ),
       thumbnail: "/assets/table/thumbnails/t-date-range-thumbnail.png",
     },
     {
@@ -345,26 +349,39 @@ const Table = () => {
   };
 
   const extraImgs = [
-    "/assets/thumbnail-table.png",
+    "/assets/thumbnails/thumbnail-table.png",
     "/assets/table/thumbnails/t-filter-presets-thumbnail.png",
   ];
+
+  const getFeatures = () => {
+    let features = "Features";
+
+    if (selectedLanguage === "Filipino" || selectedLanguage === "Bisaya") {
+      features = "Mga Feature";
+    }
+    return features;
+  };
+
+  const desc =
+    "The table was one of the most complex components I have created so far. Although there are already a lot of table libraries on the Internet, I had to make sure that the one I chose was easy to customize and implement, hence I chose the TanStack library for this component. It is a headless UI library, which meant I had to code all of the UI from scratch. Because of this, it was very easy to follow the table's design in Figma as I did not have to override any predefined classes as they did not exist in the first place. The library only provided me with convenient functions for sorting, filtering, and other table features, which I was able to easily override and customize to meet the growing specifications required by the product owner. Had I chosen another library that conveniently gives the codes for its UI and functions for me to simply copy and paste, I would have had a difficult time trying to customize the table to match its Figma designs and expected functionalities.";
 
   return (
     <div className={sectionPaddingClassnames}>
       <ProjectDescription
         img=""
-        desc="The table was one of the most complex components I have created so far. Although there are already a lot of table libraries on the Internet, I had to make sure that the one I chose was easy to customize and implement, hence I chose the TanStack library for this component. It is a headless UI library, which meant I had to code all of the UI from scratch. Because of this, it was very easy to follow the table's design in Figma as I did not have to override any predefined classes as they did not exist in the first place. The library only provided me with convenient functions for sorting, filtering, and other table features, which I was able to easily override and customize to meet the growing specifications required by the product owner. Had I chosen another library that conveniently gives the codes for its UI and functions for me to simply copy and paste, I would have had a difficult time trying to customize the table to match its Figma designs and expected functionalities."
+        desc={{ English: desc, Filipino: desc, Bisaya: desc }}
         techUsed="Next.js, TypeScript, Tailwind CSS, Bitbucket, Jira"
         index={0}
         carousel={extraImgs}
         upperContent={
           <div className={`${sectionTitleContainerClassnames} mb-8`}>
             <h2>FilPass V2 Table</h2>
+            <p>{noTransNote}</p>
           </div>
         }
         lowerContent={
           <div className="text-center mt-16">
-            <h2>Features</h2>
+            <h2>{getFeatures()}</h2>
           </div>
         }
         isDescLong={true}

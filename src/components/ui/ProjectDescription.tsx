@@ -1,9 +1,16 @@
 import { ProjectsInterface } from "../Projects";
 import Button from "./Button";
 import useMediaQuery from "@/hooks/useMediaQuery";
-import { ReactNode, useState } from "react";
+import { ReactNode, useContext, useState } from "react";
 import Carousel from "./Carousel";
-import { getConditionalSmoothTransition, imgClassnames } from "@/shared";
+import {
+  getConditionalSmoothTransition,
+  getVariants,
+  imgClassnames,
+  redirectToNewPage,
+} from "@/shared";
+import { motion } from "framer-motion";
+import { UserPrefContext } from "@/context/UserPrefContext";
 
 interface ProjectExtraInfo {
   index: number;
@@ -22,11 +29,12 @@ const ProjectDescription = ({
   learnMoreLink,
   linkedInLink,
   carousel,
-  isDescLong,
+  // isDescLong,
   upperContent,
   lowerContent,
   extraImgs,
 }: ProjectDescription) => {
+  const { disableAnimations, selectedLanguage } = useContext(UserPrefContext);
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");
   const [showCarousel, setShowCarousel] = useState(false);
@@ -47,15 +55,72 @@ const ProjectDescription = ({
     );
   };
 
+  const Wrapper = disableAnimations ? "div" : motion.div;
+
+  const getTechnologiesUsed = () => {
+    let title = "Technologies Used";
+    if (selectedLanguage === "Filipino") {
+      title = "Mga teknolohiyang ginamit";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Mga teknolohiya nga gigamit";
+    }
+
+    return title;
+  };
+
+  const translatedDesc =
+    typeof desc[selectedLanguage] === "string" ? (
+      <h6>{desc[selectedLanguage]}</h6>
+    ) : (
+      desc[selectedLanguage]
+    );
+
+  const getLearnMore = () => {
+    let title = "Learn more";
+    if (selectedLanguage === "Filipino") {
+      title = "Alamin pa";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Hibal-i pa";
+    }
+
+    return title;
+  };
+
+  const getVisitWebsite = () => {
+    let title = "Visit website";
+    if (selectedLanguage === "Filipino") {
+      title = "Bisitahin ang website";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Bisita sa website";
+    }
+
+    return title;
+  };
+
+  const getviewPostOnLinkedIn = () => {
+    let title = "View post on LinkedIn";
+    if (selectedLanguage === "Filipino") {
+      title = "Tingnan ang LinkedIn post";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Tan-awa ang LinkedIn post";
+    }
+
+    return title;
+  };
+
   return (
     <>
-      <div>
+      <Wrapper
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.5 }}
+        variants={getVariants(index)}
+      >
         {upperContent}
         <div key={img} className="flex flex-col gap-4">
           <div
-            className={`flex gap-8 ${isDescLong ? "items-center" : ""} ${
-              isTablet ? "flex-col" : ""
-            }`}
+            className={`flex gap-8 items-center ${isTablet ? "flex-col" : ""}`}
           >
             <div
               className={`${
@@ -75,11 +140,7 @@ const ProjectDescription = ({
                 index % 2 === 1 || isTablet ? "order-1" : "order-2"
               }`}
             >
-              {typeof desc === "string" ? (
-                <h6 className="font-extralight">{desc}</h6>
-              ) : (
-                desc
-              )}
+              {translatedDesc}
               <div
                 className={`flex ${
                   !isTablet || isPhone
@@ -89,8 +150,8 @@ const ProjectDescription = ({
               >
                 {techUsed && (
                   <div className="flex flex-col text-purple">
-                    <p>Technologies used:</p>
-                    <p className="font-extralight italic">{techUsed}</p>
+                    <p className="font-normal">{getTechnologiesUsed()}:</p>
+                    <p className="italic">{techUsed}</p>
                   </div>
                 )}
                 {(websiteLink || learnMoreLink || linkedInLink) && (
@@ -99,18 +160,6 @@ const ProjectDescription = ({
                       isPhone ? "flex-col gap-2 items-center" : "gap-4"
                     }`}
                   >
-                    {websiteLink && (
-                      <Button
-                        onClick={() =>
-                          window.open(
-                            `${websiteLink}`,
-                            "_blank",
-                            "noopener,noreferrer"
-                          )
-                        }
-                        content="Visit website"
-                      />
-                    )}
                     {learnMoreLink && (
                       <a href={learnMoreLink}>
                         <Button
@@ -120,20 +169,22 @@ const ProjectDescription = ({
                             //   window.scrollTo(0, 0);
                             // }, 100);
                           }}
-                          content="Learn more"
+                          content={getLearnMore()}
                         />
                       </a>
                     )}
+                    {websiteLink && (
+                      <Button
+                        onClick={() => redirectToNewPage(websiteLink)}
+                        content={getVisitWebsite()}
+                        isExternal={true}
+                      />
+                    )}
                     {linkedInLink && (
                       <Button
-                        onClick={() =>
-                          window.open(
-                            `${linkedInLink}`,
-                            "_blank",
-                            "noopener,noreferrer"
-                          )
-                        }
-                        content="View post on LinkedIn"
+                        onClick={() => redirectToNewPage(linkedInLink)}
+                        content={getviewPostOnLinkedIn()}
+                        isExternal={true}
                       />
                     )}
                   </div>
@@ -143,7 +194,7 @@ const ProjectDescription = ({
           </div>
         </div>
         {lowerContent}
-      </div>
+      </Wrapper>
 
       <Carousel
         imgIdx={imgIdx}

@@ -16,63 +16,69 @@ import {
 import Button from "../components/ui/Button";
 import { renderSkills } from "../components/functions/renderSkills";
 import { UserPrefContext } from "@/context/UserPrefContext";
+import { AvailableLanguagesType } from "@/types";
 
 const SkillsList = () => {
-  const { selectedTheme, setSelectedSection } = useContext(UserPrefContext);
+  const {
+    selectedTheme,
+    setSelectedSection,
+    disableAnimations,
+    selectedLanguage,
+  } = useContext(UserPrefContext);
 
   useEffect(() => {
     setSelectedSection("");
   }, [setSelectedSection]);
 
   const pl = [
-    { name: "TypeScript", src: "/assets/pl-typescript.png" },
-    { name: "JavaScript", src: "/assets/pl-javascript.png" },
-    { name: "C", src: "/assets/pl-c.png" },
-    { name: "Python", src: "/assets/pl-python.png" },
-    { name: "Java", src: "/assets/pl-java.png" },
-    { name: "C#", src: "/assets/pl-csharp.png" },
-    { name: "PHP", src: "/assets/pl-php.png" },
+    { name: "TypeScript", src: "/assets/skills/pl-typescript.png" },
+    { name: "JavaScript", src: "/assets/skills/pl-javascript.png" },
+    { name: "C", src: "/assets/skills/pl-c.png" },
+    { name: "Python", src: "/assets/skills/pl-python.png" },
+    { name: "Java", src: "/assets/skills/pl-java.png" },
+    { name: "C#", src: "/assets/skills/pl-csharp.png" },
+    { name: "PHP", src: "/assets/skills/pl-php.png" },
   ];
   const wdFront = [
-    { name: "HTML", src: "/assets/wd-html.png" },
-    { name: "CSS", src: "/assets/wd-css.svg" },
-    { name: "SCSS", src: "/assets/wd-scss.svg" },
-    { name: "TypeScript", src: "/assets/pl-typescript.png" },
-    { name: "JavaScript", src: "/assets/pl-javascript.png" },
-    { name: "React", src: "/assets/wd-react.png" },
-    { name: "Flask", src: "/assets/wd-flask.png" },
+    { name: "HTML", src: "/assets/skills/wd-html.png" },
+    { name: "CSS", src: "/assets/skills/wd-css.svg" },
+    { name: "SCSS", src: "/assets/skills/wd-scss.svg" },
+    { name: "TypeScript", src: "/assets/skills/pl-typescript.png" },
+    { name: "JavaScript", src: "/assets/skills/pl-javascript.png" },
+    { name: "React", src: "/assets/skills/wd-react.png" },
+    { name: "Flask", src: "/assets/skills/wd-flask.png" },
     {
       name: "Next.js",
       src: selectedTheme
-        ? "/assets/wd-nextjs-white.png"
-        : "/assets/wd-nextjs-black.svg",
+        ? "/assets/skills/wd-nextjs-white.png"
+        : "/assets/skills/wd-nextjs-black.svg",
     },
   ];
   const wdBack = [
-    { name: "Node.js", src: "/assets/wd-node.webp" },
-    { name: "SQL", src: "/assets/wd-sql.png" },
-    { name: "NoSQL", src: "/assets/wd-nosql.png" },
-    { name: "MongoDB", src: "/assets/wd-mongodb.png" },
-    { name: "Express.js", src: "/assets/wd-expressjs.webp" },
-    { name: "Prisma", src: "/assets/wd-prisma.png" },
+    { name: "Node.js", src: "/assets/skills/wd-node.webp" },
+    { name: "SQL", src: "/assets/skills/wd-sql.png" },
+    { name: "NoSQL", src: "/assets/skills/wd-nosql.png" },
+    { name: "MongoDB", src: "/assets/skills/wd-mongodb.png" },
+    { name: "Express.js", src: "/assets/skills/wd-expressjs.webp" },
+    { name: "Prisma", src: "/assets/skills/wd-prisma.png" },
   ];
   const flt = [
-    { name: "React", src: "/assets/wd-react.png" },
-    { name: "Flask", src: "/assets/wd-flask.png" },
-    { name: "Django", src: "/assets/flt-django.png" },
-    { name: "jQuery", src: "/assets/flt-jquery.svg" },
-    { name: "Git", src: "/assets/flt-git.png" },
-    { name: "GitHub", src: "/assets/flt-github.png" },
-    { name: "Bitbucket", src: "/assets/flt-bitbucket.webp" },
-    { name: "Bootstrap", src: "/assets/flt-bootstrap.png" },
-    { name: "Tailwind CSS", src: "/assets/flt-tailwind.png" },
-    { name: "Figma", src: "/assets/flt-figma.png" },
-    { name: "Jupyter", src: "/assets/flt-jupyter.svg" },
-    { name: "MySQL Workbench", src: "/assets/flt-workbench.png" },
-    { name: "ASP.net", src: "/assets/flt-aspnet.png" },
-    { name: "Firebase", src: "/assets/flt-firebase.webp" },
-    { name: "Jira", src: "/assets/flt-jira.png" },
-    { name: "Storybook", src: "/assets/flt-storybook.png" },
+    { name: "React", src: "/assets/skills/wd-react.png" },
+    { name: "Flask", src: "/assets/skills/wd-flask.png" },
+    { name: "Django", src: "/assets/skills/flt-django.png" },
+    { name: "jQuery", src: "/assets/skills/flt-jquery.svg" },
+    { name: "Git", src: "/assets/skills/flt-git.png" },
+    { name: "GitHub", src: "/assets/skills/flt-github.png" },
+    { name: "Bitbucket", src: "/assets/skills/flt-bitbucket.webp" },
+    { name: "Bootstrap", src: "/assets/skills/flt-bootstrap.png" },
+    { name: "Tailwind CSS", src: "/assets/skills/flt-tailwind.png" },
+    { name: "Figma", src: "/assets/skills/flt-figma.png" },
+    { name: "Jupyter", src: "/assets/skills/flt-jupyter.svg" },
+    { name: "MySQL Workbench", src: "/assets/skills/flt-workbench.png" },
+    { name: "ASP.net", src: "/assets/skills/flt-aspnet.png" },
+    { name: "Firebase", src: "/assets/skills/flt-firebase.webp" },
+    { name: "Jira", src: "/assets/skills/flt-jira.png" },
+    { name: "Storybook", src: "/assets/skills/flt-storybook.png" },
   ];
   const cw = [
     {
@@ -110,63 +116,111 @@ const SkillsList = () => {
   const [cwContainerHeight, setCwContainerHeight] = useState(0);
   useHeightResize({ ref: cwContainerRef, setHeight: setCwContainerHeight });
 
+  const getTitle = () => {
+    let title = "All skills";
+    if (selectedLanguage === "Filipino") {
+      title = "Lahat ng Kasanayan";
+    }
+
+    return title;
+  };
+
+  const boxLabels: Record<AvailableLanguagesType, string[]> = {
+    English: [
+      "Programming Languages",
+      "Web Development",
+      "Frameworks, Libraries, and Tools",
+      "Coursework",
+    ],
+    Filipino: [
+      "Mga Programming Language",
+      "Web Development",
+      "Mga Framework, Library, at Kagamitan",
+      "Mga Kurso",
+    ],
+    Bisaya: [
+      "Mga Programming Language",
+      "Web Development",
+      "Mga Framework, Library, ug Kagamitan",
+      "Mga Kurso",
+    ],
+  };
+
+  const getButtonTitle = () => {
+    let title = "Go back";
+    if (selectedLanguage === "Filipino") {
+      title = "Bumalik";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Mubalik";
+    }
+
+    return title;
+  };
+
   return (
     <div className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h2>All Skills</h2>
+        <h2>{getTitle()}</h2>
       </div>
       <div className={boxContainerClassnames}>
         <Box
           key="programmingLanguages"
-          title="Programming Languages"
+          title={boxLabels[selectedLanguage][0]}
           isFoldable={true}
           childrenHeight={plContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={plContainerRef} className={itemsContainerClass}>
-            {renderSkills(pl)}
+            {renderSkills(pl, disableAnimations)}
           </div>
         </Box>
         <Box
           key="webDevelopment"
-          title="Web Development"
+          title={boxLabels[selectedLanguage][1]}
           isFoldable={true}
           childrenHeight={wdContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={wdContainerRef} className="flex flex-col gap-8">
             <div className="flex flex-col gap-4">
-              <h6 className="text-center">Frontend</h6>
-              <div className={itemsContainerClass}>{renderSkills(wdFront)}</div>
+              <h6 className="text-center font-normal">Frontend</h6>
+              <div className={itemsContainerClass}>
+                {renderSkills(wdFront, disableAnimations)}
+              </div>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h6 className="text-center">Backend</h6>
-              <div className={itemsContainerClass}>{renderSkills(wdBack)}</div>
+              <h6 className="text-center font-normal">Backend</h6>
+              <div className={itemsContainerClass}>
+                {renderSkills(wdBack, disableAnimations)}
+              </div>
             </div>
           </div>
         </Box>
         <Box
           key="frameworksLibrariesAndTools"
-          title="Frameworks, Libraries, and Tools"
+          title={boxLabels[selectedLanguage][2]}
           isFoldable={true}
           childrenHeight={fltContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={fltContainerRef} className={itemsContainerClass}>
-            {renderSkills(flt)}
+            {renderSkills(flt, disableAnimations)}
           </div>
         </Box>
         <Box
           key="coursework"
-          title="Coursework"
+          title={boxLabels[selectedLanguage][3]}
           isFoldable={true}
           childrenHeight={cwContainerHeight - EXTRA_HEIGHT}
         >
           <div ref={cwContainerRef} className={itemsContainerClass}>
-            {renderSkills(cw)}
+            {renderSkills(cw, disableAnimations)}
           </div>
         </Box>
       </div>
       <div className="flex justify-center">
-        <Button onClick={() => window.history.back()} content="Go back" />
+        <Button
+          onClick={() => window.history.back()}
+          content={getButtonTitle()}
+        />
       </div>
     </div>
   );

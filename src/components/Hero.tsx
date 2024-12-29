@@ -1,11 +1,15 @@
 import Button from "./ui/Button";
-import { IoMail } from "react-icons/io5";
-import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import {
-  getConditionalSmoothTransition,
+  camelToTitleCase,
+  CVFilename,
+  CVFilepath,
+  getVariants,
   languages,
   maxWidth,
   minWidth,
+  redirectToNewPage,
+  translatedSections,
+  viewCVLink,
 } from "@/shared";
 import { useContext, useRef, useState } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
@@ -15,6 +19,17 @@ import { AvailableLanguagesType } from "@/types";
 import useHeightResize from "@/hooks/useHeightResize";
 import SingleCheckbox from "./ui/SingleCheckbox";
 import useHighlightSection from "@/hooks/useHighlightSection";
+import { renderSocials } from "./functions/renderSocials";
+import { motion } from "framer-motion";
+import {
+  getAnimationsLabel,
+  getDownloadCVLabel,
+  getIntro,
+  getTransitionsLabel,
+  getValueProp,
+  getViewCVLabel,
+} from "@/data/getHeroData";
+import Carousel from "./ui/Carousel";
 
 const Hero = () => {
   const {
@@ -27,7 +42,7 @@ const Hero = () => {
     selectedTheme,
     setSelectedSection,
   } = useContext(UserPrefContext);
-  const marginTop = "mt-[66px]";
+  const marginTop = "mt-[66px]"; // navbar height
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isTablet2 = useMediaQuery("(max-width: 800px)");
   const isPhone = useMediaQuery("(max-width: 660px)");
@@ -39,9 +54,14 @@ const Hero = () => {
   const [heroImageHeight, setHeroImageHeight] = useState(700);
   useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
 
-  const onHoverStyle = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-    disableTransitions
-  )}`;
+  const getCVButtonsStyles = () => {
+    let style = "";
+    if (selectedLanguage !== "English" && isTablet) style = "flex-col";
+    if (isTablet2) style = "";
+    if (isPhone) style = "flex-col items-center";
+
+    return style;
+  };
 
   const renderIntroduction = () => {
     return (
@@ -50,144 +70,157 @@ const Hero = () => {
           isTablet2 ? "items-center text-center" : ""
         }`}
       >
-        <h4 className="font-extralight">
-          I am <span className="font-normal">Ernest Curativo</span>—a{" "}
-          <span className="text-purple">software engineer</span> in{" "}
-          <span className="whitespace-nowrap">Cebu, Philippines.</span>
-        </h4>
-        <div className={`flex gap-2 ${isPhone ? "flex-col items-center" : ""}`}>
-          <Button
-            onClick={() =>
-              window.open(
-                "https://drive.google.com/file/d/1ta_HLzIx5MN4DGbTTlYkPlWe12cfC23O/view?usp=sharing",
-                "_blank",
-                "noopener,noreferrer"
-              )
-            }
-            content="View CV"
-          />
-          <a
-            href="/src/data/Curativo-CV.pdf" // Path to the PDF file
-            download="Curativo-CV.pdf" // File name for the download
-          >
-            <Button onClick={() => null} content="Download CV" />
+        {getIntro(selectedLanguage)}
+        <div className={`flex gap-2 ${getCVButtonsStyles()}`}>
+          <a href={CVFilepath} download={CVFilename}>
+            <Button
+              onClick={() => null}
+              content={getDownloadCVLabel(selectedLanguage)}
+            />
           </a>
+          <Button
+            onClick={() => redirectToNewPage(viewCVLink)}
+            content={getViewCVLabel(selectedLanguage)}
+            isExternal={true}
+          />
         </div>
       </div>
     );
   };
 
+  const sectionId = translatedSections.Home[selectedLanguage];
+
   const homeRef = useRef<HTMLDivElement | null>(null);
   useHighlightSection({
     ref: homeRef,
     setSection: setSelectedSection,
-    section: "Home",
+    section: camelToTitleCase(sectionId),
+    selectedLanguage,
   });
 
+  const Wrapper = disableAnimations ? "div" : motion.div;
+
+  const [showCarousel, setShowCarousel] = useState(false);
+  const [imgIdx, setImgIdx] = useState(-1);
+  const heroProfileImg = "/assets/hero/hero-me.jpg";
+
   return (
-    <div id="home" className="border-[0.5px] border-black">
+    <>
       <div
-        ref={homeRef}
-        className={`relative ${marginTop} ${minWidth}`}
-        style={{
-          backgroundImage: `url(${
-            selectedTheme === "Dark"
-              ? "/assets/background-transparent-black.png"
-              : "/assets/background-transparent-white.png"
-          })`,
-          backgroundSize: "cover",
-          // backgroundSize: "auto",
-          // backgroundRepeat: "repeat",
-          backgroundPosition: "center",
-          height: heroImageHeight,
-        }}
+        id={sectionId}
+        className={`border-[0.5px] ${
+          selectedTheme === "Dark" ? "border-black" : "border-white"
+        }`}
       >
         <div
-          ref={heroInfoContainerRef}
-          className={`absolute z-30 left-0 right-0 gap-12 flex px-4 justify-between top-1/2 -translate-y-1/2 ${
-            !isTablet ? "" : "flex-col"
-          } ${maxWidth} ${minWidth} mx-auto`}
+          ref={homeRef}
+          className={`relative ${marginTop} ${minWidth}`}
+          style={{
+            backgroundImage: `url(${
+              selectedTheme === "Dark"
+                ? "/assets/hero/background-transparent-black.png"
+                : "/assets/hero/background-transparent-purple-light.png"
+            })`,
+            backgroundSize: "cover",
+            // backgroundSize: "auto",
+            // backgroundRepeat: "repeat",
+            backgroundPosition: "center",
+            height: heroImageHeight,
+          }}
         >
           <div
-            className={`flex gap-16 flex-col ${
-              isTablet2 ? "text-center" : "max-w-[800px]"
-            }`}
+            ref={heroInfoContainerRef}
+            className={`absolute z-30 left-0 right-0 gap-12 flex px-4 justify-between top-1/2 -translate-y-1/2 ${
+              !isTablet ? "" : "flex-col"
+            } ${maxWidth} ${minWidth} mx-auto`}
           >
-            <h1>
-              Transforming your ideas into{" "}
-              <span className="text-purple font-extralight italic">
-                elegant
-              </span>{" "}
-              <span className="whitespace-nowrap">code and</span>{" "}
-              <span className="text-purple font-extralight italic">
-                meaningful
-              </span>{" "}
-              creations
-            </h1>
-
-            {!isTablet && renderIntroduction()}
-          </div>
-
-          <div
-            className={`flex ${
-              !isTablet || isTablet2
-                ? "flex-col justify-between items-center gap-12"
-                : "gap-24"
-            } flex-shrink-0`}
-          >
-            <div className="flex flex-col gap-4 flex-shrink-0">
-              <img
-                src="/assets/hero-me.jpg"
-                alt=""
-                width={!isPhone && !isLandscapePhone ? 300 : 250}
-                height={!isPhone && !isLandscapePhone ? 300 : 250}
-                className="rounded-full shadow-custom"
-              />
-              <div className="flex gap-3 justify-center">
-                <IoMail size={25} className={onHoverStyle} />
-                <FaGithub size={25} className={onHoverStyle} />
-                <FaLinkedin size={25} className={onHoverStyle} />
-                <FaInstagram size={25} className={onHoverStyle} />
-              </div>
-            </div>
-
-            <div
-              className={`flex flex-col ${
-                !isTablet ? "items-center" : "justify-between"
-              } gap-24`}
+            <Wrapper
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5 }}
+              variants={getVariants(0)}
+              className={`flex gap-16 flex-col ${
+                isTablet2 ? "text-center" : "max-w-[800px]"
+              }`}
             >
-              {isTablet && renderIntroduction()}
-              <div
-                className={`flex gap-2 flex-col ${
-                  isTablet && !isTablet2 ? "" : "items-center"
-                }`}
-              >
-                <SingleCheckbox
-                  state={disableTransitions}
-                  setState={setDisableTransitions}
-                  label="Disable transitions"
+              {getValueProp(selectedLanguage)}
+              {!isTablet && renderIntroduction()}
+            </Wrapper>
+
+            <Wrapper
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              variants={getVariants(1)}
+              className={`flex ${
+                !isTablet || isTablet2
+                  ? "flex-col justify-between items-center gap-12"
+                  : "gap-24"
+              } flex-shrink-0`}
+            >
+              <div className="flex flex-col gap-4 flex-shrink-0">
+                <img
+                  onClick={() => {
+                    setShowCarousel(true);
+                    setImgIdx(0);
+                  }}
+                  src={heroProfileImg}
+                  alt=""
+                  width={!isPhone && !isLandscapePhone ? 300 : 250}
+                  height={!isPhone && !isLandscapePhone ? 300 : 250}
+                  className="rounded-full shadow-custom hover:cursor-pointer"
                 />
-                <SingleCheckbox
-                  state={disableAnimations}
-                  setState={setDisableAnimations}
-                  label="Disable animations"
-                />
-                <Select
-                  selectedOption={selectedLanguage}
-                  options={languages.map((language) => ({
-                    label: language,
-                    value: language,
-                  }))}
-                  onChange={(value) =>
-                    setSelectedLanguage(value as AvailableLanguagesType)
-                  }
-                />
+                {renderSocials(disableTransitions)}
               </div>
-            </div>
+
+              <div
+                className={`flex flex-col ${
+                  !isTablet ? "items-center" : "justify-between"
+                } gap-24`}
+              >
+                {isTablet && renderIntroduction()}
+                <div
+                  className={`flex gap-2 flex-col ${
+                    isTablet && !isTablet2 ? "" : "items-center"
+                  }`}
+                >
+                  <SingleCheckbox
+                    state={disableTransitions}
+                    setState={setDisableTransitions}
+                    label={getTransitionsLabel(selectedLanguage)}
+                  />
+                  <SingleCheckbox
+                    state={disableAnimations}
+                    setState={setDisableAnimations}
+                    label={getAnimationsLabel(selectedLanguage)}
+                  />
+                  <Select
+                    selectedOption={selectedLanguage}
+                    options={languages.map((language) => ({
+                      label: language,
+                      value: language,
+                    }))}
+                    onChange={(value) =>
+                      setSelectedLanguage(value as AvailableLanguagesType)
+                    }
+                  />
+                </div>
+              </div>
+            </Wrapper>
           </div>
         </div>
       </div>
-    </div>
+
+      <Carousel
+        imgIdx={imgIdx}
+        setImgIdx={setImgIdx}
+        carousel={[heroProfileImg]}
+        showCarousel={showCarousel}
+        setShowCarousel={setShowCarousel}
+      />
+    </>
   );
 };
 

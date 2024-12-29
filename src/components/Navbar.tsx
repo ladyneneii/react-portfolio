@@ -1,21 +1,29 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { getConditionalSmoothTransition, languages, maxWidth } from "../shared";
+import {
+  camelToTitleCase,
+  getConditionalSmoothTransition,
+  getHoverStyles,
+  languages,
+  maxWidth,
+  translatedSections,
+} from "../shared";
 import { IoClose } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import Radio from "./ui/Radio";
 import Toggle from "./ui/Toggle";
-import { SectionsType } from "@/types";
 import SingleCheckbox from "./ui/SingleCheckbox";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Dropdown from "./ui/Dropdown";
+import { getAnimationsLabel, getTransitionsLabel } from "@/data/getHeroData";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 const Navbar = () => {
   // LANGUAGE & DISABLE TRANSITIONS
@@ -32,14 +40,9 @@ const Navbar = () => {
     setSelectedSection,
   } = useContext(UserPrefContext);
 
-  const sections: SectionsType[] = [
-    "Home",
-    "Skills",
-    "Experience",
-    "Projects",
-    "Thesis",
-    "Testimonials",
-  ];
+  const sections = Object.values(translatedSections)
+    .map((translations) => translations[selectedLanguage])
+    .slice(0, -1);
 
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");
@@ -54,18 +57,18 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const navigateToSection = (section: SectionsType) => {
-    const sectionHash = `#${
-      section.charAt(0).toLowerCase() + section.slice(1)
-    }`;
+  const navigateToSection = (section: string) => {
+    // const sectionHash = `#${
+    //   section.charAt(0).toLowerCase() + section.slice(1)
+    // }`;
+    const sectionHash = `#${section}`;
 
     // this should come BEFORE navigate() so currentUrl gets the url of the non-root page
     const currentUrl = window.location.href;
-    console.log(currentUrl);
     const delay = currentUrl.includes("/#") ? 100 : 800;
 
     navigate(`/${sectionHash}`); // Navigate to root with hash
-    setSelectedSection(section);
+    setSelectedSection(camelToTitleCase(section));
     setShowNavbar(false);
 
     // Delay scroll to allow page navigation
@@ -80,20 +83,16 @@ const Navbar = () => {
     }, delay); // Longer delay to allow resizing to finish so it is able to navigate to the right section
   };
 
-  const onHoverStyle = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-    disableTransitions
-  )}`;
-
   const renderLinks = () => {
     return sections.map((section) => (
       <div
         key={section}
         onClick={() => navigateToSection(section)}
-        className={`${onHoverStyle} ${
-          selectedSection === section ? "text-purple" : ""
+        className={`${getHoverStyles(disableTransitions)} ${
+          selectedSection === camelToTitleCase(section) ? "text-purple" : ""
         }`}
       >
-        {section}
+        {camelToTitleCase(section)}
       </div>
     ));
   };
@@ -123,23 +122,26 @@ const Navbar = () => {
           <SingleCheckbox
             state={disableTransitions}
             setState={setDisableTransitions}
-            label="Disable transitions"
+            label={getTransitionsLabel(selectedLanguage)}
           />
           <SingleCheckbox
             state={disableAnimations}
             setState={setDisableAnimations}
-            label="Disable animations"
+            label={getAnimationsLabel(selectedLanguage)}
           />
         </div>
       </div>
     );
-  }
+  };
+
+  const mobNavbarRef = useRef<HTMLDivElement>(null);
+  useOutsideClick({ ref: mobNavbarRef, setVisibility: setShowNavbar });
 
   return (
     <div className="whitespace-nowrap">
       <div
         className={`${
-          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+          selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
         } fixed top-0 left-0 right-0 z-[100] ${getConditionalSmoothTransition(
           disableTransitions
         )}`}
@@ -150,8 +152,8 @@ const Navbar = () => {
           <div>
             {window.location.pathname === "/" ? (
               <img
-                onClick={() => navigateToSection("Home")}
-                src={"/assets/logo-transparent.png"}
+                onClick={() => navigateToSection("home")}
+                src={"/assets/navbar/logo-transparent.png"}
                 alt=""
                 width={50}
                 height={50}
@@ -161,7 +163,9 @@ const Navbar = () => {
               <div
                 className={`rounded-full w-[50px] h-[50px] border-2 ${
                   selectedTheme === "Dark" ? "border-white" : "border-black"
-                } flex justify-center items-center ${onHoverStyle} hover:border-purple`}
+                } flex justify-center items-center ${getHoverStyles(
+                  disableTransitions
+                )} hover:border-purple`}
               >
                 <IoArrowBack onClick={() => window.history.back()} size={25} />
               </div>
@@ -171,7 +175,7 @@ const Navbar = () => {
             <div
               className={`flex gap-16 ${getConditionalSmoothTransition(
                 disableTransitions
-              )} items-center`}
+              )} items-center justify-between`}
             >
               {renderLinks()}
             </div>
@@ -186,7 +190,10 @@ const Navbar = () => {
               />
               <Dropdown
                 trigger={
-                  <BsThreeDotsVertical size={35} className={onHoverStyle} />
+                  <BsThreeDotsVertical
+                    size={35}
+                    className={getHoverStyles(disableTransitions)}
+                  />
                 }
                 content={renderExtraFeatures()}
                 position="right-2 top-12"
@@ -197,7 +204,7 @@ const Navbar = () => {
             <RxHamburgerMenu
               onClick={() => setShowNavbar(!showNavbar)}
               size={35}
-              className={onHoverStyle}
+              className={getHoverStyles(disableTransitions)}
             />
           )}
         </div>
@@ -205,10 +212,11 @@ const Navbar = () => {
 
       {/* SMALLER SCREENS */}
       <div
+        ref={mobNavbarRef}
         className={`fixed right-0 top-0 bottom-0 ${
           !disableTransitions ? "transition-all duration-500" : ""
         } flex flex-col justify-between overflow-auto gap-16 z-[100] ${
-          selectedTheme === "Dark" ? "bg-black" : "bg-white"
+          selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
         } ${handleShowNavbar()}`}
       >
         <div>
@@ -222,7 +230,7 @@ const Navbar = () => {
             <IoClose
               onClick={() => setShowNavbar(false)}
               size={35}
-              className={onHoverStyle}
+              className={getHoverStyles(disableTransitions)}
             />
           </div>
           <div
@@ -234,9 +242,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-12">
-          {renderExtraFeatures()}
-        </div>
+        <div className="flex flex-col gap-12">{renderExtraFeatures()}</div>
       </div>
     </div>
   );

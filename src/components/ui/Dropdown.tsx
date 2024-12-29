@@ -24,9 +24,9 @@ const Dropdown = ({ trigger, content, position, dropdownHeight }: Props) => {
         className={`absolute rounded-lg flex flex-col justify-center border-2 ${
           selectedTheme === "Dark"
             ? "bg-black border-white"
-            : "bg-white border-black"
+            : "bg-purpleLight border-black"
         } ${position} ${getConditionalSmoothTransition(disableTransitions)} ${
-          showDropdown ? "p-2" : ""
+          showDropdown ? "px-4" : ""
         } ${showDropdown ? "opacity-100" : "opacity-0 invisible"}`}
         style={{ height: showDropdown ? dropdownHeight : 0 }}
       >

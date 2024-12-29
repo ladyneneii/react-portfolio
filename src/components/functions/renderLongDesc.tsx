@@ -5,14 +5,14 @@ export const renderLongDesc = (
 ) => {
   return (
     <div className="flex flex-col gap-2">
-      <p>{title}</p>
-      <div
-        className={`text-sm font-extralight leading-[24px] ${
+      <p className="font-normal">{title}</p>
+      <p
+        className={`text-sm font-extralight leading-[28px] ${
           !isCentered ? "text-justify" : "text-center"
         }`}
       >
         {desc}
-      </div>
+      </p>
     </div>
   );
 };

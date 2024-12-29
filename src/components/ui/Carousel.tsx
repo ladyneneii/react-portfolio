@@ -1,5 +1,5 @@
 import { UserPrefContext } from "@/context/UserPrefContext";
-import { getConditionalSmoothTransition } from "@/shared";
+import { getHoverStyles } from "@/shared";
 import { useCallback, useContext, useEffect, useRef } from "react";
 import { IoClose } from "react-icons/io5";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
@@ -20,7 +20,7 @@ const Carousel = ({
   showCarousel,
   setShowCarousel,
 }: Props) => {
-  const { disableTransitions } = useContext(UserPrefContext);
+  const { disableTransitions, selectedTheme } = useContext(UserPrefContext);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const refLeft = useRef<HTMLDivElement | null>(null);
   const refRight = useRef<HTMLDivElement | null>(null);
@@ -76,17 +76,16 @@ const Carousel = ({
     };
   }, [showCarousel, handleKeyDown]);
 
-  const textHoverClassnames = `hover:cursor-pointer hover:text-purple ${getConditionalSmoothTransition(
-    disableTransitions
-  )}`;
-  const buttonContainer = "rounded-full bg-black/90 p-3";
+  const color =
+    selectedTheme === "Dark" ? "bg-black/90" : "bg-[rgb(239,213,255,0.9)]";
+  const buttonContainer = `rounded-full ${color} p-3`;
 
   return (
     showCarousel && (
       // has to be z-[1000] so it goes above the modal-open (pointer-events: none) class in the body
-      <div className="fixed top-0 bottom-0 left-0 right-0 bg-black/90 z-[1000] flex items-center justify-center pointer-events-auto">
+      <div className={`fixed top-0 bottom-0 left-0 right-0 ${color} z-[1000] flex items-center justify-center pointer-events-auto`}>
         <div
-          className={`absolute top-2 right-2 ${buttonContainer} ${textHoverClassnames}`}
+          className={`absolute top-2 right-2 ${buttonContainer} ${getHoverStyles(disableTransitions)}`}
         >
           <IoClose onClick={() => setShowCarousel(false)} size={35} />
         </div>
@@ -104,13 +103,13 @@ const Carousel = ({
           <>
             <div
               ref={refLeft}
-              className={`absolute top-1/2 transform -translate-y-1/2 z-[200] left-2 ${buttonContainer} ${textHoverClassnames}`}
+              className={`absolute top-1/2 transform -translate-y-1/2 z-[200] left-2 ${buttonContainer} ${getHoverStyles(disableTransitions)}`}
             >
               <FaChevronLeft onClick={handlePrev} size={30} />
             </div>
             <div
               ref={refRight}
-              className={`absolute top-1/2 transform -translate-y-1/2 z-[200] right-2 ${buttonContainer} ${textHoverClassnames}`}
+              className={`absolute top-1/2 transform -translate-y-1/2 z-[200] right-2 ${buttonContainer} ${getHoverStyles(disableTransitions)}`}
             >
               <FaChevronRight onClick={handleNext} size={30} />
             </div>
