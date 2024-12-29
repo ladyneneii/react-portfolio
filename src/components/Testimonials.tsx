@@ -197,7 +197,7 @@ const Testimonials = () => {
         style={{ height: getBgImgHeight() }}
       >
         <div
-          className={`${sectionPaddingClassnames} px-4 max-h-[1000px]`}
+          className={`${sectionPaddingClassnames} px-4 h-[1000px]`}
           style={{
             backgroundImage: `url("/assets/testimonials/testimonials-bg-2.png")`,
             backgroundSize: "cover",
