@@ -1,10 +1,12 @@
 import {
   boxContainerClassnames,
+  camelToTitleCase,
   EXTRA_HEIGHT,
   sectionPaddingClassnames,
   sectionTitleContainerClassnames,
+  translatedSections,
 } from "@/shared";
-import { MutableRefObject, useContext, useRef, useState } from "react";
+import React, { MutableRefObject, useContext, useRef, useState } from "react";
 import Box from "./ui/Box";
 import useHeightResize from "@/hooks/useHeightResize";
 import useHighlightSection from "@/hooks/useHighlightSection";
@@ -32,7 +34,7 @@ interface BoxInfoInterface {
 type ProjectsWithTitleInterface = ProjectsInterface & BoxInfoInterface;
 
 const Projects = () => {
-  const { setSelectedSection } = useContext(UserPrefContext);
+  const { setSelectedSection, selectedLanguage } = useContext(UserPrefContext);
 
   const tsContainerRef = useRef<HTMLDivElement | null>(null);
   const [tsContainerHeight, setTsContainerHeight] = useState(0);
@@ -54,7 +56,14 @@ const Projects = () => {
     {
       title: "Taylor Swift's Discography",
       img: "/assets/thumbnails/thumbnail-taylor-swift.png",
-      desc: "Created and deployed a website about Taylor Swift's discography.",
+      desc: {
+        English:
+          "Created and deployed a website about Taylor Swift's discography.",
+        Filipino:
+          "Lumikha at nag-deploy ng isang website tungkol sa discography ni Taylor Swift.",
+        Bisaya:
+          "Naghimo ug nag-deploy og usa ka website bahin sa discography ni Taylor Swift.",
+      },
       techUsed: "React TypeScript, Cloudflare, SCSS",
       websiteLink: "https://taymother.pages.dev/",
       learnMoreLink: "/taylor-swift",
@@ -64,7 +73,14 @@ const Projects = () => {
     {
       title: "Calculators",
       img: "/assets/thumbnails/thumbnail-calculators.png",
-      desc: "Created and deployed a Flask website of calculators using CPU scheduling, page replacement, disk scheduling, and cryptographic algorithms.",
+      desc: {
+        English:
+          "Created and deployed a Flask website of calculators using CPU scheduling, page replacement, disk scheduling, and cryptographic algorithms.",
+        Filipino:
+          "Lumikha at nag-deploy ng isang Flask website ng mga calculator gamit ang CPU scheduling, page replacement, disk scheduling, at cryptographic algorithms.",
+        Bisaya:
+          "Naghimo ug nag-deploy og usa ka Flask website sa mga calculator gamit ang CPU scheduling, page replacement, disk scheduling, ug cryptographic algorithms.",
+      },
       techUsed: "Python, Flask, Vanilla Javascript",
       websiteLink: "https://calculators-flask.onrender.com/",
       learnMoreLink: "/calculators",
@@ -75,7 +91,14 @@ const Projects = () => {
     {
       title: "Padayon;",
       img: "/assets/thumbnails/thumbnail-padayon.png",
-      desc: "Created a full-stack app with the following features: user authentication, profile viewing & sorting according to location, a forum with multi-tiered/infinitely nested comments and replies, private and group messaging, a global map, and different permissions and privileges depending on user type.",
+      desc: {
+        English:
+          "Created a full-stack app with the following features: user authentication, profile viewing & sorting according to location, a forum with multi-tiered/infinitely nested comments and replies, private and group messaging, a global map, and different permissions and privileges depending on user type.",
+        Filipino:
+          "Lumikha ng isang full-stack app na may mga sumusunod na tampok: user authentication, pag-view ng profile at pag-sort ayon sa lokasyon, isang forum na may multi-tiered/infinitely nested na mga komento at sagot, private at group messaging, isang global map, at iba't ibang permissions at privileges depende sa uri ng user.",
+        Bisaya:
+          "Naghimo ug usa ka full-stack app nga adunay mga sumusunod nga feature: user authentication, pagtan-aw sa profile ug pag-sort base sa lokasyon, usa ka forum nga adunay multi-tiered/infinitely nested nga mga komento ug tubag, private ug group messaging, usa ka global map, ug lain-laing permissions ug privileges depende sa klase sa user.",
+      },
       techUsed: "React TypeScript, Node.js, Express.js, Firebase, Bootstrap",
       learnMoreLink: "/padayon",
       ref: pContainerRef,
@@ -85,7 +108,14 @@ const Projects = () => {
     {
       title: "FM-AM Synthesizer",
       img: "/assets/thumbnails/thumbnail-synthesizer.png",
-      desc: "Designed an FM-AM Synthesizer with mobile (portrait & landscape) responsiveness.",
+      desc: {
+        English:
+          "Designed an FM-AM Synthesizer with mobile (portrait & landscape) responsiveness.",
+        Filipino:
+          "Idinisenyo ang FM-AM Synthesizer na may mobile (portrait at landscape) responsiveness.",
+        Bisaya:
+          "Gidisenyo ang FM-AM Synthesizer nga adunay mobile (portrait ug landscape) responsiveness.",
+      },
       techUsed: "React TypeScript, Tailwind CSS",
       websiteLink: "https://noodlesushi.github.io/FM-AM-Synth/",
       ref: fasContainerRef,
@@ -96,7 +126,7 @@ const Projects = () => {
   const renderProjectBox = (
     title: string,
     img: string,
-    desc: string | React.ReactNode,
+    desc: Record<AvailableLanguagesType, string | React.ReactNode>,
     techUsed: string,
     websiteLink: string | undefined,
     learnMoreLink: string | undefined,
@@ -128,17 +158,20 @@ const Projects = () => {
     );
   };
 
+  const sectionId = translatedSections.Projects[selectedLanguage];
+
   const projectsRef = useRef<HTMLDivElement | null>(null);
   useHighlightSection({
     ref: projectsRef,
     setSection: setSelectedSection,
-    section: "Projects",
+    section: camelToTitleCase(sectionId),
+    selectedLanguage,
   });
 
   return (
-    <div ref={projectsRef} id="projects" className={sectionPaddingClassnames}>
+    <div ref={projectsRef} id={sectionId} className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h2>Projects</h2>
+        <h2>{camelToTitleCase(sectionId)}</h2>
       </div>
       <div className={boxContainerClassnames}>
         {projectsInfo.map(

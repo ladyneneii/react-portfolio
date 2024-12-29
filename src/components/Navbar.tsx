@@ -17,7 +17,6 @@ import { IoClose } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import Radio from "./ui/Radio";
 import Toggle from "./ui/Toggle";
-import { SectionsType } from "@/types";
 import SingleCheckbox from "./ui/SingleCheckbox";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
@@ -40,10 +39,9 @@ const Navbar = () => {
     setSelectedSection,
   } = useContext(UserPrefContext);
 
-  const sections: SectionsType[] = Object.values(translatedSections).map(
-    (translations) => camelToTitleCase(translations[selectedLanguage])
-  );
-
+  const sections = Object.values(translatedSections)
+    .map((translations) => translations[selectedLanguage])
+    .slice(0, -1);
 
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");
@@ -58,10 +56,11 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const navigateToSection = (section: SectionsType) => {
-    const sectionHash = `#${
-      section.charAt(0).toLowerCase() + section.slice(1)
-    }`;
+  const navigateToSection = (section: string) => {
+    // const sectionHash = `#${
+    //   section.charAt(0).toLowerCase() + section.slice(1)
+    // }`;
+    const sectionHash = `#${section}`
 
     // this should come BEFORE navigate() so currentUrl gets the url of the non-root page
     const currentUrl = window.location.href;
@@ -69,7 +68,7 @@ const Navbar = () => {
     const delay = currentUrl.includes("/#") ? 100 : 800;
 
     navigate(`/${sectionHash}`); // Navigate to root with hash
-    setSelectedSection(section);
+    setSelectedSection(camelToTitleCase(section));
     setShowNavbar(false);
 
     // Delay scroll to allow page navigation
@@ -90,10 +89,10 @@ const Navbar = () => {
         key={section}
         onClick={() => navigateToSection(section)}
         className={`${getHoverStyles(disableTransitions)} ${
-          selectedSection === section ? "text-purple" : ""
+          selectedSection === camelToTitleCase(section) ? "text-purple" : ""
         }`}
       >
-        {section}
+        {camelToTitleCase(section)}
       </div>
     ));
   };
@@ -150,7 +149,7 @@ const Navbar = () => {
           <div>
             {window.location.pathname === "/" ? (
               <img
-                onClick={() => navigateToSection("Home")}
+                onClick={() => navigateToSection("home")}
                 src={"/assets/navbar/logo-transparent.png"}
                 alt=""
                 width={50}
@@ -173,7 +172,7 @@ const Navbar = () => {
             <div
               className={`flex gap-16 ${getConditionalSmoothTransition(
                 disableTransitions
-              )} items-center`}
+              )} items-center justify-between`}
             >
               {renderLinks()}
             </div>

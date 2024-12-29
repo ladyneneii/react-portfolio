@@ -58,7 +58,7 @@ const Experience = () => {
         English: "Redesigned an old verifier and email templates.",
         Filipino:
           "Ibinago ang disenyo ng isang lumang verifier at mga email template.",
-        Bisaya: "Giresign ang daan nga verifier ug email templates.",
+        Bisaya: "Gidesign ang daan nga verifier ug email templates.",
       },
       techUsed:
         "Next.js, TypeScript, Tailwind CSS, Bitbucket, Jira, Handlebars",

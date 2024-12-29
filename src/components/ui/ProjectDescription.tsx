@@ -75,6 +75,39 @@ const ProjectDescription = ({
       desc[selectedLanguage]
     );
 
+  const getLearnMore = () => {
+    let title = "Learn more";
+    if (selectedLanguage === "Filipino") {
+      title = "Alamin pa";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Hibal-i pa";
+    }
+
+    return title;
+  };
+
+  const getVisitWebsite = () => {
+    let title = "Visit website";
+    if (selectedLanguage === "Filipino") {
+      title = "Bisitahin ang website";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Bisita sa website";
+    }
+
+    return title;
+  };
+
+  const getviewPostOnLinkedIn = () => {
+    let title = "View post on LinkedIn";
+    if (selectedLanguage === "Filipino") {
+      title = "Tingnan ang LinkedIn post";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Tan-awa ang LinkedIn post";
+    }
+
+    return title;
+  };
+
   return (
     <>
       <Wrapper
@@ -127,12 +160,6 @@ const ProjectDescription = ({
                       isPhone ? "flex-col gap-2 items-center" : "gap-4"
                     }`}
                   >
-                    {websiteLink && (
-                      <Button
-                        onClick={() => redirectToNewPage(websiteLink)}
-                        content="Visit website"
-                      />
-                    )}
                     {learnMoreLink && (
                       <a href={learnMoreLink}>
                         <Button
@@ -142,14 +169,22 @@ const ProjectDescription = ({
                             //   window.scrollTo(0, 0);
                             // }, 100);
                           }}
-                          content="Learn more"
+                          content={getLearnMore()}
                         />
                       </a>
+                    )}
+                    {websiteLink && (
+                      <Button
+                        onClick={() => redirectToNewPage(websiteLink)}
+                        content={getVisitWebsite()}
+                        isExternal={true}
+                      />
                     )}
                     {linkedInLink && (
                       <Button
                         onClick={() => redirectToNewPage(linkedInLink)}
-                        content="View post on LinkedIn"
+                        content={getviewPostOnLinkedIn()}
+                        isExternal={true}
                       />
                     )}
                   </div>
