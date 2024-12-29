@@ -26,7 +26,7 @@ const Dropdown = ({ trigger, content, position, dropdownHeight }: Props) => {
             ? "bg-black border-white"
             : "bg-purpleLight border-black"
         } ${position} ${getConditionalSmoothTransition(disableTransitions)} ${
-          showDropdown ? "p-2" : ""
+          showDropdown ? "px-4" : ""
         } ${showDropdown ? "opacity-100" : "opacity-0 invisible"}`}
         style={{ height: showDropdown ? dropdownHeight : 0 }}
       >

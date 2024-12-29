@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
@@ -23,6 +23,7 @@ import { IoArrowBack } from "react-icons/io5";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Dropdown from "./ui/Dropdown";
 import { getAnimationsLabel, getTransitionsLabel } from "@/data/getHeroData";
+import useOutsideClick from "@/hooks/useOutsideClick";
 
 const Navbar = () => {
   // LANGUAGE & DISABLE TRANSITIONS
@@ -60,11 +61,10 @@ const Navbar = () => {
     // const sectionHash = `#${
     //   section.charAt(0).toLowerCase() + section.slice(1)
     // }`;
-    const sectionHash = `#${section}`
+    const sectionHash = `#${section}`;
 
     // this should come BEFORE navigate() so currentUrl gets the url of the non-root page
     const currentUrl = window.location.href;
-    console.log(currentUrl);
     const delay = currentUrl.includes("/#") ? 100 : 800;
 
     navigate(`/${sectionHash}`); // Navigate to root with hash
@@ -133,6 +133,9 @@ const Navbar = () => {
       </div>
     );
   };
+
+  const mobNavbarRef = useRef<HTMLDivElement>(null);
+  useOutsideClick({ ref: mobNavbarRef, setVisibility: setShowNavbar });
 
   return (
     <div className="whitespace-nowrap">
@@ -209,6 +212,7 @@ const Navbar = () => {
 
       {/* SMALLER SCREENS */}
       <div
+        ref={mobNavbarRef}
         className={`fixed right-0 top-0 bottom-0 ${
           !disableTransitions ? "transition-all duration-500" : ""
         } flex flex-col justify-between overflow-auto gap-16 z-[100] ${

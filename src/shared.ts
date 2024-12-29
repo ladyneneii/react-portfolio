@@ -29,7 +29,7 @@ export const NAVBAR_HEIGHT = 65;
 export const EXTRA_HEIGHT = 80; // extra height added to when a user unfolds a box
 export const sectionPaddingClassnames = "py-16 flex flex-col gap-8";
 export const sectionTitleContainerClassnames =
-  "flex flex-col gap-2 items-center text-center";
+  "flex flex-col gap-2 items-center text-center mt-4";
 export const boxContainerClassnames = "flex flex-col gap-4";
 export const itemsContainerClass = "flex justify-center flex-wrap mb-8";
 export const videosContainerClass = `flex gap-8 justify-center`;
@@ -121,3 +121,5 @@ export const translatedSections: Record<SectionsType, Record<AvailableLanguagesT
 
 //   return sections[section][currentLanguage];
 // };
+
+export const noTransNote = "(No Filipino or Bisaya translations at the moment.)";

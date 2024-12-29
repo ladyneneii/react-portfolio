@@ -31,7 +31,7 @@ const Button = ({ content, onClick, isExternal }: Props) => {
 
   const getUniqueStyles = () => {
     if (isExternal) return ""
-    else return `${selectedTheme === "Dark" ? "border" : "border-2"} rounded-lg`
+    else return `border-2 rounded-lg`
   }
 
   return (

@@ -11,7 +11,6 @@ type Props = {
 
 const useHighlightSection = ({ ref, setSection, section, selectedLanguage }: Props) => {
   const VALUE_FOR_EARLY_HIGHLIGHT = 200
-  console.log(section);
   
   useEffect(() => {
     const handleScroll = () => {

@@ -63,11 +63,9 @@ const Footer = () => {
     );
   };
 
-  return (
-    <div
-      className={`p-8 border-2 border-pink-500 bg-black text-white ${minWidth} mx-auto flex justify-center items-center text-center`}
-    >
-      <div className="flex flex-col justify-between items-center gap-16">
+  const getFooterNotesTrans = () => {
+    let trans = (
+      <>
         <div className={`${colItemsCenter} mt-16 gap-2`}>
           <p>
             Loosely designed in Figma and translated into code by yours truly ♡.
@@ -76,6 +74,53 @@ const Footer = () => {
             &copy; {currentYear} Ernest Joseph S. Curativo. All rights reserved.
           </p>
           <p>Website last updated on the 29th of December, 2024.</p>
+        </div>
+      </>
+    );
+
+    if (selectedLanguage === "Filipino") {
+      trans = (
+        <>
+          <div className={`${colItemsCenter} mt-16 gap-2`}>
+            <p>Dinisenyo sa Figma at isinalin sa code ng iyong lingkod ♡.</p>
+            <p>
+              &copy; {currentYear} Ernest Joseph S. Curativo. All rights
+              reserved.
+            </p>
+            <p>Huling na-update ang website noong ika-29 ng Disyembre, 2024.</p>
+          </div>
+        </>
+      );
+    } else if (selectedLanguage === "Bisaya") {
+      trans = (
+        <>
+          <div className={`${colItemsCenter} mt-16 gap-2`}>
+            <p>
+              Gidisenyo sa Figma ug gitranslate ngadto sa code sa inyong alagad
+              ♡.
+            </p>
+            <p>
+              &copy; {currentYear} Ernest Joseph S. Curativo. All rights
+              reserved.
+            </p>
+            <p>
+              Ang website kay huling gi-update sa ika-29 sa Disyembre, 2024.
+            </p>
+          </div>
+        </>
+      );
+    }
+
+    return trans;
+  };
+
+  return (
+    <div
+      className={`p-8 bg-black text-white ${minWidth} mx-auto flex justify-center items-center text-center`}
+    >
+      <div className="flex flex-col justify-between items-center gap-16">
+        <div className={`${colItemsCenter} mt-16 gap-2`}>
+          {getFooterNotesTrans()}
         </div>
         {renderLinks()}
       </div>

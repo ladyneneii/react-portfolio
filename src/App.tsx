@@ -51,6 +51,10 @@ const App = () => {
       font-weight: ${selectedTheme === "Dark" ? 400 : 600};
     }
 
+    .border-2 {
+      border-width: ${selectedTheme === "Dark" ? "1px" : "2px"};
+    }
+
     .firefly::before {
       background: ${selectedTheme === "Dark" ? "black" : "white"};
     }
@@ -62,7 +66,7 @@ const App = () => {
     <Router>
       <style>{conditionalGlobalStyles}</style>
       <div
-        className={`${minWidth} border-2 border-yellow-500 ${
+        className={`${minWidth} ${
           selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
         }`}
       >
@@ -75,7 +79,7 @@ const App = () => {
               <div>
                 <Hero />
                 <div
-                  className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                  className={`${maxWidth} mx-auto px-4`}
                 >
                   <Skills />
                   <Experience />
@@ -93,7 +97,7 @@ const App = () => {
             path="/skills-list"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <SkillsList />
               </div>
@@ -104,7 +108,7 @@ const App = () => {
             path="/taylor-swift"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <TaylorSwift />
               </div>
@@ -115,7 +119,7 @@ const App = () => {
             path="/filpass-v2-table"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <Table />
               </div>
@@ -126,7 +130,7 @@ const App = () => {
             path="/padayon"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <Padayon />
               </div>
@@ -137,7 +141,7 @@ const App = () => {
             path="/calculators"
             element={
               <div
-                className={`${maxWidth} mx-auto border-2 border-red-500 px-4`}
+                className={`${maxWidth} mx-auto px-4`}
               >
                 <Calculators />
               </div>
