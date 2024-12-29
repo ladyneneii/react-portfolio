@@ -160,7 +160,7 @@ const ProjectDescription = ({
                   !isTablet || isPhone
                     ? "flex-col"
                     : "justify-between items-center"
-                } gap-4`}
+                } gap-8`}
               >
                 {techUsed && (
                   <div className="flex flex-col text-purple">
@@ -173,8 +173,8 @@ const ProjectDescription = ({
                   linkedInLink ||
                   otherExternalLinks) && (
                   <div
-                    className={`flex ${
-                      isPhone ? "flex-col gap-2 items-center" : "gap-4"
+                    className={`flex items-center ${
+                      isPhone ? "flex-col gap-2" : "gap-4"
                     }`}
                   >
                     {learnMoreLink && (

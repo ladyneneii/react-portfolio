@@ -59,9 +59,9 @@ const Hero = () => {
   });
 
   const getCVButtonsStyles = () => {
-    let style = "";
+    let style = "items-center";
     if (selectedLanguage !== "English" && isTablet) style = "flex-col";
-    if (isTablet2) style = "";
+    if (isTablet2) style = "items-center";
     if (isPhone) style = "flex-col items-center";
 
     return style;

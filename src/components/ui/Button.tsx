@@ -29,7 +29,7 @@ const Button = ({ content, onClick, isExternal }: Props) => {
   };
 
   const getUniqueStyles = () => {
-    if (isExternal) return "border-b-2";
+    if (isExternal) return "border-b-2 h-max";
     else return `border-2 rounded-lg`;
   };
 
