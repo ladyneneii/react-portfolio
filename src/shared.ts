@@ -37,7 +37,7 @@ export const imgClassnames =
   "rounded-lg hover:cursor-pointer hover:outline-offset-4 hover:outline hover:outline-purple";
 
 export const viewCVLink =
-  "https://drive.google.com/file/d/1ta_HLzIx5MN4DGbTTlYkPlWe12cfC23O/view?usp=sharing";
+  "https://drive.google.com/file/d/1h2cCT8MKunTKek61a9UIIhHAUYB9yY5C/view?usp=sharing";
 export const CVFilename = "Curativo-CV.pdf";
 export const CVFilepath = `/src/data/${CVFilename}`;
 
