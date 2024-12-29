@@ -39,7 +39,7 @@ export const imgClassnames =
 export const viewCVLink =
   "https://drive.google.com/file/d/1h2cCT8MKunTKek61a9UIIhHAUYB9yY5C/view?usp=sharing";
 export const CVFilename = "Curativo-CV.pdf";
-export const CVFilepath = `/src/data/${CVFilename}`;
+export const CVFilepath = `/${CVFilename}`;
 
 export const redirectToNewPage = (href: string) => {
   window.open(href, "_blank", "noopener,noreferrer");
