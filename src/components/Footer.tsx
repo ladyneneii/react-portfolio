@@ -63,7 +63,7 @@ const Footer = () => {
             onClick={() => {
               window.scrollTo({
                 top: 0,
-                behavior: disableTransitions ? "auto" : "smooth", 
+                behavior: disableTransitions ? "auto" : "smooth",
               });
             }}
             className={`p-2 mt-4 flex items-center justify-center rounded-full border-2 hover:border-purple border-white ${getHoverStyles(
@@ -85,7 +85,10 @@ const Footer = () => {
             Loosely designed in Figma and translated into code by yours truly ♡.
           </p>
           <p>
-            &copy; {currentYear} Ernest Joseph S. Curativo. All rights reserved.
+            <span className="whitespace-nowrap">
+              &copy; {currentYear} Ernest Joseph S. Curativo.
+            </span>{" "}
+            <span className="whitespace-nowrap">All rights reserved.</span>
           </p>
           <p>Website last updated on the 29th of December, 2024.</p>
         </div>
@@ -98,8 +101,10 @@ const Footer = () => {
           <div className={`${colItemsCenter} mt-16 gap-2`}>
             <p>Dinisenyo sa Figma at isinalin sa code ng iyong lingkod ♡.</p>
             <p>
-              &copy; {currentYear} Ernest Joseph S. Curativo. All rights
-              reserved.
+              <span className="whitespace-nowrap">
+                &copy; {currentYear} Ernest Joseph S. Curativo.
+              </span>{" "}
+              <span className="whitespace-nowrap">All rights reserved.</span>
             </p>
             <p>Huling na-update ang website noong ika-29 ng Disyembre, 2024.</p>
           </div>
@@ -114,8 +119,10 @@ const Footer = () => {
               ♡.
             </p>
             <p>
-              &copy; {currentYear} Ernest Joseph S. Curativo. All rights
-              reserved.
+              <span className="whitespace-nowrap">
+                &copy; {currentYear} Ernest Joseph S. Curativo.
+              </span>{" "}
+              <span className="whitespace-nowrap">All rights reserved.</span>
             </p>
             <p>
               Ang website kay huling gi-update sa ika-29 sa Disyembre, 2024.
