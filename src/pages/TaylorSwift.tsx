@@ -356,6 +356,7 @@ const TaylorSwift = () => {
           </div>
         }
         isDescLong={true}
+        disableAnimation={true}
       />
       <div className={boxContainerClassnames}>{renderTsBoxes()}</div>
       <div className="flex justify-center">

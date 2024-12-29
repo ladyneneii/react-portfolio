@@ -292,6 +292,7 @@ const Thesis = () => {
               techUsed=""
               index={1}
               carousel={imgs}
+              disableAnimation={true}
             />
           </div>
         </Box>

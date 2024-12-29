@@ -17,6 +17,7 @@ interface ProjectExtraInfo {
   carousel: string[];
   upperContent?: ReactNode;
   lowerContent?: ReactNode;
+  disableAnimation?: boolean;
 }
 type ProjectDescription = ProjectsInterface & ProjectExtraInfo;
 
@@ -28,11 +29,13 @@ const ProjectDescription = ({
   websiteLink,
   learnMoreLink,
   linkedInLink,
+  otherExternalLinks,
   carousel,
   // isDescLong,
   upperContent,
   lowerContent,
   extraImgs,
+  disableAnimation,
 }: ProjectDescription) => {
   const { disableAnimations, selectedLanguage } = useContext(UserPrefContext);
   const isTablet = useMediaQuery("(max-width: 1020px)");
@@ -55,7 +58,7 @@ const ProjectDescription = ({
     );
   };
 
-  const Wrapper = disableAnimations ? "div" : motion.div;
+  const Wrapper = disableAnimations || disableAnimation ? "div" : motion.div;
 
   const getTechnologiesUsed = () => {
     let title = "Technologies Used";
@@ -97,12 +100,23 @@ const ProjectDescription = ({
     return title;
   };
 
-  const getviewPostOnLinkedIn = () => {
+  const getViewPostOnLinkedIn = () => {
     let title = "View post on LinkedIn";
     if (selectedLanguage === "Filipino") {
       title = "Tingnan ang LinkedIn post";
     } else if (selectedLanguage === "Bisaya") {
       title = "Tan-awa ang LinkedIn post";
+    }
+
+    return title;
+  };
+
+  const getViewDemo = () => {
+    let title = "Watch full demo";
+    if (selectedLanguage === "Filipino") {
+      title = "Panoorin ang buong demo";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Tan-awa ang tibuok demo";
     }
 
     return title;
@@ -154,7 +168,10 @@ const ProjectDescription = ({
                     <p className="italic">{techUsed}</p>
                   </div>
                 )}
-                {(websiteLink || learnMoreLink || linkedInLink) && (
+                {(websiteLink ||
+                  learnMoreLink ||
+                  linkedInLink ||
+                  otherExternalLinks) && (
                   <div
                     className={`flex ${
                       isPhone ? "flex-col gap-2 items-center" : "gap-4"
@@ -183,7 +200,14 @@ const ProjectDescription = ({
                     {linkedInLink && (
                       <Button
                         onClick={() => redirectToNewPage(linkedInLink)}
-                        content={getviewPostOnLinkedIn()}
+                        content={getViewPostOnLinkedIn()}
+                        isExternal={true}
+                      />
+                    )}
+                    {otherExternalLinks && otherExternalLinks.length > 0 && (
+                      <Button
+                        onClick={() => redirectToNewPage(otherExternalLinks[0])}
+                        content={getViewDemo()}
                         isExternal={true}
                       />
                     )}

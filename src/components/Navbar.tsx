@@ -137,12 +137,16 @@ const Navbar = () => {
   const mobNavbarRef = useRef<HTMLDivElement>(null);
   useOutsideClick({ ref: mobNavbarRef, setVisibility: setShowNavbar });
 
+  const getNavbarColor = (isMobile?: boolean) => {
+    if ((isPhone || isLandscapePhone) && !isMobile)
+      return selectedTheme === "Dark" ? "bg-black/50" : "bg-purpleLight-half";
+    return selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight";
+  };
+
   return (
     <div className="whitespace-nowrap">
       <div
-        className={`${
-          selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
-        } fixed top-0 left-0 right-0 z-[100] ${getConditionalSmoothTransition(
+        className={`${getNavbarColor()} fixed top-0 left-0 right-0 z-[100] ${getConditionalSmoothTransition(
           disableTransitions
         )}`}
       >
@@ -153,7 +157,11 @@ const Navbar = () => {
             {window.location.pathname === "/" ? (
               <img
                 onClick={() => navigateToSection("home")}
-                src={"/assets/navbar/logo-transparent.png"}
+                src={
+                  selectedTheme === "Dark"
+                    ? "/assets/navbar/logo-transparent-light.png"
+                    : "/assets/navbar/logo-transparent-dark.png"
+                }
                 alt=""
                 width={50}
                 height={50}
@@ -215,9 +223,9 @@ const Navbar = () => {
         ref={mobNavbarRef}
         className={`fixed right-0 top-0 bottom-0 ${
           !disableTransitions ? "transition-all duration-500" : ""
-        } flex flex-col justify-between overflow-auto gap-16 z-[100] ${
-          selectedTheme === "Dark" ? "bg-black" : "bg-purpleLight"
-        } ${handleShowNavbar()}`}
+        } flex flex-col justify-between overflow-auto gap-16 z-[100] ${getNavbarColor(
+          true
+        )} ${handleShowNavbar()}`}
       >
         <div>
           <div className={`flex justify-between items-center mb-8`}>

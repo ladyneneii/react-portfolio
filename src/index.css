@@ -128,3 +128,7 @@ video::-webkit-media-controls-mute-button {
 .bg-purpleLight {
   background-color: var(--purple-light);
 }
+
+.bg-purpleLight-half {
+  background-color: var(--purple-light-half);
+}

@@ -42,7 +42,7 @@ const Hero = () => {
     selectedTheme,
     setSelectedSection,
   } = useContext(UserPrefContext);
-  const marginTop = "mt-[66px]"; // navbar height
+  // const marginTop = "mt-[66px]"; // navbar height
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isTablet2 = useMediaQuery("(max-width: 800px)");
   const isPhone = useMediaQuery("(max-width: 660px)");
@@ -52,7 +52,11 @@ const Hero = () => {
 
   const heroInfoContainerRef = useRef<HTMLDivElement | null>(null);
   const [heroImageHeight, setHeroImageHeight] = useState(700);
-  useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
+  useHeightResize({
+    ref: heroInfoContainerRef,
+    setHeight: setHeroImageHeight,
+    customVerticalPadding: 200,
+  });
 
   const getCVButtonsStyles = () => {
     let style = "";
@@ -106,15 +110,10 @@ const Hero = () => {
 
   return (
     <>
-      <div
-        id={sectionId}
-        className={`border-[0.5px] ${
-          selectedTheme === "Dark" ? "border-black" : "border-white"
-        }`}
-      >
+      <div id={sectionId}>
         <div
           ref={homeRef}
-          className={`relative ${marginTop} ${minWidth}`}
+          className={`relative  ${minWidth}`}
           style={{
             backgroundImage: `url(${
               selectedTheme === "Dark"

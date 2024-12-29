@@ -9,6 +9,7 @@ import { renderSocials } from "./functions/renderSocials";
 import { useContext } from "react";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import { getDownloadCVLabel, getViewCVLabel } from "@/data/getHeroData";
+import { FaArrowUp } from "react-icons/fa6";
 
 const Footer = () => {
   const { disableTransitions, selectedLanguage } = useContext(UserPrefContext);
@@ -58,6 +59,19 @@ const Footer = () => {
               Mike Golus
             </a>
           </p>
+          <div
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: disableTransitions ? "auto" : "smooth", 
+              });
+            }}
+            className={`p-2 mt-4 flex items-center justify-center rounded-full border-2 hover:border-purple border-white ${getHoverStyles(
+              disableTransitions
+            )}`}
+          >
+            <FaArrowUp />
+          </div>
         </div>
       </div>
     );

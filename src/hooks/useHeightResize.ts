@@ -3,11 +3,12 @@ import { useEffect } from "react";
 type Props = {
   ref: React.RefObject<HTMLDivElement | null>;
   setHeight: (value: number) => void;
+  customVerticalPadding?: number;
 };
 
-const useHeightResize = ({ ref, setHeight }: Props) => {
+const useHeightResize = ({ ref, setHeight, customVerticalPadding }: Props) => {
   useEffect(() => {
-    const VERTICAL_PADDING = 100;
+    const VERTICAL_PADDING = customVerticalPadding ? customVerticalPadding : 100;
 
     const resizeObserver = new ResizeObserver(() => {
       if (ref.current) {

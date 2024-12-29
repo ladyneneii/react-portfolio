@@ -336,6 +336,10 @@ const Padayon = () => {
         }
         isDescLong={true}
         extraImgs={extraImgs}
+        disableAnimation={true}
+        otherExternalLinks={[
+          "https://drive.google.com/drive/folders/1bb1KSq87Co3lKIIDPsla1yRtjeqPkSqG?usp=sharing",
+        ]}
       />
       <div className={boxContainerClassnames}>{renderTBoxes()}</div>
       <div className="flex justify-center">

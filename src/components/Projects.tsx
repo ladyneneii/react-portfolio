@@ -21,6 +21,7 @@ export interface ProjectsInterface {
   websiteLink?: string;
   learnMoreLink?: string;
   linkedInLink?: string;
+  otherExternalLinks?: string[];
   isDescLong?: boolean;
   extraImgs?: string[];
 }
@@ -130,6 +131,7 @@ const Projects = () => {
     techUsed: string,
     websiteLink: string | undefined,
     learnMoreLink: string | undefined,
+    otherExternalLinks: string[] | undefined,
     index: number,
     ref: MutableRefObject<HTMLDivElement | null>,
     height: number,
@@ -150,6 +152,7 @@ const Projects = () => {
             index={index}
             websiteLink={websiteLink}
             learnMoreLink={learnMoreLink}
+            otherExternalLinks={otherExternalLinks}
             carousel={projectsInfo.map(({ img }) => img)}
             isDescLong={isDescLong}
           />
@@ -183,6 +186,7 @@ const Projects = () => {
               techUsed,
               websiteLink,
               learnMoreLink,
+              otherExternalLinks,
               ref,
               height,
               isDescLong,
@@ -196,6 +200,7 @@ const Projects = () => {
               techUsed,
               websiteLink,
               learnMoreLink,
+              otherExternalLinks,
               index,
               ref,
               height,

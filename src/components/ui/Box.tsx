@@ -30,6 +30,9 @@ const Box = ({
 }: Props) => {
   const { selectedTheme, disableTransitions } = useContext(UserPrefContext);
   const isPhone = useMediaQuery("(max-width: 660px)");
+  const isLandscapePhone = useMediaQuery(
+    "(max-device-width: 940px) and (orientation: landscape) and (min-aspect-ratio: 3/2)"
+  );
   const [unfold, setUnfold] = useState<boolean>(isUnfolded);
 
   const foldCondition = !isFoldable || (isFoldable && unfold);
@@ -76,7 +79,7 @@ const Box = ({
         } cursor-pointer ${getConditionalSmoothTransition(
           disableTransitions
         )} ${
-          isSticky && unfold
+          isSticky && unfold && !isPhone && !isLandscapePhone
             ? `sticky z-10 ${
                 selectedTheme === "Dark" || theme === "Dark" ? "bg-black" : "bg-purpleLight"
               }`

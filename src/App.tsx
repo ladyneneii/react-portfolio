@@ -55,6 +55,10 @@ const App = () => {
       border-width: ${selectedTheme === "Dark" ? "1px" : "2px"};
     }
 
+    .border-b-2 {
+      border-bottom-width: ${selectedTheme === "Dark" ? "1px" : "2px"};
+    }
+
     .firefly::before {
       background: ${selectedTheme === "Dark" ? "black" : "white"};
     }

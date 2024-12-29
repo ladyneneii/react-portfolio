@@ -212,6 +212,7 @@ const Calculators = () => {
           </div>
         }
         isDescLong={true}
+        disableAnimation={true}
       />
       <div className={boxContainerClassnames}>{renderCBoxes()}</div>
       <div className="flex justify-center">

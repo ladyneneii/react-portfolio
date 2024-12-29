@@ -386,6 +386,7 @@ const Table = () => {
         }
         isDescLong={true}
         extraImgs={extraImgs}
+        disableAnimation={true}
       />
       <div className={boxContainerClassnames}>{renderTBoxes()}</div>
       <div className="flex justify-center">

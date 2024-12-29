@@ -22,24 +22,27 @@ const Button = ({ content, onClick, isExternal }: Props) => {
     if (isExternal) {
       padding = "py-1 px-2";
     } else {
-      padding =
-        isPhone || isLandscapePhone ? "text-[14px] px-6 py-3" : "px-8 py-4";
+      padding = isPhone || isLandscapePhone ? "px-6 py-3" : "px-8 py-4";
     }
 
     return padding;
   };
 
   const getUniqueStyles = () => {
-    if (isExternal) return ""
-    else return `border-2 rounded-lg`
-  }
+    if (isExternal) return "border-b-2";
+    else return `border-2 rounded-lg`;
+  };
 
   return (
     <div
       onClick={onClick}
-      className={`flex items-center gap-2 ${getUniqueStyles()} ${getConditionalSmoothTransition(disableTransitions)} ${
+      className={`flex items-center gap-2 ${getUniqueStyles()} ${getConditionalSmoothTransition(
+        disableTransitions
+      )} ${
         selectedTheme === "Dark" ? "border-white" : "border-black"
-      } cursor-pointer hover:border-purple hover:text-purple whitespace-nowrap w-max ${getPadding()}`}
+      } cursor-pointer hover:border-purple hover:text-purple whitespace-nowrap w-max ${getPadding()} ${
+        isPhone || isLandscapePhone ? "text-[14px]" : ""
+      }`}
     >
       {content}
       {isExternal && <FiExternalLink size={20} />}
