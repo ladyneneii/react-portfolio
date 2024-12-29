@@ -64,7 +64,9 @@ const Box = ({
   return (
     <div
       className={`rounded-lg shadow-custom-sm ${
-        selectedTheme === "Dark" || theme === "Dark" ? "bg-black/50 text-white" : "bg-white/50 text-black"
+        selectedTheme === "Dark" || theme === "Dark"
+          ? "bg-black/50 text-white"
+          : "bg-white/50 text-black"
       } ${getOuterDivPadding()}`}
     >
       <div
@@ -72,16 +74,20 @@ const Box = ({
         onClick={() => {
           if (isFoldable) setUnfold(!unfold);
         }}
-        className={`flex justify-between gap-4 rounded-lg ${!isSmall ? "mb-8" : ""} py-4 ${
-          isPhone ? "px-4 py-2" : "px-8 py-4"
-        } ${isPhone ? "flex-col" : "items-center"} ${
+        className={`flex justify-between gap-4 rounded-bl-lg rounded-br-lg ${
+          !isSmall ? "mb-8" : ""
+        } py-4 ${isPhone ? "px-4 py-2" : "px-8 py-4"} ${
+          isPhone ? "flex-col" : "items-center"
+        } ${
           isFoldable ? "hover:text-purple group" : ""
         } cursor-pointer ${getConditionalSmoothTransition(
           disableTransitions
         )} ${
           isSticky && unfold && !isPhone && !isLandscapePhone
             ? `sticky z-10 ${
-                selectedTheme === "Dark" || theme === "Dark" ? "bg-black" : "bg-purpleLight"
+                selectedTheme === "Dark" || theme === "Dark"
+                  ? "bg-black"
+                  : "bg-purpleLight"
               }`
             : ""
         }`}

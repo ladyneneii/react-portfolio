@@ -49,7 +49,7 @@ const Footer = () => {
             </div>
           </div>
           <p>
-            Fireflies animation by{" "}
+            Fireflies animation {selectedLanguage === "English" ? "by" : "ni"}{" "}
             <a
               href="https://codepen.io/mikegolus/pen/Jegvym"
               target="_blank"
