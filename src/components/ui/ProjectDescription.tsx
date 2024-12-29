@@ -115,7 +115,7 @@ const ProjectDescription = ({
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
-        variants={getVariants(index)}
+        variants={getVariants()}
       >
         {upperContent}
         <div key={img} className="flex flex-col gap-4">

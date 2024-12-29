@@ -123,7 +123,7 @@ const Testimonials = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
         transition={{ delay: index * 0.2, duration: 0.5 }}
-        variants={getVariants(index)}
+        variants={getVariants()}
         className={`${isTablet2 ? "w-full" : "w-1/2"}`}
       >
         <Box

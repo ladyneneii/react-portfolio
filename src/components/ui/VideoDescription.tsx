@@ -81,7 +81,7 @@ const VideoDescription = ({
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
         transition={{ delay: index ? index * 0.2 : 0, duration: 0.5 }}
-        variants={getVariants(index)}
+        variants={getVariants()}
         className={`flex flex-col gap-2 items-center text-center ${
           isTablet2 || hasDiffScreenSizes ? "w-[100%]" : "w-[45%]"
         }`}

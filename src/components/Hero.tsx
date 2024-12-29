@@ -139,7 +139,7 @@ const Hero = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.5 }}
-              variants={getVariants(0)}
+              variants={getVariants()}
               className={`flex gap-16 flex-col ${
                 isTablet2 ? "text-center" : "max-w-[800px]"
               }`}
@@ -153,7 +153,7 @@ const Hero = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              variants={getVariants(1)}
+              variants={getVariants()}
               className={`flex ${
                 !isTablet || isTablet2
                   ? "flex-col justify-between items-center gap-12"
