@@ -59,10 +59,10 @@ const Hero = () => {
   });
 
   const getCVButtonsStyles = () => {
-    let style = "items-center";
-    if (selectedLanguage !== "English" && isTablet) style = "flex-col";
-    if (isTablet2) style = "items-center";
-    if (isPhone) style = "flex-col items-center";
+    let style = "items-center gap-4";
+    if (selectedLanguage !== "English" && isTablet) style = "flex-col gap-2";
+    if (isTablet2) style = "items-center gap-4";
+    if (isPhone) style = "flex-col items-center gap-2";
 
     return style;
   };
@@ -75,7 +75,7 @@ const Hero = () => {
         }`}
       >
         {getIntro(selectedLanguage)}
-        <div className={`flex gap-2 ${getCVButtonsStyles()}`}>
+        <div className={`flex ${getCVButtonsStyles()}`}>
           <a href={CVFilepath} download={CVFilename}>
             <Button
               onClick={() => null}
