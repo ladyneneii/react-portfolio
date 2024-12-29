@@ -3,10 +3,12 @@ import {
   camelToTitleCase,
   CVFilename,
   CVFilepath,
+  getVariants,
   languages,
   maxWidth,
   minWidth,
   redirectToNewPage,
+  translatedSections,
   viewCVLink,
 } from "@/shared";
 import { useContext, useRef, useState } from "react";
@@ -51,6 +53,15 @@ const Hero = () => {
   const [heroImageHeight, setHeroImageHeight] = useState(700);
   useHeightResize({ ref: heroInfoContainerRef, setHeight: setHeroImageHeight });
 
+  const getCVButtonsStyles = () => {
+    let style = "";
+    if (selectedLanguage !== "English" && isTablet) style = "flex-col";
+    if (isTablet2) style = "";
+    if (isPhone) style = "flex-col items-center";
+
+    return style;
+  };
+
   const renderIntroduction = () => {
     return (
       <div
@@ -59,39 +70,42 @@ const Hero = () => {
         }`}
       >
         {getIntro(selectedLanguage)}
-        <div className={`flex gap-2 ${isPhone ? "flex-col items-center" : ""}`}>
+        <div className={`flex gap-2 ${getCVButtonsStyles()}`}>
+          <a href={CVFilepath} download={CVFilename}>
+            <Button
+              onClick={() => null}
+              content={getDownloadCVLabel(selectedLanguage)}
+            />
+          </a>
           <Button
             onClick={() => redirectToNewPage(viewCVLink)}
             content={getViewCVLabel(selectedLanguage)}
+            isExternal={true}
           />
-          <a href={CVFilepath} download={CVFilename}>
-            <Button onClick={() => null} content={getDownloadCVLabel(selectedLanguage)} />
-          </a>
         </div>
       </div>
     );
   };
 
-  const getSectionName = () => {
-    let name = "home"
-    if (selectedLanguage === "Filipino") {
-      name = "pahina"
-    }
-
-    return name
-  }
+  const sectionId = translatedSections.Home[selectedLanguage];
 
   const homeRef = useRef<HTMLDivElement | null>(null);
   useHighlightSection({
     ref: homeRef,
     setSection: setSelectedSection,
-    section: camelToTitleCase(getSectionName()),
+    section: camelToTitleCase(sectionId),
+    selectedLanguage,
   });
 
   const Wrapper = disableAnimations ? "div" : motion.div;
 
   return (
-    <div id={getSectionName()} className="border-[0.5px] border-black">
+    <div
+      id={sectionId}
+      className={`border-[0.5px] ${
+        selectedTheme === "Dark" ? "border-black" : "border-white"
+      }`}
+    >
       <div
         ref={homeRef}
         className={`relative ${marginTop} ${minWidth}`}
@@ -119,10 +133,7 @@ const Hero = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.5 }}
-            variants={{
-              hidden: { opacity: 0, transform: "translate3d(-5%, 0, 0)" },
-              visible: { opacity: 1, transform: "translate3d(0, 0, 0)" },
-            }}
+            variants={getVariants(0)}
             className={`flex gap-16 flex-col ${
               isTablet2 ? "text-center" : "max-w-[800px]"
             }`}
@@ -136,10 +147,7 @@ const Hero = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            variants={{
-              hidden: { opacity: 0, transform: "translate3d(5%, 0, 0)" },
-              visible: { opacity: 1, transform: "translate3d(0, 0, 0)" },
-            }}
+            variants={getVariants(1)}
             className={`flex ${
               !isTablet || isTablet2
                 ? "flex-col justify-between items-center gap-12"

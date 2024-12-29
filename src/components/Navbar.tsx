@@ -6,10 +6,12 @@ import { FiSun } from "react-icons/fi";
 import useMediaQuery from "../hooks/useMediaQuery";
 import { RxHamburgerMenu } from "react-icons/rx";
 import {
+  camelToTitleCase,
   getConditionalSmoothTransition,
   getHoverStyles,
   languages,
   maxWidth,
+  translatedSections,
 } from "../shared";
 import { IoClose } from "react-icons/io5";
 import { UserPrefContext } from "@/context/UserPrefContext";
@@ -38,31 +40,10 @@ const Navbar = () => {
     setSelectedSection,
   } = useContext(UserPrefContext);
 
-  const getSections = () => {
-    let sections: SectionsType[] = [
-      "Home",
-      "Skills",
-      "Experience",
-      "Projects",
-      "Thesis",
-      "Testimonials",
-    ];
+  const sections: SectionsType[] = Object.values(translatedSections).map(
+    (translations) => camelToTitleCase(translations[selectedLanguage])
+  );
 
-    if (selectedLanguage === "Filipino") {
-      sections = [
-        "Pahina",
-        "Kasanayan",
-        "Karera",
-        "Mga Proyekto",
-        "Tesis",
-        "Mga Patotoo",
-      ];
-    }
-
-    return sections;
-  };
-
-  const sections: SectionsType[] = getSections();
 
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");

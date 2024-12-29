@@ -1,4 +1,5 @@
 import { SkillsInterface } from "@/components/Skills";
+import { getVariants } from "@/shared";
 import { motion } from "framer-motion";
 
 export const renderSkills = (list: SkillsInterface[], disableAnimations: boolean) => {
@@ -10,10 +11,7 @@ export const renderSkills = (list: SkillsInterface[], disableAnimations: boolean
       whileInView="visible"
       viewport={{ once: true, amount: 0.5 }}
       transition={{ delay: index * 0.05, duration: 0.5 }}
-      variants={{
-        hidden: { opacity: 0, },
-        visible: { opacity: 1, },
-      }}
+      variants={getVariants()}
       key={item.name}
       className="flex gap-4 items-center justify-center w-[140px] flex-col"
     >

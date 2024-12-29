@@ -9,13 +9,7 @@ export type SectionsType =
   | "Projects"
   | "Thesis"
   | "Testimonials"
-  | ""
-  | "Pahina"
-  | "Kasanayan"
-  | "Karera"
-  | "Mga Proyekto"
-  | "Tesis"
-  | "Mga Patotoo";
+  | "";
 
 export interface UserPrefContextInterface {
   selectedLanguage: AvailableLanguagesType;

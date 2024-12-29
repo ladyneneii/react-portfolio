@@ -5,6 +5,7 @@ import { ReactNode, useContext, useState } from "react";
 import Carousel from "./Carousel";
 import {
   getConditionalSmoothTransition,
+  getVariants,
   imgClassnames,
   redirectToNewPage,
 } from "@/shared";
@@ -33,7 +34,7 @@ const ProjectDescription = ({
   lowerContent,
   extraImgs,
 }: ProjectDescription) => {
-  const { disableAnimations } = useContext(UserPrefContext);
+  const { disableAnimations, selectedLanguage } = useContext(UserPrefContext);
   const isTablet = useMediaQuery("(max-width: 1020px)");
   const isPhone = useMediaQuery("(max-width: 620px)");
   const [showCarousel, setShowCarousel] = useState(false);
@@ -56,6 +57,24 @@ const ProjectDescription = ({
 
   const Wrapper = disableAnimations ? "div" : motion.div;
 
+  const getTechnologiesUsed = () => {
+    let title = "Technologies Used";
+    if (selectedLanguage === "Filipino") {
+      title = "Mga teknolohiyang ginamit";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Mga teknolohiya nga gigamit";
+    }
+
+    return title;
+  };
+
+  const translatedDesc =
+    typeof desc[selectedLanguage] === "string" ? (
+      <h6>{desc[selectedLanguage]}</h6>
+    ) : (
+      desc[selectedLanguage]
+    );
+
   return (
     <>
       <Wrapper
@@ -63,13 +82,7 @@ const ProjectDescription = ({
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
-        variants={{
-          hidden: {
-            opacity: 0,
-            transform: `translate3d(${index % 2 !== 0 ? "5%" : "-5%"}, 0, 0)`,
-          },
-          visible: { opacity: 1, transform: "translate3d(0, 0, 0)" },
-        }}
+        variants={getVariants(index)}
       >
         {upperContent}
         <div key={img} className="flex flex-col gap-4">
@@ -94,7 +107,7 @@ const ProjectDescription = ({
                 index % 2 === 1 || isTablet ? "order-1" : "order-2"
               }`}
             >
-              {typeof desc === "string" ? <h6>{desc}</h6> : desc}
+              {translatedDesc}
               <div
                 className={`flex ${
                   !isTablet || isPhone
@@ -104,7 +117,7 @@ const ProjectDescription = ({
               >
                 {techUsed && (
                   <div className="flex flex-col text-purple">
-                    <p className="font-normal">Technologies used:</p>
+                    <p className="font-normal">{getTechnologiesUsed()}:</p>
                     <p className="italic">{techUsed}</p>
                   </div>
                 )}

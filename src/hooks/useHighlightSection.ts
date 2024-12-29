@@ -1,14 +1,15 @@
 import { NAVBAR_HEIGHT } from "@/shared";
-import { SectionsType } from "@/types";
+import { AvailableLanguagesType, SectionsType } from "@/types";
 import { useEffect } from "react";
 
 type Props = {
   ref: React.RefObject<HTMLDivElement | null>;
   setSection: (value: SectionsType) => void;
   section: SectionsType;
+  selectedLanguage: AvailableLanguagesType;
 };
 
-const useHighlightSection = ({ ref, setSection, section }: Props) => {
+const useHighlightSection = ({ ref, setSection, section, selectedLanguage }: Props) => {
   const VALUE_FOR_EARLY_HIGHLIGHT = 200
   
   useEffect(() => {
@@ -26,7 +27,7 @@ const useHighlightSection = ({ ref, setSection, section }: Props) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [ref, setSection, section, selectedLanguage]);
 };
 
 export default useHighlightSection;

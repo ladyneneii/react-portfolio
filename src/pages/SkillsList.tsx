@@ -16,10 +16,15 @@ import {
 import Button from "../components/ui/Button";
 import { renderSkills } from "../components/functions/renderSkills";
 import { UserPrefContext } from "@/context/UserPrefContext";
+import { AvailableLanguagesType } from "@/types";
 
 const SkillsList = () => {
-  const { selectedTheme, setSelectedSection, disableAnimations } =
-    useContext(UserPrefContext);
+  const {
+    selectedTheme,
+    setSelectedSection,
+    disableAnimations,
+    selectedLanguage,
+  } = useContext(UserPrefContext);
 
   useEffect(() => {
     setSelectedSection("");
@@ -111,15 +116,56 @@ const SkillsList = () => {
   const [cwContainerHeight, setCwContainerHeight] = useState(0);
   useHeightResize({ ref: cwContainerRef, setHeight: setCwContainerHeight });
 
+  const getTitle = () => {
+    let title = "All skills";
+    if (selectedLanguage === "Filipino") {
+      title = "Lahat ng Kasanayan";
+    }
+
+    return title;
+  };
+
+  const boxLabels: Record<AvailableLanguagesType, string[]> = {
+    English: [
+      "Programming Languages",
+      "Web Development",
+      "Frameworks, Libraries, and Tools",
+      "Coursework",
+    ],
+    Filipino: [
+      "Mga Programming Language",
+      "Web Development",
+      "Mga Framework, Library, at Kagamitan",
+      "Mga Kurso",
+    ],
+    Bisaya: [
+      "Mga Programming Language",
+      "Web Development",
+      "Mga Framework, Library, ug Kagamitan",
+      "Mga Kurso",
+    ],
+  };
+
+  const getButtonTitle = () => {
+    let title = "Go back";
+    if (selectedLanguage === "Filipino") {
+      title = "Bumalik";
+    } else if (selectedLanguage === "Bisaya") {
+      title = "Mubalik";
+    }
+
+    return title;
+  };
+
   return (
     <div className={sectionPaddingClassnames}>
       <div className={sectionTitleContainerClassnames}>
-        <h2>All Skills</h2>
+        <h2>{getTitle()}</h2>
       </div>
       <div className={boxContainerClassnames}>
         <Box
           key="programmingLanguages"
-          title="Programming Languages"
+          title={boxLabels[selectedLanguage][0]}
           isFoldable={true}
           childrenHeight={plContainerHeight - EXTRA_HEIGHT}
         >
@@ -129,7 +175,7 @@ const SkillsList = () => {
         </Box>
         <Box
           key="webDevelopment"
-          title="Web Development"
+          title={boxLabels[selectedLanguage][1]}
           isFoldable={true}
           childrenHeight={wdContainerHeight - EXTRA_HEIGHT}
         >
@@ -151,7 +197,7 @@ const SkillsList = () => {
         </Box>
         <Box
           key="frameworksLibrariesAndTools"
-          title="Frameworks, Libraries, and Tools"
+          title={boxLabels[selectedLanguage][2]}
           isFoldable={true}
           childrenHeight={fltContainerHeight - EXTRA_HEIGHT}
         >
@@ -161,7 +207,7 @@ const SkillsList = () => {
         </Box>
         <Box
           key="coursework"
-          title="Coursework"
+          title={boxLabels[selectedLanguage][3]}
           isFoldable={true}
           childrenHeight={cwContainerHeight - EXTRA_HEIGHT}
         >
@@ -171,7 +217,10 @@ const SkillsList = () => {
         </Box>
       </div>
       <div className="flex justify-center">
-        <Button onClick={() => window.history.back()} content="Go back" />
+        <Button
+          onClick={() => window.history.back()}
+          content={getButtonTitle()}
+        />
       </div>
     </div>
   );

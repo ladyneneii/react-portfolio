@@ -16,7 +16,7 @@ export const getConditionalSmoothTransition = (disableTransitions: boolean) => {
 export const languages: AvailableLanguagesType[] = [
   "English",
   "Filipino",
-  // "Bisaya",
+  "Bisaya",
 ];
 
 export const getHoverStyles = (disableTransitions: boolean) => {
@@ -51,3 +51,73 @@ export const camelToTitleCase = (str: string): SectionsType => {
     .replace(/^./, (match) => match.toUpperCase())
     .trim() as SectionsType;
 };
+
+export const getVariants = (index?: number) => {
+  const indexExists = index !== undefined && index !== null;
+  // return {
+  //   hidden: {
+  //     opacity: 0,
+  //     transform: indexExists
+  //       ? `translate3d(${index % 2 !== 0 ? "5%" : "-5%"}, 0, 0)`
+  //       : "",
+  //   },
+  //   visible: {
+  //     opacity: 1,
+  //     transform: indexExists ? "translate3d(0, 0, 0)" : "",
+  //   },
+  // };
+  return {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+    },
+  };
+};
+
+export const translatedSections: Record<SectionsType, Record<AvailableLanguagesType, string>> = {
+  Home: {
+    English: "home",
+    Filipino: "pahina",
+    Bisaya: "panid",
+  },
+  Skills: {
+    English: "skills",
+    Filipino: "kasanayan",
+    Bisaya: "abilidad",
+  },
+  Experience: {
+    English: "experience",
+    Filipino: "karera",
+    Bisaya: "karera",
+  },
+  Projects: {
+    English: "projects",
+    Filipino: "mgaProyekto",
+    Bisaya: "mgaProyekto",
+  },
+  Thesis: {
+    English: "thesis",
+    Filipino: "tesis",
+    Bisaya: "tesis",
+  },
+  Testimonials: {
+    English: "testimonials",
+    Filipino: "mgaPatotoo",
+    Bisaya: "mgaPatotoo",
+  },
+  "": {
+    English: "",
+    Filipino: "",
+    Bisaya: "",
+  }
+};
+
+// export const getSectionName = (
+//   section: SectionsType,
+//   currentLanguage: AvailableLanguagesType
+// ) => {
+
+//   return sections[section][currentLanguage];
+// };

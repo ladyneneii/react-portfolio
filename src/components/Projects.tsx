@@ -10,10 +10,11 @@ import useHeightResize from "@/hooks/useHeightResize";
 import useHighlightSection from "@/hooks/useHighlightSection";
 import { UserPrefContext } from "@/context/UserPrefContext";
 import ProjectDescription from "./ui/ProjectDescription";
+import { AvailableLanguagesType } from "@/types";
 
 export interface ProjectsInterface {
   img: string;
-  desc: string | React.ReactNode;
+  desc: Record<AvailableLanguagesType, string | React.ReactNode>;
   techUsed: string;
   websiteLink?: string;
   learnMoreLink?: string;

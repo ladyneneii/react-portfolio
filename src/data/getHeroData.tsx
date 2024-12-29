@@ -23,6 +23,16 @@ export const getValueProp = (selectedLanguage: AvailableLanguagesType) => {
         likha
       </h1>
     );
+  } else if (selectedLanguage === "Bisaya") {
+    valueProp = (
+      <h1>
+        Tigbuhat sa imong mga ideya ngadto sa{" "}
+        <span className="text-purple font-extralight italic">elegante</span>{" "}
+        <span className="whitespace-nowrap">nga code ug</span>{" "}
+        <span className="text-purple font-extralight italic">makahulugang</span>{" "}
+        mga kreasyon
+      </h1>
+    );
   }
 
   return valueProp;
@@ -88,15 +98,15 @@ export const getAnimationsLabel = (
   return label;
 };
 
-export const getViewCVLabel = (
-  selectedLanguage: AvailableLanguagesType
-) => {
+export const getViewCVLabel = (selectedLanguage: AvailableLanguagesType) => {
   let label = "";
 
   if (selectedLanguage === "English") {
     label = "View CV";
   } else if (selectedLanguage === "Filipino") {
-    label = "Tingnan ang CV";
+    label = "Silipin ang CV";
+  } else if (selectedLanguage === "Bisaya") {
+    label = "Tan-awa ang CV";
   }
 
   return label;
@@ -109,7 +119,7 @@ export const getDownloadCVLabel = (
 
   if (selectedLanguage === "English") {
     label = "Download CV";
-  } else if (selectedLanguage === "Filipino") {
+  } else if (selectedLanguage === "Filipino" || selectedLanguage === "Bisaya") {
     label = "I-download ang CV";
   }
 

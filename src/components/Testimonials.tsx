@@ -11,6 +11,7 @@ import {
   EXTRA_HEIGHT,
   getConditionalSmoothTransition,
   getHoverStyles,
+  getVariants,
   maxWidth,
   redirectToNewPage,
   sectionPaddingClassnames,
@@ -91,13 +92,7 @@ const Testimonials = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
         transition={{ delay: index * 0.2, duration: 0.5 }}
-        variants={{
-          hidden: {
-            opacity: 0,
-            transform: `translate3d(${index % 2 !== 0 ? "5%" : "-5%"}, 0, 0)`,
-          },
-          visible: { opacity: 1, transform: "translate3d(0, 0, 0)" },
-        }}
+        variants={getVariants(index)}
         className={`${isTablet2 ? "w-full" : "w-1/2"}`}
       >
         <Box

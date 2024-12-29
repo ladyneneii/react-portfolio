@@ -2,7 +2,7 @@ import useMediaQuery from "@/hooks/useMediaQuery";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Button from "./Button";
 import { FaPlayCircle, FaPauseCircle } from "react-icons/fa";
-import { imgClassnames, redirectToNewPage } from "@/shared";
+import { getVariants, imgClassnames, redirectToNewPage } from "@/shared";
 import Carousel from "./Carousel";
 import { motion } from "framer-motion";
 import { UserPrefContext } from "@/context/UserPrefContext";
@@ -81,10 +81,7 @@ const VideoDescription = ({
         whileInView="visible"
         viewport={{ once: true, amount: 0.5 }}
         transition={{ delay: index ? index * 0.2 : 0, duration: 0.5 }}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1 },
-        }}
+        variants={getVariants()}
         className={`flex flex-col gap-2 items-center text-center ${
           isTablet2 || hasDiffScreenSizes ? "w-[100%]" : "w-[45%]"
         }`}
