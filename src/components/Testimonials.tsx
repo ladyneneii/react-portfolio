@@ -193,26 +193,30 @@ const Testimonials = () => {
       <div
         ref={testimonialsRef}
         id={sectionId}
-        className={`${sectionPaddingClassnames} px-4 ${maxWidth} mx-auto`}
-        style={{
-          backgroundImage: `url("/assets/testimonials/testimonials-bg.png")`,
-          backgroundSize: "cover",
-          // backgroundSize: "auto",
-          // backgroundRepeat: "repeat",
-          backgroundPosition: "center",
-          height: getBgImgHeight(),
-        }}
+        className={`${maxWidth} mx-auto`}
+        style={{ height: getBgImgHeight() }}
       >
-        <div className={sectionTitleContainerClassnames}>
-          <h2 className="text-white">{camelToTitleCase(sectionId)}</h2>
-        </div>
         <div
-          className={`flex justify-between ${
-            isTablet2 ? "flex-col items-center gap-8" : "gap-36"
-          }`}
+          className={`${sectionPaddingClassnames} px-4 max-h-[1000px]`}
+          style={{
+            backgroundImage: `url("/assets/testimonials/testimonials-bg-2.png")`,
+            backgroundSize: "cover",
+            // backgroundSize: "auto",
+            // backgroundRepeat: "repeat",
+            backgroundPosition: "center",
+          }}
         >
-          {renderTestimonialBox(testimonialList[0], 0)}
-          {renderTestimonialBox(testimonialList[1], 1)}
+          <div className={sectionTitleContainerClassnames}>
+            <h2 className="text-white">{camelToTitleCase(sectionId)}</h2>
+          </div>
+          <div
+            className={`flex justify-between ${
+              isTablet2 ? "flex-col items-center gap-8" : "gap-36"
+            }`}
+          >
+            {renderTestimonialBox(testimonialList[0], 0)}
+            {renderTestimonialBox(testimonialList[1], 1)}
+          </div>
         </div>
       </div>
 
