@@ -55,7 +55,7 @@ const Calculators = () => {
       altLink: "",
       desc: renderLongDesc(
         "Round Robin",
-        "Round Robin is one of the CPU Scheduling algorithms I coded from scratch. The other algorithms are FCFS (First-Come, First-Served), SJS (Shortest Job First), Priority (Non-Preemptive), Priority (Preemptive), SRTF (Shortest Remaining Time First), MLQ (Multilevel Queue), and MLFQ (Multilevel Feedback Queue). This calculator constructs the Gantt chart/s for the algorithm with the information provided by the user (e.g. Arrival time, Burst Time, etc.) and a table showing the processes and their respective ending, turnaround, and waiting time."
+        "Round Robin is one of the CPU Scheduling algorithms I coded from scratch. The other algorithms are FCFS (First-Come, First-Served), SJS (Shortest Job First), Priority (Non-Preemptive), Priority (Preemptive), SRTF (Shortest Remaining Time First), MLQ (Multilevel Queue), and MLFQ (Multilevel Feedback Queue). This calculator constructs the Gantt chart/s for the algorithm with the information provided by the user (e.g. Arrival time, Burst Time, etc.) and a table showing the processes and their respective ending, turnaround, and waiting times."
       ),
       isImg: true,
     },
