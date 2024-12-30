@@ -90,8 +90,8 @@ const Testimonials = () => {
       img: "/assets/testimonials/testimonials-neil.jpg",
       detail: {
         English: "Worked together on thesis and Padayon;",
-        Filipino: "Kasamang nagtrabaho sa thesis at Padayon;",
-        Bisaya: "Kaubang nagtrabaho sa thesis ug Padayon;",
+        Filipino: "Kasamang nagtrabaho sa tesis at Padayon;",
+        Bisaya: "Kaubang nagtrabaho sa tesis ug Padayon;",
       },
       testimonial: {
         English:
