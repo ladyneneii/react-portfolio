@@ -90,7 +90,7 @@ const Footer = () => {
             </span>{" "}
             <span className="whitespace-nowrap">All rights reserved.</span>
           </p>
-          <p>Website last updated on the 19th of June, 2025.</p>
+          <p>Website last updated on the 21st of July, 2025.</p>
         </div>
       </>
     );
