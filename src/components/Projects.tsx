@@ -37,6 +37,14 @@ type ProjectsWithTitleInterface = ProjectsInterface & BoxInfoInterface;
 const Projects = () => {
   const { setSelectedSection, selectedLanguage } = useContext(UserPrefContext);
 
+  const cfContainerRef = useRef<HTMLDivElement | null>(null);
+  const [cfContainerHeight, setCfContainerHeight] = useState(0);
+  useHeightResize({ ref: cfContainerRef, setHeight: setCfContainerHeight });
+
+  const nContainerRef = useRef<HTMLDivElement | null>(null);
+  const [nContainerHeight, setNContainerHeight] = useState(0);
+  useHeightResize({ ref: nContainerRef, setHeight: setNContainerHeight });
+
   const tsContainerRef = useRef<HTMLDivElement | null>(null);
   const [tsContainerHeight, setTsContainerHeight] = useState(0);
   useHeightResize({ ref: tsContainerRef, setHeight: setTsContainerHeight });
@@ -54,6 +62,39 @@ const Projects = () => {
   useHeightResize({ ref: fasContainerRef, setHeight: setFasContainerHeight });
 
   const projectsInfo: ProjectsWithTitleInterface[] = [
+    {
+      title: "Realtime Chat App",
+      img: "/assets/thumbnails/thumbnail-chat-forum.png",
+      desc: {
+        English:
+          "Created and deployed a chat app with reply and photo-sending features.",
+        Filipino:
+          "Lumikha at naglunsad ng chat app na may tampok na reply at pagpapadala ng mga larawan.",
+        Bisaya:
+          "Naghimo ug gi-deploy nga chat app nga adunay reply ug padala og hulagway nga mga feature.",
+      },
+      techUsed:
+        "MongoDB, Express.js, React TypeScript, Node.js, daisyUI, Zustand, Socket.IO",
+      websiteLink: "https://chat-forum-okuu.onrender.com/",
+      ref: cfContainerRef,
+      height: cfContainerHeight,
+    },
+    {
+      title: "Notes Organizing Website",
+      img: "/assets/thumbnails/thumbnail-notes.png",
+      desc: {
+        English: "Created and deployed a simple CRUD organizing notes app.",
+        Filipino:
+          "Lumikha at naglunsad ng simpleng CRUD app para sa pag-oorganisa ng mga tala.",
+        Bisaya:
+          "Naghimo ug gi-deploy nga yano nga CRUD app para sa pag-organisar sa mga nota.",
+      },
+      techUsed:
+        "PostgreSQL, Express.js, React TypeScript, Node.js, TailwindCSS, daisyUI, Zustand",
+      websiteLink: "https://notes-omvo.onrender.com/",
+      ref: nContainerRef,
+      height: nContainerHeight,
+    },
     {
       title: "Taylor Swift's Discography",
       img: "/assets/thumbnails/thumbnail-taylor-swift.png",
