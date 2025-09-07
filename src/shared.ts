@@ -37,7 +37,7 @@ export const imgClassnames =
   "rounded-lg hover:cursor-pointer hover:outline-offset-4 hover:outline hover:outline-purple";
 
 export const viewCVLink =
-  "https://drive.google.com/file/d/1O5PkJvrZsNs9dbbFxJ8UrF8vdcLTWEYU/view?usp=sharing";
+  "https://drive.google.com/file/d/1Fg2uGZREyxSXXv2-YZNlgyuZgI8ntA0w/view?usp=sharing";
 export const CVFilename = "Curativo-CV.pdf";
 export const CVFilepath = `/${CVFilename}`;
 
@@ -52,33 +52,36 @@ export const camelToTitleCase = (str: string): SectionsType => {
     .trim() as SectionsType;
 };
 
-export const getVariants = (
+export const getVariants = () =>
   // index?: number
-) => {
-  // const indexExists = index !== undefined && index !== null;
-  // return {
-  //   hidden: {
-  //     opacity: 0,
-  //     transform: indexExists
-  //       ? `translate3d(${index % 2 !== 0 ? "5%" : "-5%"}, 0, 0)`
-  //       : "",
-  //   },
-  //   visible: {
-  //     opacity: 1,
-  //     transform: indexExists ? "translate3d(0, 0, 0)" : "",
-  //   },
-  // };
-  return {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-    },
+  {
+    // const indexExists = index !== undefined && index !== null;
+    // return {
+    //   hidden: {
+    //     opacity: 0,
+    //     transform: indexExists
+    //       ? `translate3d(${index % 2 !== 0 ? "5%" : "-5%"}, 0, 0)`
+    //       : "",
+    //   },
+    //   visible: {
+    //     opacity: 1,
+    //     transform: indexExists ? "translate3d(0, 0, 0)" : "",
+    //   },
+    // };
+    return {
+      hidden: {
+        opacity: 0,
+      },
+      visible: {
+        opacity: 1,
+      },
+    };
   };
-};
 
-export const translatedSections: Record<SectionsType, Record<AvailableLanguagesType, string>> = {
+export const translatedSections: Record<
+  SectionsType,
+  Record<AvailableLanguagesType, string>
+> = {
   Home: {
     English: "home",
     Filipino: "pahina",
@@ -113,7 +116,7 @@ export const translatedSections: Record<SectionsType, Record<AvailableLanguagesT
     English: "",
     Filipino: "",
     Bisaya: "",
-  }
+  },
 };
 
 // export const getSectionName = (
@@ -124,4 +127,5 @@ export const translatedSections: Record<SectionsType, Record<AvailableLanguagesT
 //   return sections[section][currentLanguage];
 // };
 
-export const noTransNote = "(No Filipino or Bisaya translations at the moment.)";
+export const noTransNote =
+  "(No Filipino or Bisaya translations at the moment.)";
